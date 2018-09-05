@@ -1,5 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
+const users = require('./routes/users');
+const products = require('./routes/product');
+
 const app = express();
 
 // DB Config
