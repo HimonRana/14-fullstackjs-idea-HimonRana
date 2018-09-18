@@ -90,7 +90,8 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        return res.status(400).json({ password: "Incorrect password" });
+        errors.password = 'Incorrect Password'
+        return res.status(400).json(errors);
       }
     });
   });
@@ -105,6 +106,7 @@ router.get(
   (req, res) => {
     res.json({
       id: req.user.id,
+      role: req.user.role,
       name: req.user.name,
       email: req.user.email
     });
