@@ -6,7 +6,34 @@ const OrderSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
+  },
+
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: "products"
+  },
+
+  quantity: {
+    type: Schema.Types.ObjectId,
+    ref: "quantities"
+  },
+
+  address: {
+    type: Stringgit,
+    required: true
+  },
+
+  zip: {
+    type: Number,
+    required: true
+  },
+
+  city: {
+    type: String,
+    required: true
   }
+
+
 });
 
-module.exports = Order = mongoose.model("INSERT", OrderSchema);
+module.exports = Order = mongoose.model("orders", OrderSchema);
