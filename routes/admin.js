@@ -27,6 +27,7 @@ router.post(
       title: req.body.title,
       description: req.body.description,
       productImg: req.body.productImg,
+      price: req.body.price,
       size: req.body.size,
       category: req.body.category,
       available: req.body.available,
@@ -36,5 +37,10 @@ router.post(
     newProduct.save().then(product => res.json(product));
   }
 );
+
+// @Route   DELETE admin/delete/:user_id
+// @Desc    Delete User and Profile
+// @Access  Private
+
 
 module.exports = router;
