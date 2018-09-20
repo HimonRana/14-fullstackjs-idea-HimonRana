@@ -8,18 +8,18 @@ const OrderSchema = new Schema({
     ref: "users"
   },
 
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: "products"
+  firstname: {
+    type: String,
+    required: true
   },
 
-  quantity: {
-    type: Schema.Types.ObjectId,
-    ref: "quantities"
+  lastname: {
+    type: String,
+    required: true
   },
 
-  address: {
-    type: Stringgit,
+  street: {
+    type: String,
     required: true
   },
 
@@ -30,6 +30,11 @@ const OrderSchema = new Schema({
 
   city: {
     type: String,
+    required: true
+  },
+
+  telephone: {
+    type: Boolean,
     required: true
   }
 

@@ -3,11 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const QuantitySchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  },
-
   product: {
     type: Schema.Types.ObjectId,
     ref: "products"
@@ -17,7 +12,6 @@ const QuantitySchema = new Schema({
     type: Number,
     required: true
   }
-
 });
 
 module.exports = Quantity = mongoose.model("quantities", QuantitySchema);

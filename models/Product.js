@@ -3,16 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ProductSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "users"
-  },
-
-  order: {
-    type: Schema.Types.ObjectId,
-    ref: "orders"
-  },
-
   quantity: {
     type: Schema.Types.ObjectId,
     ref: "quantities"
@@ -26,10 +16,14 @@ const ProductSchema = new Schema({
   description: {
     type: String
   },
-  
+
   productImg: {
     type: String,
     required: true
+  },
+
+  price: {
+      type: String
   },
 
   size: {
