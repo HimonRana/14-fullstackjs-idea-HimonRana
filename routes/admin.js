@@ -23,24 +23,31 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const newProduct = new Product({
-      title: req.body.title,
-      description: req.body.description,
-      productImg: req.body.productImg,
-      price: req.body.price,
-      size: req.body.size,
-      category: req.body.category,
-      available: req.body.available,
-      stock: req.body.stock
-    });
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          const newProduct = new Product({
+            title: req.body.title,
+            description: req.body.description,
+            productImg: req.body.productImg,
+            price: req.body.price,
+            size: req.body.size,
+            category: req.body.category,
+            available: req.body.available,
+            stock: req.body.stock
+          });
 
-    newProduct.save().then(product => res.json(product));
+          newProduct.save().then(product => res.json(product));
+        } else {
+          return res.status(400).json("Not Authorized");
+        }
+      })
+      .catch(err => console.log(err + " You are not Admin"));
   }
 );
 
 // @Route   DELETE admin/delete/:user_id
 // @Desc    Delete User and Profile
 // @Access  Private
-
 
 module.exports = router;
