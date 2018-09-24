@@ -36,9 +36,12 @@ const OrderSchema = new Schema({
   telephone: {
     type: Boolean,
     required: true
+  },
+
+  date: {
+    type: Date,
+    default: Date.now
   }
-
-
 });
 
 module.exports = Order = mongoose.model("orders", OrderSchema);

@@ -23,18 +23,26 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    const newProduct = new Product({
-      title: req.body.title,
-      description: req.body.description,
-      productImg: req.body.productImg,
-      price: req.body.price,
-      size: req.body.size,
-      category: req.body.category,
-      available: req.body.available,
-      stock: req.body.stock
-    });
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          const newProduct = new Product({
+            title: req.body.title,
+            description: req.body.description,
+            productImg: req.body.productImg,
+            price: req.body.price,
+            size: req.body.size,
+            category: req.body.category,
+            available: req.body.available,
+            stock: req.body.stock
+          });
 
-    newProduct.save().then(product => res.json(product));
+          newProduct.save().then(product => res.json(product));
+        } else {
+          return res.status(400).json("Not Authorized");
+        }
+      })
+      .catch(err => console.log(err + " You are not Admin"));
   }
 );
 
@@ -42,5 +50,30 @@ router.post(
 // @Desc    Delete User and Profile
 // @Access  Private
 
+// @Route   DELETE admin/deleteproduct/:id
+// @Desc    Delete Product
+// @Access  Private
+router.delete(
+  "/deleteproduct/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ role: req.user.role }).then(user => {
+      Product.findById(req.params.id)
+        .then(product => {
+          // Check if user is Admin
+          if (user.role) {
+            product
+              .remove()
+              .then(() =>
+                res.json({ product: "Product is successfully deleted" })
+              );
+          } else {
+            return res.status(401).json('Not Authorized')
+          }
+        })
+        .catch(err => res.status(404).json({ product: "No product found" }));
+    })
+  }
+);
 
 module.exports = router;
