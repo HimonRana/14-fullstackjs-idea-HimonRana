@@ -50,4 +50,30 @@ router.post(
 // @Desc    Delete User and Profile
 // @Access  Private
 
+// @Route   DELETE admin/deleteproduct/:id
+// @Desc    Delete Product
+// @Access  Private
+router.delete(
+  "/deleteproduct/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ role: req.user.role }).then(user => {
+      Product.findById(req.params.id)
+        .then(product => {
+          // Check if user is Admin
+          if (user.role) {
+            product
+              .remove()
+              .then(() =>
+                res.json({ product: "Product is successfully deleted" })
+              );
+          } else {
+            return res.status(401).json('Not Authorized')
+          }
+        })
+        .catch(err => res.status(404).json({ product: "No product found" }));
+    })
+  }
+);
+
 module.exports = router;
