@@ -46,9 +46,56 @@ router.post(
   }
 );
 
-// @Route   DELETE admin/delete/:user_id
-// @Desc    Delete User and Profile
+// @Route   GET admin/all/products/
+// @Desc    GET all Products
 // @Access  Private
+router.get("/all/products", (req, res) => {
+  Product.find()
+    .sort({ date: -1 })
+    .then(products => res.json(products))
+    .catch(err => res.status(404).json({ products: "No Products found" }));
+});
+
+// @Route   PUT admin/edit/product/:id
+// @Desc    EDIT Product
+// @Access  Private
+router.put(
+  "/edit/product/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          const newProduct = {};
+          newProduct.title = req.body.title;
+          newProduct.description = req.body.description;
+          newProduct.productImg = req.body.productImg;
+          newProduct.price = req.body.price;
+          newProduct.size = req.body.size;
+          newProduct.category = req.body.category;
+          newProduct.available = req.body.available;
+          newProduct.stock = req.body.stock;
+          // Update
+          Product.findByIdAndUpdate(
+            req.params.id,
+            { $set: newProduct },
+            { new: true }
+          )
+            .then(product => res.json(product))
+            .catch(err =>
+              res.status(404).json({ upderror: "Could not update product" })
+            );
+        } else {
+          return res.status(200).json({ NoAthorization: "Not Authorized" });
+        }
+      })
+      .catch(err =>
+        res
+          .status(404)
+          .json({ usererror: "No User found and could not update product" })
+      );
+  }
+);
 
 // @Route   DELETE admin/deleteproduct/:id
 // @Desc    Delete Product
@@ -68,11 +115,11 @@ router.delete(
                 res.json({ product: "Product is successfully deleted" })
               );
           } else {
-            return res.status(401).json('Not Authorized')
+            return res.status(401).json("Not Authorized");
           }
         })
         .catch(err => res.status(404).json({ product: "No product found" }));
-    })
+    });
   }
 );
 
