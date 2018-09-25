@@ -8,12 +8,13 @@ const Product = require("../models/Product");
 
 // Validation
 const validateProductInput = require("../validation/product");
+const validateRegisterEditInput = require("../validation/registerEdit");
 
 // @route   POST admin/products
 // @dec     Create Product as Admin
 // @access  Private
 router.post(
-  "/createproduct",
+  "/create/product",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateProductInput(req.body);
@@ -63,6 +64,13 @@ router.put(
   "/edit/product/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateProductInput(req.body);
+
+    // To check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     User.findOne({ role: req.user.role })
       .then(user => {
         if (user.role) {
@@ -112,14 +120,75 @@ router.delete(
             product
               .remove()
               .then(() =>
-                res.json({ product: "Product is successfully deleted" })
+                res.json({ message: "Product is successfully deleted" })
               );
           } else {
             return res.status(401).json("Not Authorized");
           }
         })
-        .catch(err => res.status(404).json({ product: "No product found" }));
+        .catch(err => res.status(404).json({ message: "No product found" }));
     });
+  }
+);
+
+// @Route   GET admin/all/users
+// @Desc    Get all Users
+// @Access  Private
+router.get(
+  "/all/users",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.role) {
+      User.find({}, { password: 0 })
+        .sort({ date: -1 })
+        .then(users => res.json(users))
+        .catch(err => res.status(404).json({ error: "No Users found" }));
+    } else {
+      return res.status(401).json({ error: "Not Authorized" });
+    }
+  }
+);
+
+// @Route   PUT admin/edit/user/:id
+// @Desc    Edit all Users
+// @Access  Private
+router.put(
+  "/edit/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateRegisterEditInput(req.body);
+
+    // To check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          const newUser = {};
+          newUser.role = req.body.role;
+          newUser.name = req.body.name;
+          newUser.email = req.body.email;
+          // Update
+          User.findByIdAndUpdate(
+            req.params.id,
+            { $set: newUser },
+            { new: true }
+          )
+            .then(user => res.json(user))
+            .catch(err =>
+              res.status(404).json({ error: "Could not update User" })
+            );
+        } else {
+          return res.status(200).json({ NoAthorization: "Not Authorized" });
+        }
+      })
+      .catch(err =>
+        res
+          .status(404)
+          .json({ error: "No User found and could not update User" })
+      );
   }
 );
 
