@@ -6,6 +6,7 @@ const passport = require("passport");
 const users = require("./routes/users");
 const products = require("./routes/products");
 const admin = require("./routes/admin");
+const order = require("./routes/order");
 
 const app = express();
 
@@ -35,6 +36,7 @@ require("./config/passport")(passport);
 app.use("/users", users);
 app.use("/products", products);
 app.use("/admin", admin);
+app.use("/order", order);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
