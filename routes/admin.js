@@ -10,6 +10,16 @@ const Product = require("../models/Product");
 const validateProductInput = require("../validation/product");
 const validateRegisterEditInput = require("../validation/registerEdit");
 
+// @Route   GET admin/all/products/
+// @Desc    GET all Products
+// @Access  Private
+router.get("/all/products", (req, res) => {
+  Product.find()
+    .sort({ date: -1 })
+    .then(products => res.json(products))
+    .catch(err => res.status(404).json({ products: "No Products found" }));
+});
+
 // @route   POST admin/products
 // @dec     Create Product as Admin
 // @access  Private
@@ -46,16 +56,6 @@ router.post(
       .catch(err => console.log(err + " You are not Admin"));
   }
 );
-
-// @Route   GET admin/all/products/
-// @Desc    GET all Products
-// @Access  Private
-router.get("/all/products", (req, res) => {
-  Product.find()
-    .sort({ date: -1 })
-    .then(products => res.json(products))
-    .catch(err => res.status(404).json({ products: "No Products found" }));
-});
 
 // @Route   PUT admin/edit/product/:id
 // @Desc    EDIT Product
@@ -105,11 +105,11 @@ router.put(
   }
 );
 
-// @Route   DELETE admin/deleteproduct/:id
+// @Route   DELETE admin/delete/product/:id
 // @Desc    Delete Product
 // @Access  Private
 router.delete(
-  "/deleteproduct/:id",
+  "/delete/product/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ role: req.user.role }).then(user => {
@@ -189,6 +189,28 @@ router.put(
           .status(404)
           .json({ error: "No User found and could not update User" })
       );
+  }
+);
+
+// @Route   DELETE admin/delete/user/:id
+// @Desc    Delete user
+// @Access  Private
+router.delete(
+  "/delete/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Check if user is Admin
+    if (req.user.role) {
+      User.findById(req.params.id)
+        .then(user => {
+          user
+            .remove()
+            .then(() => res.json({ message: "User is successfully deleted" }));
+        })
+        .catch(err => res.status(404).json({ message: "No user found" }));
+    } else {
+      return res.status(401).json("Not Authorized");
+    }
   }
 );
 
