@@ -181,7 +181,7 @@ router.put(
               res.status(404).json({ error: "Could not update User" })
             );
         } else {
-          return res.status(200).json({ NoAthorization: "Not Authorized" });
+          return res.status(401).json({ NoAthorization: "Not Authorized" });
         }
       })
       .catch(err =>
