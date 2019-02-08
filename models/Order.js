@@ -8,11 +8,6 @@ const OrderSchema = new Schema({
     ref: "users"
   },
 
-  product: {
-    type: Schema.Types.ObjectId,
-    ref: "products"
-  },
-
   orderProducts: [
     {
       productTitle: {
@@ -69,6 +64,11 @@ const OrderSchema = new Schema({
 
   telephone: {
     type: String,
+  },
+
+  status: {
+    type: String,
+    required: true
   },
 
   date: {
