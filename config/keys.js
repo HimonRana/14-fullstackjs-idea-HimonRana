@@ -1,5 +1,6 @@
+require("dotenv").config();
+
 module.exports = {
-  mongoURI:
-    "mongodb://buntstapress:bunt1234@ds145412.mlab.com:45412/buntstapress",
-  secretOrKey: "secret"
+  mongoURI: process.env.MONGO_URI,
+  secretOrKey: process.env.SECRET_OR_KEY
 };

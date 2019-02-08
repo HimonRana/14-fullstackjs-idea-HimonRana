@@ -214,4 +214,8 @@ router.delete(
   }
 );
 
+// TODO: GET order(ADMIN)
+// TODO: PUT order(ADMIN)
+// TODO: DELETE order(ADMIN)
+
 module.exports = router;

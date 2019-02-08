@@ -24,7 +24,10 @@ router.get("/all/products", (req, res) => {
 router.get("/product/:id", (req, res) => {
   Product.findById(req.params.id)
     .then(product => res.json(product))
-    .catch(err => res.status(404).json({ product: "No Product found", err: err }));
+    .catch(err =>
+      res.status(404).json({ product: "No Product found", err: err })
+    );
 });
+
 
 module.exports = router;
