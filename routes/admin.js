@@ -20,7 +20,7 @@ router.get("/all/products", (req, res) => {
     .catch(err => res.status(404).json({ products: "No Products found" }));
 });
 
-// @route   POST admin/products
+// @route   POST admin/create/product
 // @dec     Create Product as Admin
 // @access  Private
 router.post(
