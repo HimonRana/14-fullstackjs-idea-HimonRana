@@ -12,7 +12,7 @@ const User = require("../models/User");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
-// @route   GET users/register
+// @route   POST users/register
 // @dec     Register user
 // @access  Public
 router.post("/register", (req, res) => {
@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-// @route   GET users/login
+// @route   POST users/login
 // @dec     Login user / Returning JWT Token
 // @access  Public
 router.post("/login", (req, res) => {
@@ -90,7 +90,7 @@ router.post("/login", (req, res) => {
           }
         );
       } else {
-        errors.password = 'Incorrect Password'
+        errors.password = "Incorrect Password";
         return res.status(400).json(errors);
       }
     });

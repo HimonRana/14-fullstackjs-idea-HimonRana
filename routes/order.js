@@ -54,7 +54,8 @@ router.post(
       street: req.body.street,
       zip: req.body.zip,
       city: req.body.city,
-      telephone: req.body.telephone
+      telephone: req.body.telephone,
+      status: req.body.status
     });
 
     newOrder

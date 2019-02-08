@@ -7,6 +7,7 @@ const users = require("./routes/users");
 const products = require("./routes/products");
 const admin = require("./routes/admin");
 const order = require("./routes/order");
+require("dotenv").config();
 
 const app = express();
 
@@ -19,10 +20,7 @@ const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true }
-  )
+  .connect(db, { useNewUrlParser: true })
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log(err));
 
