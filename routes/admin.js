@@ -9,6 +9,7 @@ const Product = require("../models/Product");
 // Validation
 const validateProductInput = require("../validation/product");
 const validateRegisterEditInput = require("../validation/registerEdit");
+const validateOrderInput = require("../validation/order");
 
 // @Route   GET admin/all/products/
 // @Desc    GET all Products
@@ -214,8 +215,93 @@ router.delete(
   }
 );
 
-// TODO: GET order(ADMIN)
-// TODO: PUT order(ADMIN)
-// TODO: DELETE order(ADMIN)
+// @Route   GET admin/all/orders/
+// @Desc    GET all Orders
+// @Access  Private
+router.get(
+  "/all/orders",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.role) {
+      Order.find()
+        .sort({ date: -1 })
+        .then(orders => res.json(orders))
+        .catch(err => res.status(404).json({ orders: "No Orders found" }));
+    } else {
+      return res.status(401).json({ error: "Not Authorized" });
+    }
+  }
+);
+
+// @Route   PUT admin/edit/order/:id
+// @Desc    Edit all Order
+// @Access  Private
+router.put(
+  "/edit/order/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateOrderInput(req.body);
+
+    // To check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          const newOrder = {};
+          newOrder.totalSum = req.body.totalSum;
+          newOrder.name = req.body.name;
+          newOrder.email = req.body.email;
+          newOrder.street = req.body.street;
+          newOrder.zip = req.body.zip;
+          newOrder.city = req.body.city;
+          newOrder.telephone = req.body.telephone;
+          newOrder.status = req.body.status;
+
+          // Update
+          Order.findByIdAndUpdate(
+            req.params.id,
+            { $set: newOrder },
+            { new: true }
+          )
+            .then(order => res.json(order))
+            .catch(err =>
+              res.status(404).json({ error: "Could not update Order" })
+            );
+        } else {
+          return res.status(401).json({ NoAthorization: "Not Authorized" });
+        }
+      })
+      .catch(err =>
+        res
+          .status(404)
+          .json({ error: "No Order found and could not update Order" })
+      );
+  }
+);
+
+// @Route   DELETE admin/delete/order/:id
+// @Desc    Delete Order
+// @Access  Private
+router.delete(
+  "/delete/order/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Check if user is Admin
+    if (req.user.role) {
+      Order.findById(req.params.id)
+        .then(order => {
+          order
+            .remove()
+            .then(() => res.json({ message: "User is successfully deleted" }));
+        })
+        .catch(err => res.status(404).json({ message: "No user found" }));
+    } else {
+      return res.status(401).json("Not Authorized");
+    }
+  }
+);
 
 module.exports = router;
