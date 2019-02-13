@@ -5,5 +5,15 @@
 }
 
 .login-btn {
-  margin: 1em 0 0.5em 0 !important;
+  margin: 1.5em 0 0.5em 0 !important;
+}
+
+.login-popper {
+  position: absolute;
+  right: 20px;
+  will-change: transform;
+  top: 50px !important;
+  left: unset !important;
+  right: 20px;
+  transform: unset !important;
 }
