@@ -7,22 +7,25 @@ import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
-import { FormControl } from "@material-ui/core";
+import { FormControl, Typography } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 
 import "./Login.css";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      open: false
+      open: false,
+      email: "",
+      password: "",
+      errors: {}
     };
   }
 
-  handleChange = event => {
-    this.setState({ name: event.target.value });
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   handleToggle = () => {
@@ -35,8 +38,20 @@ class Login extends Component {
     });
   };
 
+  onSubmit = e => {
+    e.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    console.log(user);
+  };
+
   render() {
     const { open } = this.state;
+    const { errors } = this.state;
 
     return (
       <div className="container">
@@ -71,20 +86,44 @@ class Login extends Component {
                   }}
                 >
                   <Paper>
-                    <form className="login-form">
+                    <form
+                      noValidate
+                      onSubmit={this.onSubmit}
+                      className="login-form"
+                    >
                       <MenuItem>
                         <FormControl>
                           <InputLabel>Email</InputLabel>
-                          <Input type="email" onChange={this.handleChange} />
+                          <Input
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onChange}
+                          />
                         </FormControl>
                       </MenuItem>
+                      {errors.email && (
+                        <Typography color="error" className="error-message">
+                          {errors.email}
+                        </Typography>
+                      )}
                       <br />
                       <MenuItem>
                         <FormControl>
                           <InputLabel>Password</InputLabel>
-                          <Input type="password" onChange={this.handleChange} />
+                          <Input
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onChange}
+                          />
                         </FormControl>
                       </MenuItem>
+                      {errors.password && (
+                        <Typography color="error" className="error-message">
+                          {errors.password}
+                        </Typography>
+                      )}
                       <Button
                         className="login-btn"
                         type="submit"
