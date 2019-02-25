@@ -17,3 +17,7 @@
   right: 20px;
   transform: unset !important;
 }
+
+.error-message {
+  margin-left: 1.2em !important;
+}
