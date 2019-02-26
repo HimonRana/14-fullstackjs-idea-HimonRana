@@ -1,6 +1,7 @@
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
+import Toastr from "toastr";
 
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
@@ -8,13 +9,20 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 export const registerUser = userData => dispatch => {
   Axios.post("/users/register", userData)
     .then(() => {
-      // this.loginUser(userData);
       const loginUserData = {
         email: userData.email,
         password: userData.password
       };
+
+      Toastr.success(
+        "Welcome to BuntShop, You are registered!",
+        {
+          timeOut: 5000
+        },
+        { positionClass: "toast-bottom-right" }
+      );
+
       dispatch(loginUser(loginUserData));
-      console.log("You are registered now!");
     })
     .catch(err =>
       dispatch({
@@ -28,7 +36,11 @@ export const registerUser = userData => dispatch => {
 export const loginUser = userData => dispatch => {
   Axios.post("users/login", userData)
     .then(res => {
-      console.log("You are Logged in now!");
+      Toastr.success(
+        "You are logged in now!",
+        { timeOut: 5000 },
+        { positionClass: "toast-bottom-right" }
+      );
 
       // Save token to locaStorage
       const { token } = res.data;
@@ -67,4 +79,10 @@ export const logoutUser = () => dispatch => {
   setAuthToken(false);
   // Set thhe current use to {} which will set IsAuthenticated to false
   dispatch(setCurrentUser({}));
+
+  Toastr.success(
+    "You are logged out now!",
+    { timeOut: 5000 },
+    { positionClass: "toast-bottom-right" }
+  );
 };
