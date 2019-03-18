@@ -25,13 +25,28 @@ class Navbar extends Component {
         <AppBar position="static">
           {isAuthenticated ? (
             <Toolbar className="tool_bar">
-              <Button color="inherit" onClick={this.onLogoutClick}>
+              <Typography className="logo-name" variant="h5" color="inherit">
+                BuntShop
+              </Typography>
+              <Typography color="inherit">{user.name}</Typography>
+              <Typography color="inherit">
+                {user.role ? (
+                  <Button variant="contained">Dashboard</Button>
+                ) : null}
+              </Typography>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={this.onLogoutClick}
+              >
                 Logout
               </Button>
-              <Typography color="inherit">{user.name}</Typography>
             </Toolbar>
           ) : (
             <Toolbar className="tool_bar">
+              <Typography className="logo-name" variant="h5" color="inherit">
+                BuntShop
+              </Typography>
               <Register />
               <Login />
             </Toolbar>

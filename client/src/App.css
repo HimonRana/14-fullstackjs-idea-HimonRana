@@ -8,8 +8,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
 }
 
 .tool_bar {
   justify-content: flex-end;
+}
+
+.tool_bar button {
+  margin-left: 1em;
+}
+
+.tool_bar .logo-name {
+  flex-grow: 1;
 }
