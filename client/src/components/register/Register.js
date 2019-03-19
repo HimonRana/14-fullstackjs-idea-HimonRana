@@ -192,9 +192,9 @@ class Register extends Component {
   }
 }
 
-Register.PropTypes = {
+Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.IsRequired,
+  auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 };
 
