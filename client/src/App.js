@@ -10,6 +10,7 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 
+import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 // Check for Token

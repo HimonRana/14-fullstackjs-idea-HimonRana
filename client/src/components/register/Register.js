@@ -4,16 +4,17 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 
-import Button from "@material-ui/core/Button";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-
-import { FormControl, Typography } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
+import {
+  Button,
+  Header,
+  Icon,
+  Modal,
+  Form,
+  Grid,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
 
 import "./Register.css";
 
@@ -40,8 +41,10 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleToggle = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleModalOpening = () => {
+    this.setState({
+      open: true
+    });
   };
 
   handleClickAway = () => {
@@ -64,129 +67,55 @@ class Register extends Component {
   };
 
   render() {
-    const { open } = this.state;
     const { errors } = this.state;
 
     return (
-      <div className="container">
-        <ClickAwayListener onClickAway={this.handleClickAway}>
-          <div>
-            <Button
-              color="inherit"
-              onClick={this.handleToggle}
-              buttonRef={node => {
-                this.anchorEl = node;
-              }}
-              aria-owns={open ? "menu-list-grow" : undefined}
-              aria-haspopup="true"
-            >
+      <div>
+        <Modal
+          trigger={
+            <Button onClick={this.handleModalOpening} compact basic inverted>
               Register
             </Button>
-            <Popper
-              className="register-popper"
-              open={open}
-              anchorEl={this.anchorEl}
-              transition
-              placement={"bottom-start"}
-              disablePortal={true}
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  id="menu-list-grow"
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom"
-                  }}
-                >
-                  <Paper>
-                    <form
-                      noValidate
-                      onSubmit={this.onSubmit}
-                      className="register-form"
-                    >
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Name</InputLabel>
-                          <Input
-                            type="text"
-                            name="name"
-                            value={this.state.name}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.name && (
-                        <Typography color="error" className="error-message">
-                          {errors.name}
-                        </Typography>
-                      )}
-                      <br />
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Email</InputLabel>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.email && (
-                        <Typography color="error" className="error-message">
-                          {errors.email}
-                        </Typography>
-                      )}
-                      <br />
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Password</InputLabel>
-                          <Input
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.password && (
-                        <Typography color="error" className="error-message">
-                          {errors.password}
-                        </Typography>
-                      )}
-                      <br />
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Confirm password</InputLabel>
-                          <Input
-                            type="password"
-                            name="password2"
-                            value={this.state.password2}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.password2 && (
-                        <Typography color="error" className="error-message">
-                          {errors.password2}
-                        </Typography>
-                      )}
-                      <Button
-                        className="register-btn"
-                        type="submit"
-                        variant="contained"
-                        color="secondary"
-                      >
-                        Register now
-                      </Button>
-                    </form>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </div>
-        </ClickAwayListener>
+          }
+          basic
+          size="small"
+        >
+          <Grid textAlign="center" style={{ height: "100%" }}>
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Modal.Content>
+                <Header color="blue" content="Register" textAlign="left" />
+                <Form error size="small">
+                  {/* <Segment stacked> */}
+                  <Form.Input
+                    fluid
+                    icon="user"
+                    iconPosition="left"
+                    placeholder="E-mail address"
+                  />
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                  />
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Confirm password"
+                    type="password"
+                  />
+                  <Message error content="You can only sign up for an account once with a given e-mail address." />
+                  <Button primary fluid size="medium">
+                    Login
+                  </Button>
+                  {/* </Segment> */}
+                </Form>
+              </Modal.Content>
+            </Grid.Column>
+          </Grid>
+        </Modal>
       </div>
     );
   }

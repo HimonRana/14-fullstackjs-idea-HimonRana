@@ -63,7 +63,7 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-      <div className="container">
+      <div>
         <ClickAwayListener onClickAway={this.handleClickAway}>
           <div>
             <Button
