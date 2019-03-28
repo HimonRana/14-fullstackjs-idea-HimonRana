@@ -41,18 +41,6 @@ class Register extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleModalOpening = () => {
-    this.setState({
-      open: true
-    });
-  };
-
-  handleClickAway = () => {
-    this.setState({
-      open: false
-    });
-  };
-
   onSubmit = e => {
     e.preventDefault();
 
@@ -84,13 +72,27 @@ class Register extends Component {
             <Grid.Column style={{ maxWidth: 450 }}>
               <Modal.Content>
                 <Header color="blue" content="Register" textAlign="left" />
-                <Form error size="small">
+                <Form error onSubmit={this.onSubmit} size="small">
                   {/* <Segment stacked> */}
                   <Form.Input
                     fluid
                     icon="user"
                     iconPosition="left"
+                    placeholder="Name"
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.onChange}
+                  />
+                  <Form.Input
+                    fluid
+                    icon="mail"
+                    iconPosition="left"
                     placeholder="E-mail address"
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
                   />
                   <Form.Input
                     fluid
@@ -98,6 +100,9 @@ class Register extends Component {
                     iconPosition="left"
                     placeholder="Password"
                     type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
                   />
                   <Form.Input
                     fluid
@@ -105,10 +110,24 @@ class Register extends Component {
                     iconPosition="left"
                     placeholder="Confirm password"
                     type="password"
+                    name="password2"
+                    value={this.state.password2}
+                    onChange={this.onChange}
                   />
-                  <Message error content="You can only sign up for an account once with a given e-mail address." />
-                  <Button primary fluid size="medium">
-                    Login
+                  {errors.name && (
+                    <Message size="mini" error list={[`${errors.name}`]} />
+                  )}
+                  {errors.email && (
+                    <Message size="mini" error list={[`${errors.email}`]} />
+                  )}
+                  {errors.password && (
+                    <Message size="mini" error list={[`${errors.password}`]} />
+                  )}
+                  {errors.password2 && (
+                    <Message size="mini" error list={[`${errors.password2}`]} />
+                  )}
+                  <Button type="submit" primary fluid size="medium">
+                    Register
                   </Button>
                   {/* </Segment> */}
                 </Form>
