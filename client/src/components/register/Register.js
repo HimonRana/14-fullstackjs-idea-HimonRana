@@ -4,7 +4,15 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 
-import { Button, Header, Modal, Form, Grid, Message } from "semantic-ui-react";
+import {
+  Button,
+  Header,
+  Modal,
+  Form,
+  Grid,
+  Message,
+  Icon
+} from "semantic-ui-react";
 
 import "./Register.css";
 
@@ -12,6 +20,7 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
+      modalOpen: false,
       name: "",
       email: "",
       password: "",
@@ -28,6 +37,18 @@ class Register extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleModalOpen = () => {
+    this.setState({
+      modalOpen: true
+    });
+  };
+
+  handleModalClose = () => {
+    this.setState({
+      modalOpen: false
+    });
   };
 
   onSubmit = e => {
@@ -48,18 +69,25 @@ class Register extends Component {
 
     return (
       <div>
+        <Button onClick={this.handleModalOpen} compact basic inverted>
+          Register
+        </Button>
         <Modal
-          trigger={
-            <Button compact basic inverted>
-              Register
-            </Button>
-          }
-          dimmer="inverted"
           basic
           size="small"
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose}
         >
           <Grid textAlign="center" style={{ height: "100%" }}>
             <Grid.Column style={{ maxWidth: 450 }}>
+              <Icon
+                style={{ position: "absolute", right: "10px" }}
+                className="modal-close-icon"
+                link
+                basic
+                name="close"
+                onClick={this.handleModalClose}
+              />
               <Modal.Content>
                 <Header
                   color="blue"

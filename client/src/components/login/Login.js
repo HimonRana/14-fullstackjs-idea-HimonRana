@@ -61,26 +61,22 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-    console.log(this.state.modalOpen);
+
     return (
       <div className="content">
         <Button onClick={this.handleModalOpen} compact basic inverted>
           Login
         </Button>
         <Modal
-          // trigger={
-          //   <Button compact basic inverted>
-          //     Login
-          //   </Button>
-          // }
-          open={this.state.modalOpen}
-          onClose={this.handleModalClose}
           basic
           size="small"
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose}
         >
           <Grid textAlign="center" style={{ height: "100%" }}>
             <Grid.Column style={{ maxWidth: 450 }}>
               <Icon
+                style={{ position: "absolute", right: "10px" }}
                 className="modal-close-icon"
                 link
                 basic
