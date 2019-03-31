@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 
-import Button from "@material-ui/core/Button";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import MenuItem from "@material-ui/core/MenuItem";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-
-import { FormControl, Typography } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
+import {
+  Button,
+  Header,
+  Modal,
+  Form,
+  Grid,
+  Message,
+  Icon
+} from "semantic-ui-react";
 
 import "./Login.css";
 
@@ -20,7 +19,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      open: false,
+      modalOpen: false,
       email: "",
       password: "",
       errors: {}
@@ -37,13 +36,15 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleToggle = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleModalOpen = () => {
+    this.setState({
+      modalOpen: true
+    });
   };
 
-  handleClickAway = () => {
+  handleModalClose = () => {
     this.setState({
-      open: false
+      modalOpen: false
     });
   };
 
@@ -59,95 +60,74 @@ class Login extends Component {
   };
 
   render() {
-    const { open } = this.state;
     const { errors } = this.state;
-
+    console.log(this.state.modalOpen);
     return (
-      <div>
-        <ClickAwayListener onClickAway={this.handleClickAway}>
-          <div>
-            <Button
-              color="inherit"
-              onClick={this.handleToggle}
-              buttonRef={node => {
-                this.anchorEl = node;
-              }}
-              aria-owns={open ? "menu-list-grow" : null}
-              aria-haspopup="true"
-            >
-              Login
-            </Button>
-            <Popper
-              className="login-popper"
-              open={open}
-              anchorEl={this.anchorEl}
-              transition
-              placement={"bottom-start"}
-              disablePortal={true}
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  id="menu-list-grow"
-                  style={{
-                    transformOrigin:
-                      placement === "bottom" ? "center top" : "center bottom"
-                  }}
-                >
-                  <Paper>
-                    <form
-                      noValidate
-                      onSubmit={this.onSubmit}
-                      className="login-form"
-                    >
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Email</InputLabel>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.email && (
-                        <Typography color="error" className="error-message">
-                          {errors.email}
-                        </Typography>
-                      )}
-                      <br />
-                      <MenuItem>
-                        <FormControl>
-                          <InputLabel>Password</InputLabel>
-                          <Input
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onChange}
-                          />
-                        </FormControl>
-                      </MenuItem>
-                      {errors.password && (
-                        <Typography color="error" className="error-message">
-                          {errors.password}
-                        </Typography>
-                      )}
-                      <Button
-                        className="login-btn"
-                        type="submit"
-                        variant="contained"
-                        color="secondary"
-                      >
-                        Log in
-                      </Button>
-                    </form>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </div>
-        </ClickAwayListener>
+      <div className="content">
+        <Button onClick={this.handleModalOpen} compact basic inverted>
+          Login
+        </Button>
+        <Modal
+          // trigger={
+          //   <Button compact basic inverted>
+          //     Login
+          //   </Button>
+          // }
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose}
+          basic
+          size="small"
+        >
+          <Grid textAlign="center" style={{ height: "100%" }}>
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Icon
+                className="modal-close-icon"
+                link
+                basic
+                name="close"
+                onClick={this.handleModalClose}
+              />
+              <Modal.Content>
+                <Header
+                  color="blue"
+                  content="Log in to your account"
+                  textAlign="left"
+                />
+                <Form error onSubmit={this.onSubmit} size="small">
+                  <Form.Input
+                    fluid
+                    icon="mail"
+                    iconPosition="left"
+                    placeholder="E-mail address"
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.onChange}
+                  />
+                  <Form.Input
+                    fluid
+                    icon="lock"
+                    iconPosition="left"
+                    placeholder="Password"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                  />
+                  {errors.email && (
+                    <Message size="mini" error list={[`${errors.email}`]} />
+                  )}
+                  {errors.password && (
+                    <Message size="mini" error list={[`${errors.password}`]} />
+                  )}
+                  <Button type="submit" primary fluid size="medium">
+                    Log in
+                  </Button>
+                </Form>
+              </Modal.Content>
+            </Grid.Column>
+          </Grid>
+        </Modal>
       </div>
     );
   }

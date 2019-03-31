@@ -4,17 +4,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 
-import {
-  Button,
-  Header,
-  Icon,
-  Modal,
-  Form,
-  Grid,
-  Image,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import { Button, Header, Modal, Form, Grid, Message } from "semantic-ui-react";
 
 import "./Register.css";
 
@@ -22,7 +12,6 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      open: false,
       name: "",
       email: "",
       password: "",
@@ -61,19 +50,23 @@ class Register extends Component {
       <div>
         <Modal
           trigger={
-            <Button onClick={this.handleModalOpening} compact basic inverted>
+            <Button compact basic inverted>
               Register
             </Button>
           }
+          dimmer="inverted"
           basic
           size="small"
         >
           <Grid textAlign="center" style={{ height: "100%" }}>
             <Grid.Column style={{ maxWidth: 450 }}>
               <Modal.Content>
-                <Header color="blue" content="Register" textAlign="left" />
+                <Header
+                  color="blue"
+                  content="Register a new account here"
+                  textAlign="left"
+                />
                 <Form error onSubmit={this.onSubmit} size="small">
-                  {/* <Segment stacked> */}
                   <Form.Input
                     fluid
                     icon="user"
@@ -129,7 +122,6 @@ class Register extends Component {
                   <Button type="submit" primary fluid size="medium">
                     Register
                   </Button>
-                  {/* </Segment> */}
                 </Form>
               </Modal.Content>
             </Grid.Column>
