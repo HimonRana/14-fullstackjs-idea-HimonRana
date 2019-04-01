@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
+import { Button, Icon } from "semantic-ui-react";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
@@ -24,28 +25,45 @@ class Navbar extends Component {
       <div>
         <AppBar position="static">
           {isAuthenticated ? (
-            <Toolbar className="tool_bar">
-              <Typography className="logo-name" variant="h5" color="inherit">
-                BuntShop
+            <Toolbar className="tool-bar">
+              <Typography className="logo-name" variant="h4">
+                <Link className="logo" to="/">
+                  Buntshop
+                </Link>
               </Typography>
-              <Typography color="inherit">{user.name}</Typography>
+              <Link to="/profile">
+                <Typography variant="h7" className="profile-name">
+                  {user.name}
+                </Typography>
+              </Link>
               <Typography color="inherit">
                 {user.role ? (
-                  <Button variant="contained">Dashboard</Button>
+                  <Link to="/dashboard">
+                    <Button
+                      className="dashboard-button"
+                      color="olive"
+                      compact
+                      inverted
+                    >
+                      Dashboard
+                    </Button>
+                  </Link>
                 ) : null}
               </Typography>
-              <Button
-                variant="contained"
-                color="secondary"
+              <Icon
+                className="logout-button"
+                link
+                name="log out"
+                size="big"
                 onClick={this.onLogoutClick}
-              >
-                Logout
-              </Button>
+              />
             </Toolbar>
           ) : (
-            <Toolbar className="tool_bar">
-              <Typography className="logo-name" variant="h5" color="inherit">
-                BuntShop
+            <Toolbar className="tool-bar">
+              <Typography className="logo-name" variant="h4">
+                <Link className="logo" to="/">
+                  Buntshop
+                </Link>
               </Typography>
               <Register />
               <Login />

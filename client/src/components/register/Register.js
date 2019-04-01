@@ -7,13 +7,11 @@ import { withRouter } from "react-router-dom";
 import {
   Button,
   Header,
-  Icon,
   Modal,
   Form,
   Grid,
-  Image,
   Message,
-  Segment
+  Icon
 } from "semantic-ui-react";
 
 import "./Register.css";
@@ -22,7 +20,7 @@ class Register extends Component {
   constructor() {
     super();
     this.state = {
-      open: false,
+      modalOpen: false,
       name: "",
       email: "",
       password: "",
@@ -39,6 +37,18 @@ class Register extends Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleModalOpen = () => {
+    this.setState({
+      modalOpen: true
+    });
+  };
+
+  handleModalClose = () => {
+    this.setState({
+      modalOpen: false
+    });
   };
 
   onSubmit = e => {
@@ -59,21 +69,32 @@ class Register extends Component {
 
     return (
       <div>
+        <Button onClick={this.handleModalOpen} compact basic inverted>
+          Register
+        </Button>
         <Modal
-          trigger={
-            <Button onClick={this.handleModalOpening} compact basic inverted>
-              Register
-            </Button>
-          }
           basic
           size="small"
+          open={this.state.modalOpen}
+          onClose={this.handleModalClose}
         >
           <Grid textAlign="center" style={{ height: "100%" }}>
             <Grid.Column style={{ maxWidth: 450 }}>
+              <Icon
+                style={{ position: "absolute", right: "10px" }}
+                className="modal-close-icon"
+                link
+                basic
+                name="close"
+                onClick={this.handleModalClose}
+              />
               <Modal.Content>
-                <Header color="blue" content="Register" textAlign="left" />
+                <Header
+                  color="blue"
+                  content="Register a new account here"
+                  textAlign="left"
+                />
                 <Form error onSubmit={this.onSubmit} size="small">
-                  {/* <Segment stacked> */}
                   <Form.Input
                     fluid
                     icon="user"
@@ -129,7 +150,6 @@ class Register extends Component {
                   <Button type="submit" primary fluid size="medium">
                     Register
                   </Button>
-                  {/* </Segment> */}
                 </Form>
               </Modal.Content>
             </Grid.Column>
