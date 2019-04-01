@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-
+import img1 from "../../img/pexel1.jpeg";
+import img2 from "../../img/pexel2.jpeg";
+import img3 from "../../img/pexel3.jpeg";
+import img4 from "../../img/pexel4.jpeg";
 import "./Banner.css";
 
 class Banner extends Component {
@@ -18,17 +21,17 @@ class Banner extends Component {
     return (
       <div className="container">
         <Slider {...settings}>
-          <div>
-            <img src="https://images.pexels.com/photos/298864/pexels-photo-298864.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=400" />
+          <div className="img-container">
+            <img src={img1} alt="" />
           </div>
-          <div>
-            <img src="https://images.pexels.com/photos/325876/pexels-photo-325876.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=400" />
+          <div className="img-container">
+            <img src={img2} alt="" />
           </div>
-          <div>
-            <img src="https://images.pexels.com/photos/365067/pexels-photo-365067.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=400" />
+          <div className="img-container">
+            <img src={img3} alt="" />
           </div>
-          <div>
-            <img src="https://images.pexels.com/photos/1103511/pexels-photo-1103511.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=200&w=400" />
+          <div className="img-container">
+            <img src={img4} alt="" />
           </div>
         </Slider>
       </div>
