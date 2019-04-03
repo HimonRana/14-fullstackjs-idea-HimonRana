@@ -9,6 +9,9 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
+import Product from "./components/product/Product";
+import Products from "./components/products/Products";
+import ProductItem from "./components/products/ProductItem";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
@@ -42,6 +45,8 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/product" component={Product} />
+            <Route exact path="/products" component={ProductItem} />
             <Footer />
           </div>
         </Router>

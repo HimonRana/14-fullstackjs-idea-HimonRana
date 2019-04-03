@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import img1 from "../../img/pexel1.jpeg";
-import img2 from "../../img/pexel2.jpeg";
-import img3 from "../../img/pexel3.jpeg";
-import img4 from "../../img/pexel4.jpeg";
+import img1 from "../../assets/img/pexel1.jpeg";
+import img2 from "../../assets/img/pexel2.jpeg";
+import img3 from "../../assets/img/pexel3.jpeg";
+import img4 from "../../assets/img/pexel4.jpeg";
 import "./Banner.css";
 
 class Banner extends Component {
@@ -15,6 +15,7 @@ class Banner extends Component {
       speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
+      arrows: false,
       autoplay: true,
       autoplaySpeed: 5000
     };
