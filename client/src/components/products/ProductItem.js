@@ -3,23 +3,29 @@ import { Icon, Label, Card } from "semantic-ui-react";
 
 export default class ProductItem extends Component {
   render() {
+    const { product } = this.props;
+    console.log(this.props);
     return (
-      <div>
+      <div Style="margin: 10px;">
         <Card
-          image="https://www.sneakersnstuff.com/images/225637/large.jpg"
-          header="Converse All Star"
+          image={product.productImg}
+          header={product.title}
           meta={
             <div>
               <br />
               <Label tag as="a">
-                699 SEK
+                {product.price} SEK
               </Label>
             </div>
           }
           description={
             <div>
               <br />
-              In stock: <Icon color="green" name="check" />
+              In stock:{" "}
+              <Icon
+                color={product.available ? "green" : "red"}
+                name={product.available ? "check" : "close"}
+              />
             </div>
           }
         />

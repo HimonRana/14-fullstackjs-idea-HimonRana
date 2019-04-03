@@ -29,5 +29,4 @@ router.get("/product/:id", (req, res) => {
     );
 });
 
-
 module.exports = router;

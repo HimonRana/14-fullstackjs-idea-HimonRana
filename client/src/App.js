@@ -46,7 +46,7 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <Route exact path="/product" component={Product} />
-            <Route exact path="/products" component={ProductItem} />
+            <Route exact path="/products" component={Products} />
             <Footer />
           </div>
         </Router>
