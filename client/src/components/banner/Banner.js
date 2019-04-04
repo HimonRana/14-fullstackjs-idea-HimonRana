@@ -4,7 +4,7 @@ import img1 from "../../assets/img/pexel1.jpeg";
 import img2 from "../../assets/img/pexel2.jpeg";
 import img3 from "../../assets/img/pexel3.jpeg";
 import img4 from "../../assets/img/pexel4.jpeg";
-import "./Banner.css";
+import "./Banner.scss";
 
 class Banner extends Component {
   render() {

@@ -14,7 +14,7 @@ import Products from "./components/products/Products";
 import ProductItem from "./components/products/ProductItem";
 
 import "semantic-ui-css/semantic.min.css";
-import "./App.css";
+import "./App.scss";
 
 // Check for Token
 if (localStorage.jwtToken) {

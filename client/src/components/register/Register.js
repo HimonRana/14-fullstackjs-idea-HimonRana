@@ -14,7 +14,7 @@ import {
   Icon
 } from "semantic-ui-react";
 
-import "./Register.css";
+import "./Register.scss";
 
 class Register extends Component {
   constructor() {
