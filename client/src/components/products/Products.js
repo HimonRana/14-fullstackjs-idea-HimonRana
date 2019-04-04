@@ -19,7 +19,6 @@ class Products extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(products);
     let showProducts = products.map((product, index) => (
       <ProductItem key={index} product={product} />
     ));

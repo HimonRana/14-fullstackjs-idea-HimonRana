@@ -11,7 +11,7 @@ const Product = require("../models/Product");
 // @Route   GET products/all/products
 // @Desc    GET all Products
 // @Access  Public
-router.get("/all/products", (req, res) => {
+router.get("/all", (req, res) => {
   Product.find()
     .sort({ date: -1 })
     .then(products => res.json(products))

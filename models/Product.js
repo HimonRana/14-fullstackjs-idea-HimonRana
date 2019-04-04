@@ -23,13 +23,15 @@ const ProductSchema = new Schema({
   },
 
   price: {
-      type: String
+    type: String
   },
 
-  size: {
-    type: String,
-    required: true
-  },
+  size: [
+    {
+      type: String,
+      required: true
+    }
+  ],
 
   category: {
     type: String,
