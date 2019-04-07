@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Icon, Label, Card, Image } from "semantic-ui-react";
+import { Icon, Card, Image } from "semantic-ui-react";
+
+import "./Products.scss";
 
 export default class ProductItem extends Component {
   render() {
     const { product } = this.props;
     return (
-      <div Style="margin: 10px;">
-        <Card>
+      <div className="grid-product">
+        <Card className="card-product">
           <Link to={`/product/${product._id}`}>
             <Image src={product.productImg} />
           </Link>
           <Card.Content>
             <Card.Header>{product.title}</Card.Header>
-            <br />
-            <Card.Header>
-              <Label tag as="a">
-                {product.price} SEK
-              </Label>
-            </Card.Header>
+            <h5>{product.price} SEK</h5>
           </Card.Content>
           <Card.Content extra>
             <a>

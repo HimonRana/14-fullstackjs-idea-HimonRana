@@ -47,9 +47,7 @@ class Product extends Component {
             </Grid.Column>
             <Grid.Column className="product-info-container" width={6}>
               <h1>{product.title}</h1>
-              <Label tag as="a">
-                {product.price} SEK
-              </Label>
+              <h3>{product.price} SEK</h3>
               <br />
               <br />
               <Dropdown

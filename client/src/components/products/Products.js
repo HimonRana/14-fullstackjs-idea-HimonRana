@@ -23,13 +23,7 @@ class Products extends Component {
       <ProductItem key={index} product={product} />
     ));
 
-    return (
-      <div className="products-container">
-        <Grid>
-          <Grid.Row columns={16}>{showProducts}</Grid.Row>
-        </Grid>
-      </div>
-    );
+    return <div className="products-grid-container">{showProducts}</div>;
   }
 }
 
