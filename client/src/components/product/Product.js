@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productActions";
 
-import { Grid, Image, Label, Icon, Dropdown } from "semantic-ui-react";
+import { Grid, Image, Icon, Dropdown } from "semantic-ui-react";
 import "./Product.scss";
 
 class Product extends Component {
@@ -16,28 +16,28 @@ class Product extends Component {
     const { product } = this.props;
     console.log(product);
     const getOptions = [
-      {
-        key: "42",
-        text: "42",
-        value: "42"
-      },
-      {
-        key: "43",
-        text: "43",
-        value: "43"
-      },
-      {
-        key: "44",
-        text: "44",
-        value: "44"
-      },
-      {
-        key: "45",
-        text: "45",
-        value: "45"
-      }
+      // {
+      //   key: "42",
+      //   text: "42",
+      //   value: "42"
+      // },
+      // {
+      //   key: "43",
+      //   text: "43",
+      //   value: "43"
+      // },
+      // {
+      //   key: "44",
+      //   text: "44",
+      //   value: "44"
+      // },
+      // {
+      //   key: "45",
+      //   text: "45",
+      //   value: "45"
+      // }
+      { key: product.size, text: product.size, value: product.size }
     ];
-
     return (
       <div className="product-container">
         <Grid divided="vertically">

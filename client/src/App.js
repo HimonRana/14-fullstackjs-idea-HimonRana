@@ -11,7 +11,6 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Product from "./components/product/Product";
 import Products from "./components/products/Products";
-import ProductItem from "./components/products/ProductItem";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";

@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import ProductItem from "./ProductItem";
 import { getProducts } from "../../actions/productActions";
 
-import { Grid } from "semantic-ui-react";
 import "./Products.scss";
 
 class Products extends Component {

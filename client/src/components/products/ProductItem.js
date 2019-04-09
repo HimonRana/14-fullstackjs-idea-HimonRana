@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Icon, Card, Image } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 
 import "./Products.scss";
 
@@ -11,13 +11,15 @@ export default class ProductItem extends Component {
       <div className="grid-product">
         <Card className="card-product">
           <Link to={`/product/${product._id}`}>
-            <Image src={product.productImg} />
+            <div className="products-img-container">
+              <Image alt={product.title} src={product.productImg} />
+            </div>
           </Link>
           <Card.Content>
             <Card.Header>{product.title}</Card.Header>
             <h5>{product.price} SEK</h5>
           </Card.Content>
-          <Card.Content extra>
+          {/* <Card.Content extra>
             <a>
               In stock:{" "}
               <Icon
@@ -28,7 +30,7 @@ export default class ProductItem extends Component {
             <Card.Meta>
               <span className="date">Added: {product.date}</span>
             </Card.Meta>
-          </Card.Content>
+          </Card.Content> */}
         </Card>
       </div>
     );

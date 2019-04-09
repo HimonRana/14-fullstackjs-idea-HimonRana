@@ -3,14 +3,13 @@
 
 .img-container {
   width: 100%;
-}
-
-img {
-  width: 100%;
-  min-height: 10%;
-  background-repeat: no-repeat;
-  background-position: center;
-  object-fit: cover;
+  img {
+    width: 100%;
+    min-height: 10%;
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+  }
 }
 
 ul.slick-dots {
