@@ -21,9 +21,15 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
+    const style = {
+      background: "linear-gradient(45deg, #000000 30%, #00528f 90%)",
+      color: "white",
+      boxShadow: "0 0px 5px 2px rgba(0, 0, 0, .3)"
+    };
+
     return (
       <div>
-        <AppBar position="static">
+        <AppBar style={style} position="static">
           {isAuthenticated ? (
             <Toolbar className="tool-bar">
               <Typography className="logo-name" variant="h4">

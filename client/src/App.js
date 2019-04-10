@@ -9,9 +9,11 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
+import Product from "./components/product/Product";
+import Products from "./components/products/Products";
 
 import "semantic-ui-css/semantic.min.css";
-import "./App.css";
+import "./App.scss";
 
 // Check for Token
 if (localStorage.jwtToken) {
@@ -42,6 +44,8 @@ class App extends Component {
           <div className="App">
             <Navbar />
             <Route exact path="/" component={Landing} />
+            <Route exact path="/products" component={Products} />
+            <Route exact path="/product/:id" component={Product} />
             <Footer />
           </div>
         </Router>
