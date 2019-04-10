@@ -26,10 +26,12 @@ const ProductSchema = new Schema({
     type: String
   },
 
-  size: [
+  sizes: [
     {
-      type: String,
-      required: true
+      size: {
+        type: String,
+        required: true
+      }
     }
   ],
 

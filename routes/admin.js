@@ -5,11 +5,14 @@ const passport = require("passport");
 
 // Load Product model
 const Product = require("../models/Product");
+// Load User model
+const User = require("../models/User");
 
 // Validation
 const validateProductInput = require("../validation/product");
 const validateRegisterEditInput = require("../validation/registerEdit");
 const validateOrderInput = require("../validation/order");
+const validateSizesInput = require("../validation/sizes");
 
 // @Route   GET admin/all/products/
 // @Desc    GET all Products
@@ -43,7 +46,7 @@ router.post(
             description: req.body.description,
             productImg: req.body.productImg,
             price: req.body.price,
-            size: req.body.size,
+            // size: req.body.size,
             category: req.body.category,
             available: req.body.available,
             stock: req.body.stock
@@ -51,10 +54,53 @@ router.post(
 
           newProduct.save().then(product => res.json(product));
         } else {
-          return res.status(400).json("Not Authorized");
+          return res.status(401).json({ NoAthorization: "Not Authorized" });
         }
       })
-      .catch(err => console.log(err + " You are not Admin"));
+      .catch(err =>
+        res
+          .status(404)
+          .json({ usererror: "No User found and could not create product" })
+      );
+  }
+);
+
+// @route   POST admin/add/product/size
+// @dec     Add Product-size as Admin
+// @access  Private
+router.post(
+  "/add/product/size/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateSizesInput(req.body);
+
+    // To check Validation
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          Product.findById(req.params.id).then(product => {
+            const newSize = {
+              size: req.body.size
+            };
+
+            // Add to size array
+            product.sizes.push(newSize);
+
+            product.save().then(product => res.json(product));
+          });
+        } else {
+          return res.status(401).json({ NoAthorization: "Not Authorized" });
+        }
+      })
+      .catch(err =>
+        res
+          .status(404)
+          .json({ usererror: "No User found and could not add size" })
+      );
   }
 );
 
@@ -80,7 +126,7 @@ router.put(
           newProduct.description = req.body.description;
           newProduct.productImg = req.body.productImg;
           newProduct.price = req.body.price;
-          newProduct.size = req.body.size;
+          // newProduct.size = req.body.size;
           newProduct.category = req.body.category;
           newProduct.available = req.body.available;
           newProduct.stock = req.body.stock;
@@ -95,7 +141,7 @@ router.put(
               res.status(404).json({ upderror: "Could not update product" })
             );
         } else {
-          return res.status(200).json({ NoAthorization: "Not Authorized" });
+          return res.status(401).json({ NoAthorization: "Not Authorized" });
         }
       })
       .catch(err =>
