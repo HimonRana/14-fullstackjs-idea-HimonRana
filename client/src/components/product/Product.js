@@ -40,36 +40,34 @@ class Product extends Component {
     ];
     return (
       <div className="product-container">
-        <Grid divided="vertically">
-          <Grid.Row columns={2}>
-            <Grid.Column className="product-img-container" width={10}>
-              <Image src={product.productImg} fluid />
-            </Grid.Column>
-            <Grid.Column className="product-info-container" width={6}>
-              <h1>{product.title}</h1>
-              <h3>{product.price} SEK</h3>
-              <br />
-              <br />
-              <Dropdown
-                placeholder="Select size"
-                fluid
-                selection
-                scrolling
-                options={getOptions}
+        <div className="product-grid-container">
+          <div className="product-img-container" width={10}>
+            <Image src={product.productImg} />
+          </div>
+          <div className="product-info-container" width={6}>
+            <h1>{product.title}</h1>
+            <h3>{product.price} SEK</h3>
+            <br />
+            <br />
+            <Dropdown
+              placeholder="Select size"
+              fluid
+              selection
+              scrolling
+              options={getOptions}
+            />
+            <h3>Category: {product.category}</h3>
+            <h3>Description: {product.description}</h3>
+            <h5>
+              In stock:{" "}
+              <Icon
+                color={product.available ? "green" : "red"}
+                name={product.available ? "check" : "close"}
               />
-              <h3>Category: {product.category}</h3>
-              <h3>Description: {product.description}</h3>
-              <h5>
-                In stock:{" "}
-                <Icon
-                  color={product.available ? "green" : "red"}
-                  name={product.available ? "check" : "close"}
-                />
-              </h5>
-              <Button color="blue">Add to cart</Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+            </h5>
+            <Button color="blue">Add to cart</Button>
+          </div>
+        </div>
       </div>
     );
   }
