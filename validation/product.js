@@ -6,7 +6,7 @@ module.exports = function validateProductInput(data) {
 
   data.title = !isEmpty(data.title) ? data.title : "";
   data.productImg = !isEmpty(data.productImg) ? data.productImg : "";
-  data.size = !isEmpty(data.size) ? data.size : "";
+  // data.size = !isEmpty(data.size) ? data.size : "";
   data.category = !isEmpty(data.category) ? data.category : "";
   data.available = !isEmpty(data.available) ? data.available : "";
   data.stock = !isEmpty(data.stock) ? data.stock : "";
@@ -26,9 +26,9 @@ module.exports = function validateProductInput(data) {
   //   errors.productImg = "Image is not a link";
   // }
   // Size empty
-  if (Validator.isEmpty(data.size)) {
-    errors.size = "Size is required";
-  }
+  // if (Validator.isEmpty(data.size)) {
+  //   errors.size = "Size is required";
+  // }
   // Category empty
   if (Validator.isEmpty(data.category)) {
     errors.category = "Category is required";
