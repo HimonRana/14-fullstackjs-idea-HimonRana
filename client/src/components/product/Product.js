@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productActions";
 
-import { Grid, Image, Icon, Dropdown } from "semantic-ui-react";
+import { Grid, Image, Icon, Dropdown, Button } from "semantic-ui-react";
 import "./Product.scss";
 
 class Product extends Component {
@@ -66,6 +66,7 @@ class Product extends Component {
                   name={product.available ? "check" : "close"}
                 />
               </h5>
+              <Button color="blue">Add to cart</Button>
             </Grid.Column>
           </Grid.Row>
         </Grid>
