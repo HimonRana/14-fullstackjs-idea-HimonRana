@@ -41,7 +41,11 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => res.json(user))
-            .catch(err => console.log(err));
+            .catch(err =>
+              res
+                .status(404)
+                .json({ user: "Could not register/login user", err: err })
+            );
         });
       });
     }
@@ -81,7 +85,7 @@ router.post("/login", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 7200 },
+          { expiresIn: 86400 },
           (err, token) => {
             res.json({
               success: true,

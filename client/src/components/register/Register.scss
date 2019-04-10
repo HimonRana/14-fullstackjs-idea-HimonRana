@@ -1,0 +1,23 @@
+.register-form {
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-btn {
+  margin: 1.5em 0 0.5em 0 !important;
+}
+
+.register-popper {
+  position: absolute;
+  right: 20px;
+  will-change: transform;
+  top: 50px !important;
+  left: unset !important;
+  right: 20px;
+  transform: unset !important;
+}
+
+.error-message {
+  margin-left: 1.2em !important;
+}

@@ -24,7 +24,7 @@ router.post(
   
     // get cookie (OrderRows)
     // Get product_id and quantity from cookie
-    myCookie = [
+    myCart = [
       {
         productTitle: "Nike",
         quantity: 1,
@@ -41,13 +41,13 @@ router.post(
 
     let totalSum = 0;
 
-    for (let i = 0; i < myCookie.length; i++) {
-      totalSum += myCookie[i].quantity * myCookie[i].price;
+    for (let i = 0; i < myCart.length; i++) {
+      totalSum += myCart[i].quantity * myCart[i].price;
     }
 
     const newOrder = new Order({
       user: req.user.id,
-      orderProducts: myCookie,
+      orderProducts: myCart,
       totalSum: totalSum,
       name: req.body.name,
       email: req.body.email,
