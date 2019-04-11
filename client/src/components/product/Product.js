@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productActions";
 
-import {
-  Breadcrumb,
-  Image,
-  Icon,
-  Dropdown,
-  Button,
-  Message
-} from "semantic-ui-react";
+import { Breadcrumb, Image, Icon, Dropdown, Button } from "semantic-ui-react";
 import "./Product.scss";
 
 class Product extends Component {
@@ -76,8 +69,8 @@ class Product extends Component {
     //   });
     // }
     const breadcrumOptions = [
-      { key: "Home", content: "Home", link: true, href: "/" },
-      { key: "Products", content: "Products", link: true, href: "/products" },
+      { key: "Home", content: "Home", href: "/" },
+      { key: "Products", content: "Products", href: "/products" },
       { key: "Category", content: "Category" },
       {
         key: `${product.category}`,
