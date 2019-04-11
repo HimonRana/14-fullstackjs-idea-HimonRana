@@ -2,42 +2,90 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productActions";
 
-import { Grid, Image, Icon, Dropdown, Button } from "semantic-ui-react";
+import {
+  Breadcrumb,
+  Image,
+  Icon,
+  Dropdown,
+  Button,
+  Message
+} from "semantic-ui-react";
 import "./Product.scss";
 
 class Product extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      price: 0,
+      size: "",
+      error: false
+    };
+  }
+
   componentDidMount = () => {
     if (this.props.match.params.id) {
       this.props.getProductById(this.props.match.params.id);
     }
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      title: nextProps.product.title,
+      price: nextProps.product.price
+    });
+  }
+
+  handleSelectChange = (e, { value }) => {
+    this.setState({ size: value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    if (this.state.size === "") {
+      this.setState({
+        error: true
+      });
+    } else {
+      console.log(this.state);
+    }
+  };
+
   render() {
     const { product } = this.props;
     console.log(product);
-    const getOptions = [
-      // {
-      //   key: "42",
-      //   text: "42",
-      //   value: "42"
-      // },
-      // {
-      //   key: "43",
-      //   text: "43",
-      //   value: "43"
-      // },
-      // {
-      //   key: "44",
-      //   text: "44",
-      //   value: "44"
-      // },
-      // {
-      //   key: "45",
-      //   text: "45",
-      //   value: "45"
-      // }
-      { key: product.size, text: product.size, value: product.size }
+
+    const getSize =
+      product.sizes &&
+      product.sizes.map(size => {
+        size = size.size;
+        return {
+          key: size,
+          text: size,
+          value: size
+        };
+      });
+
+    // onClickEdit(product) {
+    //   this.props.history.push({
+    //     pathname: `/admin/products`,
+    //     state: {
+    //       key: product,
+
+    //     }
+    //   });
+    // }
+    const breadcrumOptions = [
+      { key: "Home", content: "Home", link: true, href: "/" },
+      { key: "Products", content: "Products", link: true, href: "/products" },
+      { key: "Category", content: "Category" },
+      {
+        key: `${product.category}`,
+        content: `${product.category}`,
+        link: true
+      }
     ];
+
     return (
       <div className="product-container">
         <div className="product-grid-container">
@@ -45,27 +93,41 @@ class Product extends Component {
             <Image src={product.productImg} />
           </div>
           <div className="product-info-container" width={6}>
-            <h1>{product.title}</h1>
-            <h3>{product.price} SEK</h3>
-            <br />
-            <br />
+            <p className="product-title">{product.title}</p>
+            <p className="product-price">{product.price} SEK</p>
             <Dropdown
               placeholder="Select size"
+              error={this.state.error}
               fluid
               selection
               scrolling
-              options={getOptions}
+              options={getSize}
+              value={this.state.size}
+              onChange={this.handleSelectChange}
             />
-            <h3>Category: {product.category}</h3>
-            <h3>Description: {product.description}</h3>
-            <h5>
-              In stock:{" "}
+            {this.state.error ? (
+              <p className="product-select-error">Please select size</p>
+            ) : (
+              ""
+            )}
+            <Breadcrumb icon="right angle" sections={breadcrumOptions} />
+            <p className="product-description">{product.description}</p>
+            <p className="product-stock">
+              In stock:
               <Icon
                 color={product.available ? "green" : "red"}
                 name={product.available ? "check" : "close"}
               />
-            </h5>
-            <Button color="blue">Add to cart</Button>
+            </p>
+            {product.available ? (
+              <Button type="submit" onClick={this.onSubmit} color="blue">
+                Add to cart
+              </Button>
+            ) : (
+              <Button disabled color="blue">
+                Add to cart
+              </Button>
+            )}
           </div>
         </div>
       </div>
