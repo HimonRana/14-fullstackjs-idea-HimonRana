@@ -1,20 +1,127 @@
 .product-container {
-  margin: auto 80px;
+  width: 100%;
+  margin: 0 auto;
   margin-top: 20px;
+
+  .product-grid-container {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-img-container,
+  .product-info-container {
+    height: 475px;
+  }
+
+  p {
+    line-height: unset;
+  }
+
+  .product-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+  }
+
+  .product-description {
+    margin-top: 1rem;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .product-stock {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.5);
+
+    i.icon {
+      padding-left: 0.7rem;
+    }
+  }
+
+  .ui.selection.dropdown {
+    margin-bottom: 1rem;
+  }
 }
 
-.product-img-container,
+.product-img-container {
+  width: 60%;
+}
+
 .product-info-container {
-  height: 550px;
-  margin: 0;
+  width: 40%;
+  padding-left: 1rem;
+
+  .ui.fluid.dropdown {
+    max-width: 50%;
+  }
+
+  .product-select-error {
+    color: #db2828;
+  }
 }
 
-.ui.grid > .row > .column.product-img-container {
-  padding: 0;
-  margin: 0;
+.product-img-container {
   display: inline-flex;
+
+  img.ui.image {
+    object-fit: cover;
+  }
 }
 
-.product-title {
-  margin-top: 1rem !important;
+// Screen below 767px
+@media (max-width: 767px) {
+  .product-grid-container {
+    flex-direction: column;
+  }
+
+  .product-img-container {
+    align-self: center;
+    width: 90%;
+  }
+
+  .product-info-container {
+    align-self: center;
+    width: 90%;
+    padding: 0;
+    margin-top: 2rem;
+  }
+
+  .product-img-container,
+  .product-info-container {
+    height: 500px;
+  }
 }
+
+// Screen above 786px
+@media (min-width: 768px) {
+  .product-container {
+    max-width: 720px;
+  }
+}
+
+// Screen above 992px
+@media (min-width: 992px) {
+  .product-container {
+    max-width: 860px;
+  }
+}
+
+// Screen above 1200px
+@media (min-width: 1200px) {
+  .product-container {
+    max-width: 1040px;
+  }
+}
+
+// // Screen above 1440px
+// @media (min-width: 1440px) {
+//   .product-container {
+//     max-width: 1240px;
+//   }
+// }

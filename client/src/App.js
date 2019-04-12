@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import jwt_decode from "jwt-decode";
@@ -36,22 +36,22 @@ if (localStorage.jwtToken) {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Navbar />
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className="app">
+          <Navbar />
+          <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/product/:id" component={Product} />
-            <Footer />
-          </div>
-        </Router>
-      </Provider>
-    );
-  }
-}
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
