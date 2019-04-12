@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default () => {
   return (
     <footer>
-        Copyright &copy; {new Date().getFullYear()} BuntShop
+      <p>Copyright &copy; {new Date().getFullYear()} BuntShop</p>
     </footer>
-  )
-}
+  );
+};
