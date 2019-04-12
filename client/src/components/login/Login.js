@@ -50,7 +50,6 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const userData = {
       email: this.state.email,
       password: this.state.password
@@ -79,7 +78,7 @@ class Login extends Component {
                 style={{ position: "absolute", right: "10px" }}
                 className="modal-close-icon"
                 link
-                basic
+                basic="true"
                 name="close"
                 onClick={this.handleModalClose}
               />
@@ -89,6 +88,7 @@ class Login extends Component {
                   content="Log in to your account"
                   textAlign="left"
                 />
+                {/* put loading in Form later */}
                 <Form error onSubmit={this.onSubmit} size="small">
                   <Form.Input
                     fluid
