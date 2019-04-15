@@ -15,20 +15,18 @@ class Users extends Component {
   constructor() {
     super();
     this.state = {
-      expanded: null,
-      active: false
+      active: false,
+      expanded: null
     };
   }
 
   componentDidMount = () => {
     if (window.location.pathname === "/admin/dashboard/users") {
-      console.log("/admin/dashboard/users");
       this.setState({
         active: true
       });
     }
-  }
-  
+  };
 
   handleChange = panel => (event, expanded) => {
     this.setState({
@@ -49,7 +47,7 @@ class Users extends Component {
           onChange={this.handleChange("id1")}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className="">Name: Admin</Typography>
+            <Header size="tiny">Admin</Header>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Form

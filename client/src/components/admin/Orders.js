@@ -13,7 +13,6 @@ class Orders extends Component {
 
   componentDidMount = () => {
     if (window.location.pathname === "/admin/dashboard/orders") {
-      console.log("/admin/dashboard/orders");
       this.setState({
         active: true
       });

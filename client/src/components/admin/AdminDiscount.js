@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Menu, Form, Header, Button, Table } from "semantic-ui-react";
+import { Form, Header, Button, Table } from "semantic-ui-react";
 import "./Admin.scss";
 import AdminNavbar from "./AdminNavbar";
 
@@ -14,7 +14,6 @@ class AdminDashboard extends Component {
 
   componentDidMount = () => {
     if (window.location.pathname === "/admin/dashboard/discount") {
-      console.log("/admin/dashboard/discount");
       this.setState({
         active: true
       });

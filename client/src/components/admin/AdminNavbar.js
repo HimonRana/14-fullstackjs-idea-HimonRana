@@ -5,9 +5,6 @@ import { Menu } from "semantic-ui-react";
 import "./Admin.scss";
 
 class AdminNavbar extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     const {
       activeDiscount,
