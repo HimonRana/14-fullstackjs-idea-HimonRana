@@ -1,25 +1,38 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import { Menu, Form, Header, Button, Table } from "semantic-ui-react";
-import "./AdminDashboard.scss";
+import "./Admin.scss";
+import AdminNavbar from "./AdminNavbar";
 
 class AdminDashboard extends Component {
-  render() {
-    return (
-      <div className="dashboard-container">
-        <Menu color="blue" widths="4" pointing secondary>
-          <Menu.Item as={Link} to="/admin/dashboard/users" color="olive" active>
-            User
-          </Menu.Item>
-          <Menu.Item as={Link} to="/admin/dashboard/products" color="olive">
-            Products
-          </Menu.Item>
-          <Menu.Item as={Link} to="/admin/dashboard/orders" color="olive">
-            Orders
-          </Menu.Item>
-        </Menu>
+  constructor() {
+    super();
+    this.state = {
+      active: false
+    };
+  }
 
+  componentDidMount = () => {
+    if (window.location.pathname === "/admin/dashboard/discount") {
+      console.log("/admin/dashboard/discount");
+      this.setState({
+        active: true
+      });
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.setState({
+      active: false
+    });
+  };
+
+  render() {
+    const { active } = this.state;
+
+    return (
+      <div className="container">
+        <AdminNavbar activeDiscount={active} />
         <Header color="blue" content="Create discount here" textAlign="left" />
         {/* put loading in Form later */}
         <Form>
@@ -53,10 +66,10 @@ class AdminDashboard extends Component {
         <Table columns={12} unstackable color="red">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Discount name</Table.HeaderCell>
-              <Table.HeaderCell>Discount percentage</Table.HeaderCell>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Percent</Table.HeaderCell>
               <Table.HeaderCell>Created</Table.HeaderCell>
-              <Table.HeaderCell>Remove discount</Table.HeaderCell>
+              <Table.HeaderCell>Remove</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -66,7 +79,7 @@ class AdminDashboard extends Component {
               <Table.Cell>30%</Table.Cell>
               <Table.Cell>2018-04-02</Table.Cell>
               <Table.Cell>
-                <Button color="red">Delete</Button>
+                <Button color="red">X</Button>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -74,7 +87,7 @@ class AdminDashboard extends Component {
               <Table.Cell>15%</Table.Cell>
               <Table.Cell>2018-04-02</Table.Cell>
               <Table.Cell>
-                <Button color="red">Delete</Button>
+                <Button color="red">X</Button>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
@@ -82,7 +95,7 @@ class AdminDashboard extends Component {
               <Table.Cell>70%</Table.Cell>
               <Table.Cell>2018-04-02</Table.Cell>
               <Table.Cell>
-                <Button color="red">Delete</Button>
+                <Button color="red">X</Button>
               </Table.Cell>
             </Table.Row>
           </Table.Body>

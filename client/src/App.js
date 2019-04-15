@@ -11,7 +11,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Product from "./components/product/Product";
 import Products from "./components/products/Products";
-import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminDiscount from "./components/admin/AdminDiscount";
 import AdminUsers from "./components/admin/Users";
 import AdminProducts from "./components/admin/Products";
 import AdminOrders from "./components/admin/Orders";
@@ -48,7 +48,11 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route exact path="/admin/dashboard" component={AdminDashboard} />
+            <Route
+              exact
+              path="/admin/dashboard/discount"
+              component={AdminDiscount}
+            />
             <Route exact path="/admin/dashboard/users" component={AdminUsers} />
             <Route
               exact

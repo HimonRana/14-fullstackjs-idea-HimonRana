@@ -42,7 +42,7 @@ class Navbar extends Component {
               </Link>
               {/* <Typography color="inherit"> */}
               {user.role ? (
-                <Link to="/admin/dashboard">
+                <Link to="/admin/dashboard/discount">
                   <Button
                     className="dashboard-button"
                     color="olive"
