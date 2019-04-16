@@ -42,7 +42,6 @@ class CreateProducts extends Component {
       { key: 4, text: "Shoes", value: "Shoes" }
     ];
 
-    console.log(this.state.avaliable);
     return (
       <div>
         <Header

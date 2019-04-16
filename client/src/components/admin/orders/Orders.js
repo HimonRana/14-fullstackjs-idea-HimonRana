@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import AdminNavbar from "./AdminNavbar";
+import AdminNavbar from "../AdminNavbar";
 
-import "./Admin.scss";
+import "../Admin.scss";
 
 class Orders extends Component {
   constructor() {
@@ -29,7 +29,7 @@ class Orders extends Component {
     const { active } = this.state;
 
     return (
-      <div className="container">
+      <div className="admin-container">
         <AdminNavbar activeOrders={active} />
       </div>
     );

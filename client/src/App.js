@@ -11,10 +11,10 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Product from "./components/product/Product";
 import Products from "./components/products/Products";
-import AdminDiscount from "./components/admin/AdminDiscount";
-import AdminUsers from "./components/admin/Users";
-import AdminProducts from "./components/admin/Products";
-import AdminOrders from "./components/admin/Orders";
+import AdminDiscount from "./components/admin/discounts/AdminDiscount";
+import AdminUsers from "./components/admin/users/Users";
+import AdminProducts from "./components/admin/products/Products";
+import AdminOrders from "./components/admin/orders/Orders";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";

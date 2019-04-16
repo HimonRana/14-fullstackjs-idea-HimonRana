@@ -213,14 +213,14 @@ router.put(
     User.findOne({ role: req.user.role })
       .then(user => {
         if (user.role) {
-          const newUser = {};
-          newUser.role = req.body.role;
-          newUser.name = req.body.name;
-          newUser.email = req.body.email;
+          const updateUser = {};
+          updateUser.role = req.body.role;
+          updateUser.name = req.body.name;
+          updateUser.email = req.body.email;
           // Update
           User.findByIdAndUpdate(
             req.params.id,
-            { $set: newUser },
+            { $set: updateUser },
             { new: true }
           )
             .then(user => res.json(user))

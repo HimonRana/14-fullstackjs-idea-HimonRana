@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 import { Form, Header, Button, Table } from "semantic-ui-react";
-import "./Admin.scss";
-import AdminNavbar from "./AdminNavbar";
+import "../Admin.scss";
+import AdminNavbar from "../AdminNavbar";
 
 class AdminDashboard extends Component {
   constructor() {
@@ -30,7 +30,7 @@ class AdminDashboard extends Component {
     const { active } = this.state;
 
     return (
-      <div className="container">
+      <div className="admin-container">
         <AdminNavbar activeDiscount={active} />
         <Header color="blue" content="Create discount here" textAlign="left" />
         {/* put loading in Form later */}

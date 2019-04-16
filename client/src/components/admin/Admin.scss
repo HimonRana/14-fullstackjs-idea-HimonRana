@@ -1,4 +1,4 @@
-.container {
+.admin-container {
   max-width: 80%;
   margin: 0 auto;
 }
@@ -18,4 +18,18 @@
 
 .ui.toggle.checkbox.product-create-checkbox {
   margin-bottom: 1rem;
+}
+
+.ui.buttons.product-button-group {
+  float: right;
+}
+
+.user-container {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 480px) {
+  .ui.buttons.product-button-group {
+    float: left;
+  }
 }
