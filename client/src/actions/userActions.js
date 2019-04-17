@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Toastr from "toastr";
 
-import { GET_USERS, EDIT_USER } from "./types";
+import { GET_USERS, EDIT_USER, DELETE_USER, GET_ERRORS } from "./types";
 
 // GET USERS
 export const getUsers = () => dispatch => {
@@ -28,11 +28,12 @@ export const editUser = (userId, userData) => dispatch => {
         type: EDIT_USER,
         payload: res.data
       });
-      Toastr.success(
-        "User is successfully updated!",
-        { timeOut: 5000 },
-        { positionClass: "toast-bottom-right" }
-      );
+      // Toastr.success(
+      //   "User is successfully updated!",
+      //   { timeOut: 5000 },
+      //   { positionClass: "toast-bottom-right" }
+      // );
+      window.location.reload();
     })
     .catch(err =>
       dispatch({
@@ -40,4 +41,24 @@ export const editUser = (userId, userData) => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+// Delete Post
+export const deleteUser = id => dispatch => {
+  if (window.confirm("Are you sure, you want to delete this User?")) {
+    return Axios.delete(`/admin/delete/user/${id}`)
+      .then(res => {
+        dispatch({
+          type: DELETE_USER,
+          payload: id
+        });
+        window.location.reload();
+      })
+      .catch(err =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: err.response.data
+        })
+      );
+  }
 };

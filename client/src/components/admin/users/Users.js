@@ -13,7 +13,6 @@ class Users extends Component {
     super(props);
     this.state = {
       active: false,
-      expanded: null,
       name: "",
       email: "",
       role: false

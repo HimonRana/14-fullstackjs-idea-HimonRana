@@ -1,44 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { editUser } from "../../../actions/userActions";
+import { editUser, deleteUser } from "../../../actions/userActions";
 import { Header, Form, Checkbox, Button } from "semantic-ui-react";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
+import Divider from "@material-ui/core/Divider";
 
 class User extends Component {
   constructor(props) {
     super(props);
     this.state = {
       active: false,
-      expanded: null,
+      expanded: false,
       name: this.props.user.name,
       email: this.props.user.email,
       role: this.props.user.role
     };
-
-    console.log(this.props);
   }
+
+  deleteUser = () => {
+    this.props.deleteUser(this.props.user._id);
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleCheckboxtoggle = () => {
-    this.setState({ role: !this.state.role });
-  };
-
-  handleChange = panel => (event, expanded) => {
+  handleChange = () => {
     this.setState({
-      expanded: expanded ? panel : false
+      expanded: !this.expanded
     });
   };
 
-  deleteUser = () => {
-    console.log("User successfully deleted");
+  handleCheckboxtoggle = () => {
+    this.setState({ role: !this.state.role });
   };
 
   onSubmit = e => {
@@ -51,30 +51,23 @@ class User extends Component {
     };
 
     this.props.editUser(updateUser.id, updateUser);
-    this.setState({
-      expanded: !this.expanded
-    });
   };
 
   render() {
     const { user } = this.props;
+    let adminUser = "background-color: aliceblue;";
+    let regularUser = "background-color: antiquewhite;";
     return (
       <div className="user-container">
         <ExpansionPanel
-          expanded={this.state.expanded === user._id}
-          onChange={this.handleChange(user._id)}
-          Style="background-color: aliceblue;"
+          onClick={this.handleChange}
+          Style={user.role ? adminUser : regularUser}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Header size="tiny">{this.state.name}</Header>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Form
-              error
-              className="user-edit-form"
-              size="small"
-              onSubmit={this.onSubmit}
-            >
+            <Form error className="user-edit-form" size="small">
               <Form.Input
                 fluid
                 icon="user"
@@ -101,17 +94,35 @@ class User extends Component {
                 checked={this.state.role}
                 onChange={this.handleCheckboxtoggle}
               />
-              <Button.Group size="tiny" floated="right">
-                <Button type="submit" primary>
-                  Edit user
-                </Button>
-                <Button.Or />
-                <Button onClick={this.deleteUser} negative>
-                  Delete
-                </Button>
-              </Button.Group>
             </Form>
           </ExpansionPanelDetails>
+          <Divider />
+          <ExpansionPanelActions>
+            <Button.Group size="tiny">
+              <Button
+                size="small"
+                type="submit"
+                disabled={
+                  (user.name === this.state.name ? true : false) &&
+                  (user.email === this.state.email ? true : false) &&
+                  (user.role === this.state.role ? true : false)
+                }
+                onClick={this.onSubmit}
+                primary
+              >
+                Save
+              </Button>
+              <Button.Or />
+              <Button
+                size="small"
+                type="submit"
+                onClick={this.deleteUser}
+                negative
+              >
+                Delete
+              </Button>
+            </Button.Group>
+          </ExpansionPanelActions>
         </ExpansionPanel>
       </div>
     );
@@ -120,5 +131,5 @@ class User extends Component {
 
 export default connect(
   null,
-  { editUser }
+  { editUser, deleteUser }
 )(withRouter(User));

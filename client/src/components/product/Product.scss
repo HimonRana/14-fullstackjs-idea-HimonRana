@@ -12,6 +12,7 @@
   .product-img-container,
   .product-info-container {
     height: 475px;
+    overflow: hidden;
   }
 
   p {
@@ -71,6 +72,7 @@
 
   img.ui.image {
     object-fit: cover;
+    min-width: 100%;
   }
 }
 
