@@ -40,7 +40,7 @@ class Users extends Component {
       <div className="admin-container">
         <AdminNavbar activeUsers={active} />
         <Header color="blue" content="Users" textAlign="left" />
-        {showUsers}
+        <div className="show-all-users">{showUsers}</div>
       </div>
     );
   }

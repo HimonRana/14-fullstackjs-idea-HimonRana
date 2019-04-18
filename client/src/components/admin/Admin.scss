@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.show-all-users {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 .ui.form.user-edit-form {
   width: 100%;
 }

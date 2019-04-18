@@ -88,12 +88,18 @@ class User extends Component {
                 value={this.state.email}
                 onChange={this.onChange}
               />
-              <p>Admin:</p>
-              <Checkbox
-                toggle
-                checked={this.state.role}
-                onChange={this.handleCheckboxtoggle}
-              />
+              {!user.role ? (
+                <div>
+                  <p>Admin:</p>
+                  <Checkbox
+                    toggle
+                    checked={this.state.role}
+                    onChange={this.handleCheckboxtoggle}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
             </Form>
           </ExpansionPanelDetails>
           <Divider />
