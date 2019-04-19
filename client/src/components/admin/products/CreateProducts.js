@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { connect } from "react-redux";
+import { createProduct } from "../../../actions/productActions";
 import { Header, Form, Checkbox, Dropdown, Button } from "semantic-ui-react";
 
 class CreateProducts extends Component {
@@ -8,10 +9,10 @@ class CreateProducts extends Component {
     this.state = {
       title: "",
       description: "",
-      imgUrl: "",
+      productImg: "",
       price: "",
       stock: "",
-      categoryValue: "",
+      category: "",
       available: false
     };
   }
@@ -22,7 +23,7 @@ class CreateProducts extends Component {
 
   handleDropdownChange = (e, { value }) => {
     this.setState({
-      categoryValue: value
+      category: value
     });
   };
 
@@ -36,14 +37,23 @@ class CreateProducts extends Component {
     const newProduct = {
       title: this.state.title,
       description: this.state.description,
-      imgUrl: this.state.imgUrl,
+      productImg: this.state.productImg,
       price: this.state.price,
       stock: this.state.stock,
-      categoryValue: this.state.categoryValue,
+      category: this.state.category,
       available: this.state.available
     };
-
+    this.setState({
+      title: "",
+      description: "",
+      productImg: "",
+      price: "",
+      stock: "",
+      category: ""
+    });
     console.log(newProduct);
+    console.log(this.state);
+    this.props.createProduct(newProduct);
   };
 
   render() {
@@ -91,8 +101,8 @@ class CreateProducts extends Component {
             iconPosition="left"
             placeholder="Product Image URL"
             type="text"
-            name="imgUrl"
-            value={this.state.imgUrl}
+            name="productImg"
+            value={this.state.productImg}
             onChange={this.onChange}
           />
           <Form.Input
@@ -112,7 +122,7 @@ class CreateProducts extends Component {
             icon="warehouse"
             iconPosition="left"
             placeholder="Stock Quantity"
-            type="Number"
+            type="number"
             name="stock"
             value={this.state.stock}
             onChange={this.onChange}
@@ -124,7 +134,7 @@ class CreateProducts extends Component {
             scrolling
             selection
             options={categoryOptions}
-            value={this.state.categoryValue}
+            value={this.state.category}
             onChange={this.handleDropdownChange}
           />
           <Checkbox
@@ -142,4 +152,7 @@ class CreateProducts extends Component {
   }
 }
 
-export default CreateProducts;
+export default connect(
+  null,
+  { createProduct }
+)(CreateProducts);
