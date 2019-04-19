@@ -32,8 +32,8 @@ class Users extends Component {
     const { active } = this.state;
     const { users } = this.props;
 
-    let showUsers = users.map((user, index) => {
-      return <User key={index} id={user._id} user={user} />;
+    let showUsers = users.map(user => {
+      return <User id={user._id} user={user} />;
     });
 
     return (

@@ -89,14 +89,12 @@ class User extends Component {
                 onChange={this.onChange}
               />
               {!user.role ? (
-                <div>
-                  <p>Admin:</p>
-                  <Checkbox
-                    toggle
-                    checked={this.state.role}
-                    onChange={this.handleCheckboxtoggle}
-                  />
-                </div>
+                <Checkbox
+                  toggle
+                  label="Admin"
+                  checked={this.state.role}
+                  onChange={this.handleCheckboxtoggle}
+                />
               ) : (
                 ""
               )}

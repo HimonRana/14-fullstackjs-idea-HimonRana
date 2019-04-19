@@ -10,9 +10,9 @@ class CreateProducts extends Component {
       description: "",
       imgUrl: "",
       price: "",
-      stock: Number,
-      dropdownValue: "",
-      avaliable: false
+      stock: "",
+      categoryValue: "",
+      available: false
     };
   }
 
@@ -22,24 +22,36 @@ class CreateProducts extends Component {
 
   handleDropdownChange = (e, { value }) => {
     this.setState({
-      dropdownValue: value
+      categoryValue: value
     });
   };
 
   handleCheckboxtoggle = () => {
-    this.setState({ avaliable: !this.state.avaliable });
+    this.setState({ available: !this.state.available });
   };
 
-  onSubmit = () => {
-    console.log(this.state);
+  onSubmit = e => {
+    e.preventDefault();
+
+    const newProduct = {
+      title: this.state.title,
+      description: this.state.description,
+      imgUrl: this.state.imgUrl,
+      price: this.state.price,
+      stock: this.state.stock,
+      categoryValue: this.state.categoryValue,
+      available: this.state.available
+    };
+
+    console.log(newProduct);
   };
 
   render() {
     const categoryOptions = [
-      { key: 1, text: "Head", value: "Head" },
-      { key: 2, text: "Top", value: "Top" },
-      { key: 3, text: "Bottom", value: "Bottom" },
-      { key: 4, text: "Shoes", value: "Shoes" }
+      { key: "Head", text: "Head", value: "Head" },
+      { key: "Top", text: "Top", value: "Top" },
+      { key: "Bottom", text: "Bottom", value: "Bottom" },
+      { key: "Shoes", text: "Shoes", value: "Shoes" }
     ];
 
     return (
@@ -50,8 +62,9 @@ class CreateProducts extends Component {
           content="Create product here"
           textAlign="left"
         />
-        <Form>
+        <Form error onSubmit={this.onSubmit} size="small">
           <Form.Input
+            required
             fluid
             icon="tag"
             iconPosition="left"
@@ -72,6 +85,7 @@ class CreateProducts extends Component {
             onChange={this.onChange}
           />
           <Form.Input
+            required
             fluid
             icon="image"
             iconPosition="left"
@@ -82,6 +96,7 @@ class CreateProducts extends Component {
             onChange={this.onChange}
           />
           <Form.Input
+            required
             fluid
             icon="dollar"
             iconPosition="left"
@@ -92,6 +107,7 @@ class CreateProducts extends Component {
             onChange={this.onChange}
           />
           <Form.Input
+            required
             fluid
             icon="warehouse"
             iconPosition="left"
@@ -102,12 +118,13 @@ class CreateProducts extends Component {
             onChange={this.onChange}
           />
           <Dropdown
+            required
             className="product-category-dropdown"
             placeholder="Select Category"
             scrolling
             selection
             options={categoryOptions}
-            value={this.state.dropdownValue}
+            value={this.state.categoryValue}
             onChange={this.handleDropdownChange}
           />
           <Checkbox
@@ -116,12 +133,9 @@ class CreateProducts extends Component {
             disabled={this.state.stock > 0 ? false : true}
             label="Avalible In Stock"
             onChange={this.handleCheckboxtoggle}
-            checked={this.state.avaliable}
           />
           <br />
-          <Button onClick={this.onSubmit} type="submit">
-            Create product
-          </Button>
+          <Button type="submit">Create product</Button>
         </Form>
       </div>
     );

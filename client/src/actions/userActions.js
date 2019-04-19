@@ -1,9 +1,9 @@
 import Axios from "axios";
-import Toastr from "toastr";
+// import Toastr from "toastr";
 
 import { GET_USERS, EDIT_USER, DELETE_USER, GET_ERRORS } from "./types";
 
-// GET USERS
+// GET USERS -ADMIN-
 export const getUsers = () => dispatch => {
   return Axios.get("/admin/all/users")
     .then(res =>
@@ -20,7 +20,7 @@ export const getUsers = () => dispatch => {
     );
 };
 
-// EDIT USER
+// EDIT USER -ADMIN-
 export const editUser = (userId, userData) => dispatch => {
   Axios.put(`/admin/edit/user/${userId}`, userData)
     .then(res => {
@@ -43,7 +43,7 @@ export const editUser = (userId, userData) => dispatch => {
     );
 };
 
-// Delete Post
+// DELETE USER -Admin-
 export const deleteUser = id => dispatch => {
   if (window.confirm("Are you sure, you want to delete this User?")) {
     return Axios.delete(`/admin/delete/user/${id}`)
