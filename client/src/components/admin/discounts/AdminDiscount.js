@@ -41,7 +41,7 @@ class AdminDashboard extends Component {
             iconPosition="left"
             placeholder="Discount Name"
             type="text"
-            name="discount"
+            name="name"
             value=""
             onChange={this.onChange}
           />
@@ -52,7 +52,7 @@ class AdminDashboard extends Component {
             iconPosition="left"
             placeholder="How much percentage"
             type="number"
-            name="percentage"
+            name="discountValue"
             value=""
             onChange={this.onChange}
           />
