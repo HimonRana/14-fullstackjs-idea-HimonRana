@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { editProduct, deleteProduct } from "../../../actions/productActions";
 
 import { Header, Form, Checkbox, Button, Dropdown } from "semantic-ui-react";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions";
+import Divider from "@material-ui/core/Divider";
 
 class ProductEdit extends Component {
   constructor(props) {
@@ -12,12 +16,12 @@ class ProductEdit extends Component {
     this.state = {
       title: this.props.product.title,
       description: this.props.product.description,
-      imgUrl: this.props.product.productImg,
+      productImg: this.props.product.productImg,
       price: this.props.product.price,
       stock: this.props.product.stock,
       category: this.props.product.category,
       available: this.props.product.available,
-      expanded: true
+      expanded: false
     };
   }
 
@@ -29,25 +33,34 @@ class ProductEdit extends Component {
     this.setState({ available: !this.state.available });
   };
 
-  //   deleteProduct = () => {
-  //     this.props.deleteProduct(this.props.product._id);
-  //   };
+  handleExpanded = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
+
+  deleteProduct = () => {
+    this.props.deleteProduct(this.props.product._id);
+  };
 
   onSubmit = e => {
     e.preventDefault();
     const updateProduct = {
+      id: this.props.id,
       title: this.state.title,
       description: this.state.description,
-      imgUrl: this.state.imgUrl,
+      productImg: this.state.productImg,
       price: this.state.price,
       stock: this.state.stock,
       category: this.state.category,
       available: this.state.available
     };
 
-    // this.props.editProduct(updateProduct.id, updateProduct);
-
     console.log(updateProduct);
+    this.props.editProduct(updateProduct.id, updateProduct);
+    this.setState({
+      expanded: false
+    });
   };
 
   render() {
@@ -62,7 +75,10 @@ class ProductEdit extends Component {
 
     return (
       <div className="product-admin-container">
-        <ExpansionPanel>
+        <ExpansionPanel
+          expanded={this.state.expanded}
+          onChange={this.handleExpanded}
+        >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Header size="tiny">{this.state.title}</Header>
           </ExpansionPanelSummary>
@@ -75,6 +91,7 @@ class ProductEdit extends Component {
             >
               <Form.Input
                 fluid
+                required
                 icon="tag"
                 iconPosition="left"
                 placeholder="Title"
@@ -95,16 +112,18 @@ class ProductEdit extends Component {
               />
               <Form.Input
                 fluid
+                required
                 icon="image"
                 iconPosition="left"
                 placeholder="Product Image URL"
                 type="text"
-                name="imgUrl"
-                value={this.state.imgUrl}
+                name="productImg"
+                value={this.state.productImg}
                 onChange={this.onChange}
               />
               <Form.Input
                 fluid
+                required
                 icon="dollar"
                 iconPosition="left"
                 placeholder="Price"
@@ -115,6 +134,7 @@ class ProductEdit extends Component {
               />
               <Form.Input
                 fluid
+                required
                 icon="warehouse"
                 iconPosition="left"
                 placeholder="Stock Quantity"
@@ -135,26 +155,31 @@ class ProductEdit extends Component {
               <Checkbox
                 className="product-create-checkbox"
                 toggle
-                disabled={this.state.stock > 0 ? false : true}
                 label="Avalible In Stock"
                 onChange={this.handleCheckboxtoggle}
                 checked={this.state.available}
               />
-              <Button.Group className="product-button-group" size="tiny">
-                <Button onClick={this.onSubmit} primary>
-                  Edit user
-                </Button>
-                <Button.Or />
-                <Button onClick={this.deleteProduct} type="submit" negative>
-                  Delete
-                </Button>
-              </Button.Group>
             </Form>
           </ExpansionPanelDetails>
+          <Divider />
+          <ExpansionPanelActions>
+            <Button.Group className="product-button-group" size="tiny">
+              <Button size="small" onClick={this.onSubmit} primary>
+                Edit user
+              </Button>
+              <Button.Or />
+              <Button size="small" onClick={this.deleteProduct} negative>
+                Delete
+              </Button>
+            </Button.Group>
+          </ExpansionPanelActions>
         </ExpansionPanel>
       </div>
     );
   }
 }
 
-export default ProductEdit;
+export default connect(
+  null,
+  { editProduct, deleteProduct }
+)(ProductEdit);

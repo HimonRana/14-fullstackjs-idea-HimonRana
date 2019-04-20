@@ -110,12 +110,12 @@ router.put(
   "/edit/product/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateProductInput(req.body);
+    // const { errors, isValid } = validateProductInput(req.body);
 
-    // To check Validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // // To check Validation
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
     User.findOne({ role: req.user.role })
       .then(user => {

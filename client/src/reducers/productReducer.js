@@ -2,7 +2,9 @@ import {
   ADD_PRODUCT,
   GET_PRODUCTS,
   GET_PRODUCT,
-  GET_ADMIN_PRODUCTS
+  GET_ADMIN_PRODUCTS,
+  EDIT_PRODUCT,
+  DELETE_PRODUCT
 } from "../actions/types";
 
 const initialState = {
@@ -32,6 +34,18 @@ export default function(state = initialState, action) {
       return {
         ...state,
         products: [action.payload, ...state.products]
+      };
+    case EDIT_PRODUCT:
+      return {
+        ...state,
+        product: action.payload
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        products: state.products.filter(
+          product => product._id !== action.payload
+        )
       };
     default:
       return state;
