@@ -349,6 +349,24 @@ router.delete(
   }
 );
 
+// @Route   GET admin/all/discounts/
+// @Desc    GET all Discounts
+// @Access  Private
+router.get(
+  "/all/discounts",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.role) {
+      Discount.find()
+        .sort({ date: -1 })
+        .then(discounts => res.json(discounts))
+        .catch(err => res.status(404).json({ orders: "No discounts found" }));
+    } else {
+      return res.status(401).json({ error: "Not Authorized" });
+    }
+  }
+);
+
 // @Route   POST admin/create/discount
 // @Desc    Create discount
 // @Access  Private

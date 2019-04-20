@@ -13,7 +13,7 @@ class Products extends Component {
   constructor() {
     super();
     this.state = {
-      active: false,
+      active: false
     };
   }
 
@@ -30,10 +30,6 @@ class Products extends Component {
     this.setState({
       active: false
     });
-  };
-
-  deleteProduct = () => {
-    console.log("Product successfully deleted");
   };
 
   render() {

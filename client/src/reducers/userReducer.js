@@ -21,7 +21,7 @@ export default function(state = initialState, action) {
     case DELETE_USER:
       return {
         ...state,
-        user: action.payload
+        users: state.users.filter(user => user._id !== action.payload)
       };
     default:
       return state;
