@@ -32,6 +32,8 @@ i.icon.logout-button {
 }
 
 .profile-name {
+  cursor: pointer;
+  font-size: 1rem !important;
   color: white !important;
   transition: 0.1s ease-in-out;
 }
