@@ -140,7 +140,7 @@ class CreateProducts extends Component {
           <Checkbox
             className="product-create-checkbox"
             toggle
-            disabled={this.state.stock > 0 ? false : true}
+            // disabled={this.state.stock > 0 ? false : true}
             label="Avalible In Stock"
             onChange={this.handleCheckboxtoggle}
           />

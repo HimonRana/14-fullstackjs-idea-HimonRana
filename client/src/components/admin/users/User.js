@@ -31,9 +31,9 @@ class User extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleChange = () => {
+  handleExpanded = () => {
     this.setState({
-      expanded: !this.expanded
+      expanded: !this.state.expanded
     });
   };
 
@@ -51,6 +51,9 @@ class User extends Component {
     };
 
     this.props.editUser(updateUser.id, updateUser);
+    this.setState({
+      expanded: false
+    });
   };
 
   render() {
@@ -60,7 +63,8 @@ class User extends Component {
     return (
       <div className="user-container">
         <ExpansionPanel
-          onClick={this.handleChange}
+          expanded={this.state.expanded}
+          onChange={this.handleExpanded}
           Style={user.role ? adminUser : regularUser}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

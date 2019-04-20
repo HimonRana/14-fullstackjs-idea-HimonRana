@@ -33,7 +33,7 @@ class Users extends Component {
     const { users } = this.props;
 
     let showUsers = users.map(user => {
-      return <User id={user._id} user={user} />;
+      return <User key={user._id} id={user._id} user={user} />;
     });
 
     return (
