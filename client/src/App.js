@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -11,6 +11,10 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Product from "./components/product/Product";
 import Products from "./components/products/Products";
+import AdminDiscount from "./components/admin/discounts/AdminDiscount";
+import AdminUsers from "./components/admin/users/Users";
+import AdminProducts from "./components/admin/products/Products";
+import AdminOrders from "./components/admin/orders/Orders";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
@@ -44,6 +48,22 @@ const App = () => {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route
+              exact
+              path="/admin/dashboard/discount"
+              component={AdminDiscount}
+            />
+            <Route exact path="/admin/dashboard/users" component={AdminUsers} />
+            <Route
+              exact
+              path="/admin/dashboard/products"
+              component={AdminProducts}
+            />
+            <Route
+              exact
+              path="/admin/dashboard/orders"
+              component={AdminOrders}
+            />
             <Route exact path="/products" component={Products} />
             <Route exact path="/product/:id" component={Product} />
           </Switch>

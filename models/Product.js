@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const ProductSchema = new Schema({
-  quantity: {
-    type: Schema.Types.ObjectId,
-    ref: "quantities"
-  },
+  // quantity: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "quantities"
+  // },
 
   title: {
     type: String,
@@ -23,7 +23,7 @@ const ProductSchema = new Schema({
   },
 
   price: {
-    type: String
+    type: Number
   },
 
   sizes: [

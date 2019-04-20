@@ -80,9 +80,10 @@ export const logoutUser = () => dispatch => {
   // Set thhe current use to {} which will set IsAuthenticated to false
   dispatch(setCurrentUser({}));
 
-  Toastr.success(
-    "You are logged out now!",
-    { timeOut: 5000 },
-    { positionClass: "toast-bottom-right" }
-  );
+  // Toastr.success(
+  //   "You are logged out now!",
+  //   { timeOut: 5000 },
+  //   { positionClass: "toast-bottom-right" }
+  // );
+  window.location.href = "/";
 };

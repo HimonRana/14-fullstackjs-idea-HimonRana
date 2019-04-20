@@ -21,7 +21,7 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
-    const style = {
+    const navbarStyle = {
       background: "linear-gradient(45deg, #000000 30%, #00528f 90%)",
       color: "white",
       boxShadow: "0 0px 5px 2px rgba(0, 0, 0, .3)"
@@ -29,7 +29,7 @@ class Navbar extends Component {
 
     return (
       <div>
-        <AppBar style={style} position="static">
+        <AppBar style={navbarStyle} position="static">
           {isAuthenticated ? (
             <Toolbar className="tool-bar">
               <Typography className="logo-name" variant="h4">
@@ -38,24 +38,22 @@ class Navbar extends Component {
                 </Link>
               </Typography>
               <Link to="/profile">
-                <Typography variant="h7" className="profile-name">
-                  {user.name}
-                </Typography>
+                <Typography className="profile-name">{user.name}</Typography>
               </Link>
-              <Typography color="inherit">
-                {user.role ? (
-                  <Link to="/dashboard">
-                    <Button
-                      className="dashboard-button"
-                      color="olive"
-                      compact
-                      inverted
-                    >
-                      Dashboard
-                    </Button>
-                  </Link>
-                ) : null}
-              </Typography>
+              {/* <Typography color="inherit"> */}
+              {user.role ? (
+                <Link to="/admin/dashboard/discount">
+                  <Button
+                    className="dashboard-button"
+                    color="olive"
+                    compact
+                    inverted
+                  >
+                    Dashboard
+                  </Button>
+                </Link>
+              ) : null}
+              {/* </Typography> */}
               <Icon
                 className="logout-button"
                 link

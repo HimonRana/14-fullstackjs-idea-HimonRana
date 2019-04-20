@@ -111,12 +111,12 @@ router.put(
   "/edit/product/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateProductInput(req.body);
+    // const { errors, isValid } = validateProductInput(req.body);
 
-    // To check Validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
+    // // To check Validation
+    // if (!isValid) {
+    //   return res.status(400).json(errors);
+    // }
 
     User.findOne({ role: req.user.role })
       .then(user => {
@@ -213,14 +213,14 @@ router.put(
     User.findOne({ role: req.user.role })
       .then(user => {
         if (user.role) {
-          const newUser = {};
-          newUser.role = req.body.role;
-          newUser.name = req.body.name;
-          newUser.email = req.body.email;
+          const updateUser = {};
+          updateUser.role = req.body.role;
+          updateUser.name = req.body.name;
+          updateUser.email = req.body.email;
           // Update
           User.findByIdAndUpdate(
             req.params.id,
-            { $set: newUser },
+            { $set: updateUser },
             { new: true }
           )
             .then(user => res.json(user))

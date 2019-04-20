@@ -1,0 +1,41 @@
+.admin-container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.show-all-users {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.ui.form.user-edit-form {
+  width: 100%;
+}
+
+.ui.selection.dropdown.product-category-dropdown {
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.ui.blue.header.product-create-header {
+  margin-top: 1.8rem;
+}
+
+.ui.toggle.checkbox.product-create-checkbox {
+  margin-bottom: 1rem;
+}
+
+.ui.buttons.product-button-group {
+  float: right;
+}
+
+.product-admin-container,
+.user-container {
+  margin-bottom: 0.7rem;
+}
+
+@media (max-width: 480px) {
+  .ui.buttons.product-button-group {
+    float: left;
+  }
+}
