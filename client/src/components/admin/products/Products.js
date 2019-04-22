@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { getAdminProducts } from "../../../actions/productActions";
 
 import { Header } from "semantic-ui-react";
@@ -46,7 +47,15 @@ class Products extends Component {
       <div className="admin-container">
         <AdminNavbar activeProducts={active} />
         <CreateProducts />
-        <Header color="blue" content="Products" textAlign="left" />
+        <Link to="/products">
+          <Header
+            className="header-products"
+            color="blue"
+            content="Products"
+            textAlign="left"
+          />
+        </Link>
+        <br />
         <div>{getAllProducts}</div>
       </div>
     );

@@ -112,15 +112,14 @@ class Product extends Component {
                 name={product.available ? "check" : "close"}
               />
             </p>
-            {product.available ? (
-              <Button type="submit" onClick={this.onSubmit} color="blue">
-                Add to cart
-              </Button>
-            ) : (
-              <Button disabled color="blue">
-                Add to cart
-              </Button>
-            )}
+            <Button
+              disabled={product.available ? false : true}
+              type="submit"
+              onClick={this.onSubmit}
+              color="blue"
+            >
+              Add to cart
+            </Button>
           </div>
         </div>
       </div>

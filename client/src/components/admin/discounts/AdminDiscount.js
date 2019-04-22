@@ -87,7 +87,7 @@ class AdminDashboard extends Component {
           </Button>
         </Form>
 
-        <Header color="blue" content="Pevious discounts" textAlign="left" />
+        <Header color="blue" content="Previous discounts" textAlign="left" />
         <Table columns={12} unstackable color="red">
           <Table.Header>
             <Table.Row>
