@@ -22,8 +22,21 @@
   }
 }
 
-i.icon.menu-bar {
+.ui.button.menu-bar-button {
+  background: inherit;
+  padding: 0;
+  margin: 0;
   margin-left: 2rem;
+  color: #fff;
+  &:hover {
+    background: unset;
+    color: #fff;
+  }
+
+  &.ui.button:disabled.menu-bar-button {
+    opacity: unset !important;
+    cursor: pointer !important;
+  }
 }
 
 .ui.vertical.menu .item.category {

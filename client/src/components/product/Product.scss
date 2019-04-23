@@ -1,7 +1,7 @@
 .product-container {
   width: 100%;
   margin: 0 auto;
-  margin-top: 20px;
+  margin-top: 6.1rem;
 
   .product-grid-container {
     display: flex;
@@ -67,6 +67,9 @@
   }
 }
 
+.ui.blue.button.add-to-cart-button {
+  background: #00518e;
+}
 .product-img-container {
   display: inline-flex;
 

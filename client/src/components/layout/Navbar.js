@@ -64,63 +64,96 @@ class Navbar extends Component {
     return (
       <div>
         <AppBar style={navbarStyle} position="static">
-          {isAuthenticated ? (
-            <Toolbar className="tool-bar">
-              <Typography className="logo-name" variant="h4">
-                <Link className="logo" to="/">
-                  Buntshop
-                </Link>
-              </Typography>
-              <Cart />
-
-              <Link to="/profile">
-                <Typography className="profile-name">{user.name}</Typography>
+          <Toolbar className="tool-bar">
+            <Typography className="logo-name" variant="h4">
+              <Link className="logo" to="/">
+                Buntshop
               </Link>
-              <Icon
-                className="menu-bar"
-                onClick={this.handleSidebarOpen}
-                name="bars"
-                link
-                size="big"
-              />
-              {/* SIDEBAR */}
-              <Sidebar
-                className="navbar-sidebar"
-                animation="overlay"
-                icon="labeled"
-                inverted
-                onHide={this.handleSidebarHide}
-                vertical
-                visible={this.state.visible}
-                direction="right"
-              >
-                <Menu className="navbar-menu" vertical>
-                  <Menu.Item as="a">
-                    <Header inverted>Home</Header>
+            </Typography>
+            <Cart />
+
+            <Link to="/profile">
+              <Typography className="profile-name">{user.name}</Typography>
+            </Link>
+            <Button
+              disabled={this.state.visible ? true : false}
+              className="menu-bar-button"
+              onClick={this.handleSidebarOpen}
+            >
+              {visible ? (
+                <Icon name="close" size="big" />
+              ) : (
+                <Icon name="bars" size="big" />
+              )}
+            </Button>
+
+            {/* SIDEBAR */}
+            <Sidebar
+              className="navbar-sidebar"
+              animation="overlay"
+              icon="labeled"
+              inverted
+              onHide={this.handleSidebarHide}
+              vertical
+              visible={this.state.visible}
+              direction="right"
+            >
+              <Menu className="navbar-menu" vertical>
+                <Menu.Item as={Link} to="/" onClick={this.handleSidebarHide}>
+                  <Header inverted>Home</Header>
+                </Menu.Item>
+                <Menu.Item
+                  as={Link}
+                  to="/profile"
+                  onClick={this.handleSidebarHide}
+                >
+                  <Header inverted>Profile</Header>
+                </Menu.Item>
+                {user.role ? (
+                  <Menu.Item
+                    as={Link}
+                    to="/admin/dashboard/discount"
+                    onClick={this.handleSidebarHide}
+                  >
+                    <Header inverted>Dashboard</Header>
                   </Menu.Item>
-                  <Menu.Item as="a">
-                    <Header inverted>Profile</Header>
-                  </Menu.Item>
-                  {user.role ? (
-                    <Menu.Item as="a">
-                      <Header inverted>Dashboard</Header>
-                    </Menu.Item>
-                  ) : null}
-                  <Menu.Item as="a">
-                    <Header inverted>Category</Header>
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Head
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Top
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Bottom
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Shoes
-                  </Menu.Item>
+                ) : null}
+                <Menu.Item as="a">
+                  <Header inverted>Category</Header>
+                </Menu.Item>
+                <Menu.Item
+                  className="category"
+                  as={Link}
+                  to="/products/category/head"
+                  onClick={this.handleSidebarHide}
+                >
+                  Head
+                </Menu.Item>
+                <Menu.Item
+                  className="category"
+                  as={Link}
+                  to="/products/category/top"
+                  onClick={this.handleSidebarHide}
+                >
+                  Top
+                </Menu.Item>
+                <Menu.Item
+                  className="category"
+                  as={Link}
+                  to="/products/category/bottom"
+                  onClick={this.handleSidebarHide}
+                >
+                  Bottom
+                </Menu.Item>
+                <Menu.Item
+                  className="category"
+                  as={Link}
+                  to="/products/category/shoes"
+                  onClick={this.handleSidebarHide}
+                >
+                  Shoes
+                </Menu.Item>
+                {isAuthenticated ? (
                   <Menu.Item
                     className="logout-button"
                     as="a"
@@ -129,62 +162,7 @@ class Navbar extends Component {
                     <Icon name="log out" size="large" />
                     Logout
                   </Menu.Item>
-                </Menu>
-              </Sidebar>
-              {/* SIDEBAR */}
-            </Toolbar>
-          ) : (
-            <Toolbar className="tool-bar">
-              <Typography className="logo-name" variant="h4">
-                <Link className="logo" to="/">
-                  Buntshop
-                </Link>
-              </Typography>
-              <Cart />
-              <Icon
-                className="menu-bar"
-                onClick={this.handleSidebarOpen}
-                name="bars"
-                link
-                size="big"
-              />
-              <Sidebar
-                className="navbar-sidebar"
-                animation="overlay"
-                icon="labeled"
-                inverted
-                onHide={this.handleSidebarHide}
-                vertical
-                visible={this.state.visible}
-                direction="right"
-              >
-                <Menu className="navbar-menu" vertical>
-                  <Menu.Item as="a">
-                    <Header inverted>Home</Header>
-                  </Menu.Item>
-                  <Menu.Item as="a">
-                    <Header inverted>Profile</Header>
-                  </Menu.Item>
-                  {user.role ? (
-                    <Menu.Item as="a">
-                      <Header inverted>Dashboard</Header>
-                    </Menu.Item>
-                  ) : null}
-                  <Menu.Item as="a">
-                    <Header inverted>Category</Header>
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Head
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Top
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Bottom
-                  </Menu.Item>
-                  <Menu.Item className="category" as="a">
-                    Shoes
-                  </Menu.Item>
+                ) : (
                   <List>
                     <List.Item
                       className=""
@@ -201,11 +179,11 @@ class Navbar extends Component {
                       <Login />
                     </List.Item>
                   </List>
-                </Menu>
-              </Sidebar>
-              {/* SIDEBAR */}
-            </Toolbar>
-          )}
+                )}
+              </Menu>
+            </Sidebar>
+            {/* SIDEBAR */}
+          </Toolbar>
         </AppBar>
       </div>
     );

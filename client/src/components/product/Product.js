@@ -113,13 +113,15 @@ class Product extends Component {
               />
             </p>
             <Button
-              disabled={product.available ? false : true}
+              content="Add to cart"
+              className="add-to-cart-button"
               type="submit"
-              onClick={this.onSubmit}
               color="blue"
-            >
-              Add to cart
-            </Button>
+              icon="cart"
+              labelPosition="left"
+              disabled={product.available ? false : true}
+              onClick={this.onSubmit}
+            />
           </div>
         </div>
       </div>
