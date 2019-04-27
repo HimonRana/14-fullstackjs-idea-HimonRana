@@ -23,3 +23,9 @@ ul.slick-dots {
 ul.slick-dots li button:before {
   font-size: 0.7rem;
 }
+
+@media (max-width: 599px) {
+  .container {
+    margin-top: 4rem;
+  }
+}
