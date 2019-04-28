@@ -48,16 +48,22 @@ class Product extends Component {
     const { product } = this.props;
     console.log(product);
 
-    const getSize =
-      product.sizes &&
-      product.sizes.map(size => {
-        size = size.size;
-        return {
-          key: size,
-          text: size,
-          value: size
-        };
-      });
+    const getShoeSizes = [
+      { key: "39", text: "39", value: "39" },
+      { key: "40", text: "40", value: "40" },
+      { key: "41", text: "41", value: "41" },
+      { key: "42", text: "42", value: "42" },
+      { key: "43", text: "43", value: "43" },
+      { key: "44", text: "44", value: "44" },
+      { key: "45", text: "45", value: "45" }
+    ];
+
+    const getClothingSizes = [
+      { key: "S", text: "S", value: "S" },
+      { key: "M", text: "M", value: "M" },
+      { key: "L", text: "L", value: "L" },
+      { key: "XL", text: "XL", value: "XL" }
+    ];
 
     // onClickEdit(product) {
     //   this.props.history.push({
@@ -94,7 +100,9 @@ class Product extends Component {
               fluid
               selection
               scrolling
-              options={getSize}
+              options={
+                product.category === "Shoes" ? getShoeSizes : getClothingSizes
+              }
               value={this.state.size}
               onChange={this.handleSelectChange}
             />

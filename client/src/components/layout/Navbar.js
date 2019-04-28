@@ -6,15 +6,7 @@ import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Typography } from "@material-ui/core";
-import {
-  Button,
-  Icon,
-  Sidebar,
-  Menu,
-  List,
-  Header,
-  Image
-} from "semantic-ui-react";
+import { Button, Icon, Sidebar, Menu, List, Header } from "semantic-ui-react";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
@@ -39,14 +31,12 @@ class Navbar extends Component {
     this.setState({
       visible: !this.state.visible
     });
-    console.log("Open bar if");
   };
 
   handleSidebarHide = () => {
     this.setState({
       visible: false
     });
-    console.log("Hide if");
   };
 
   render() {
@@ -92,9 +82,8 @@ class Navbar extends Component {
               className="navbar-sidebar"
               animation="overlay"
               icon="labeled"
-              inverted
               onHide={this.handleSidebarHide}
-              vertical
+              vertical="true"
               visible={this.state.visible}
               direction="right"
             >

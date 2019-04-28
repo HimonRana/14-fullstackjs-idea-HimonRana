@@ -4,13 +4,8 @@ import { connect } from "react-redux";
 
 import { Card, Image, Header } from "semantic-ui-react";
 import { getProducts } from "../../actions/productActions";
-import ProductItem from "./ProductItem";
 
 class LatestProducts extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     this.props.getProducts();
   };
@@ -20,7 +15,7 @@ class LatestProducts extends Component {
     console.log(products);
 
     let latestProducts = products.slice(0, 8).map(product => (
-      <Card className="card-product-latest">
+      <Card key={product._id} className="card-product-latest">
         <Link to={`/product/${product._id}`}>
           <div className="products-img-container">
             <Image alt={product.title} src={product.productImg} />
@@ -33,7 +28,7 @@ class LatestProducts extends Component {
       .filter(product => product.category === "Head")
       .slice(0, 4)
       .map(product => (
-        <Card className="card-product-latest">
+        <Card key={product._id} className="card-product-latest">
           <Link to={`/product/${product._id}`}>
             <div className="products-img-container">
               <Image alt={product.title} src={product.productImg} />
@@ -46,7 +41,7 @@ class LatestProducts extends Component {
       .filter(product => product.category === "Top")
       .slice(0, 4)
       .map(product => (
-        <Card className="card-product-latest">
+        <Card key={product._id} className="card-product-latest">
           <Link to={`/product/${product._id}`}>
             <div className="products-img-container">
               <Image alt={product.title} src={product.productImg} />
@@ -59,7 +54,7 @@ class LatestProducts extends Component {
       .filter(product => product.category === "Bottom")
       .slice(0, 4)
       .map(product => (
-        <Card className="card-product-latest">
+        <Card key={product._id} className="card-product-latest">
           <Link to={`/product/${product._id}`}>
             <div className="products-img-container">
               <Image alt={product.title} src={product.productImg} />
@@ -72,7 +67,7 @@ class LatestProducts extends Component {
       .filter(product => product.category === "Shoes")
       .slice(0, 4)
       .map(product => (
-        <Card className="card-product-latest">
+        <Card key={product._id} className="card-product-latest">
           <Link to={`/product/${product._id}`}>
             <div className="products-img-container">
               <Image alt={product.title} src={product.productImg} />

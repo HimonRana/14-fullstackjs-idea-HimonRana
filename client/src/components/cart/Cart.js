@@ -1,25 +1,13 @@
 import React, { Component } from "react";
+import CartItem from "./CartItem";
 
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-
-class Cart extends Component {
+import { Popup, Card, Image, Button, Icon, Divider } from "semantic-ui-react";
+export default class Cart extends Component {
   render() {
     return (
       <div>
-        <IconButton aria-label="Cart">
-          <Badge
-            badgeContent={4}
-            Style="color: white; margin-right: 1rem;"
-            color="error"
-          >
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
+        <CartItem />
       </div>
     );
   }
 }
-
-export default Cart;
