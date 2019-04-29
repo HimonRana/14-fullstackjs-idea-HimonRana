@@ -12,7 +12,6 @@ class LatestProducts extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(products);
 
     let latestProducts = products.slice(0, 8).map(product => (
       <Card key={product._id} className="card-product-latest">

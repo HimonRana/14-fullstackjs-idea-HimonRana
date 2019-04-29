@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {
+  addQuantity,
+  removeQuantity,
+  deleteProductInCart
+} from "../../actions/cartActions";
 
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
@@ -15,15 +21,10 @@ import {
 import "./Cart.scss";
 
 class CartItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      cartOpen: false,
-      productImg: "",
-      title: "",
-      price: 0,
-      size: "",
-      quantity: 1
+      cartOpen: false
     };
   }
 
@@ -39,61 +40,83 @@ class CartItem extends Component {
     });
   };
 
-  handleAddQuantity = () => {
-    this.setState({
-      quantity: this.state.quantity + 1
-    });
-  };
-  
-  handleRemoveQuantity = () => {
-    this.setState({
-      quantity: this.state.quantity - 1
-    });
+  handleAddQuantity = productData => {
+    this.props.addQuantity(productData);
   };
 
-  removeProduct = () => {};
+  handleRemoveQuantity = productData => {
+    this.props.removeQuantity(productData);
+  };
+
+  handleRemoveFromCart = productData => {
+    this.props.deleteProductInCart(productData);
+  };
 
   render() {
-    let productList = (
+    const { productsInCart, totalValue } = this.props;
+    console.log(this.props);
+
+    let addedItems = (
       <div>
-        <Card className="cart-item-card">
-          <Card.Content className="cart-item-card-content-img">
-            <Image
-              size="tiny"
-              src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-            />
-          </Card.Content>
-          <Card.Content className="cart-item-card-content">
-            <Card.Description>
-              <strong>Title title title title title</strong>
-            </Card.Description>
-            <Card.Description>669 SEK</Card.Description>
-            <Card.Description>Size: L</Card.Description>
-            <Card.Description>Quantity: {this.state.quantity}</Card.Description>
-            <div className="cart-item-quantity-buttons">
-              <Button onClick={this.handleAddQuantity} size="mini" icon>
-                <Icon name="plus" />
-              </Button>
-              <Button
-                disabled={this.state.quantity <= 1 ? true : false}
-                onClick={this.handleRemoveQuantity}
-                size="mini"
-                icon
-              >
-                <Icon name="minus" />
-              </Button>
-              <Button onClick={this.removeProduct} size="mini" color="red" icon>
-                <Icon name="close" />
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+        {productsInCart.map(productInCart => (
+          <Card key={productInCart.id} className="cart-item-card">
+            <Card.Content className="cart-item-card-content-img">
+              <Image size="tiny" src={productInCart.productImg} />
+            </Card.Content>
+            <Card.Content className="cart-item-card-content">
+              <Card.Description>
+                <strong>{productInCart.title}</strong>
+              </Card.Description>
+              <Card.Description>{productInCart.price} SEK</Card.Description>
+              <Card.Description>Size: {productInCart.size}</Card.Description>
+              <Card.Description>
+                Quantity: {productInCart.quantity}
+              </Card.Description>
+              <div className="cart-item-quantity-buttons">
+                <Button
+                  onClick={() => {
+                    this.handleAddQuantity(productInCart);
+                  }}
+                  size="mini"
+                  icon
+                >
+                  <Icon name="plus" />
+                </Button>
+                <Button
+                  disabled={productInCart.quantity <= 1 ? true : false}
+                  onClick={() => {
+                    this.handleRemoveQuantity(productInCart);
+                  }}
+                  size="mini"
+                  icon
+                >
+                  <Icon name="minus" />
+                </Button>
+                <Button
+                  onClick={() => {
+                    this.handleRemoveFromCart(productInCart);
+                  }}
+                  size="mini"
+                  color="red"
+                  icon
+                >
+                  <Icon name="close" />
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+        ))}
+
         <Divider />
         <div className="cart-total-value-container">
           <Header as="h4">Total Value:</Header>
-          <Header as="h4">699 SEK</Header>
+          <Header as="h4">{totalValue} SEK</Header>
         </div>
-        <Button color="blue" className="cart-checkout-button">
+        <Button
+          disabled={productsInCart.length <= 0 ? true : false}
+          color="blue"
+          className="cart-checkout-button"
+        >
           Checkout
         </Button>
       </div>
@@ -104,7 +127,7 @@ class CartItem extends Component {
           trigger={
             <IconButton aria-label="Cart">
               <Badge
-                badgeContent={4}
+                badgeContent={productsInCart.length}
                 Style="color: white; margin-right: 1rem;"
                 color="error"
               >
@@ -113,7 +136,7 @@ class CartItem extends Component {
             </IconButton>
           }
           hideOnScroll={true}
-          content={productList}
+          content={addedItems}
           on="click"
           open={this.state.isOpen}
           onClose={this.handleClose}
@@ -124,4 +147,11 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+export default connect(
+  null,
+  {
+    addQuantity,
+    removeQuantity,
+    deleteProductInCart
+  }
+)(CartItem);

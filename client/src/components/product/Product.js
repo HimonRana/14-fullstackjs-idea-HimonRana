@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getProductById } from "../../actions/productActions";
+import { addToCart } from "../../actions/cartActions";
 
 import { Breadcrumb, Image, Icon, Dropdown, Button } from "semantic-ui-react";
 import "./Product.scss";
@@ -9,9 +10,12 @@ class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: "",
       title: "",
+      productImg: "",
       price: 0,
       size: "",
+      quantity: 0,
       error: false
     };
   }
@@ -24,7 +28,9 @@ class Product extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
+      id: nextProps.product._id,
       title: nextProps.product.title,
+      productImg: nextProps.product.productImg,
       price: nextProps.product.price
     });
   }
@@ -33,20 +39,33 @@ class Product extends Component {
     this.setState({ size: value });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
+  handleBlur = () => {
+    this.setState({
+      error: false
+    });
+  };
+
+  handleSendToCart = id => {
     if (this.state.size === "") {
       this.setState({
         error: true
       });
     } else {
-      console.log(this.state);
+      //TODO: set productData to localstorage
+      const addProductToCart = {
+        id: this.state.id,
+        title: this.state.title,
+        productImg: this.state.productImg,
+        price: this.state.price,
+        size: this.state.size,
+        quantity: this.state.quantity
+      };
+      this.props.addToCart(addProductToCart);
     }
   };
 
   render() {
     const { product } = this.props;
-    console.log(product);
 
     const getShoeSizes = [
       { key: "39", text: "39", value: "39" },
@@ -97,6 +116,7 @@ class Product extends Component {
             <Dropdown
               placeholder="Select size"
               error={this.state.error}
+              onFocus={this.handleBlur}
               fluid
               selection
               scrolling
@@ -128,7 +148,7 @@ class Product extends Component {
               icon="cart"
               labelPosition="left"
               disabled={product.available ? false : true}
-              onClick={this.onSubmit}
+              onClick={this.handleSendToCart}
             />
           </div>
         </div>
@@ -143,5 +163,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProductById }
+  { getProductById, addToCart }
 )(Product);
