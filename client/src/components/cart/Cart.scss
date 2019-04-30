@@ -36,11 +36,19 @@
     margin: 0;
     margin-bottom: 1rem;
   }
+
+  .ui.header:first-child {
+    margin-top: 0;
+  }
 }
 
 .ui.blue.button.cart-checkout-button {
   width: 100%;
   background: #00518e;
+}
+
+.ui.bottom.popup {
+  width: 100%;
 }
 
 @media (max-width: 599px) {

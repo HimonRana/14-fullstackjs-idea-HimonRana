@@ -54,7 +54,6 @@ class CartItem extends Component {
 
   render() {
     const { productsInCart, totalValue } = this.props;
-    console.log(this.props);
 
     let addedItems = (
       <div>
