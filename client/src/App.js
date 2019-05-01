@@ -11,6 +11,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Product from "./components/product/Product";
 import Products from "./components/products/Products";
+import Order from "./components/order/Order";
 import AdminDiscount from "./components/admin/discounts/AdminDiscount";
 import AdminUsers from "./components/admin/users/Users";
 import AdminProducts from "./components/admin/products/Products";
@@ -66,6 +67,7 @@ const App = () => {
             />
             <Route exact path="/products" component={Products} />
             <Route exact path="/product/:id" component={Product} />
+            <Route exact path="/order" component={Order} />
           </Switch>
           <Footer />
         </div>
