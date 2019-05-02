@@ -3,10 +3,10 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 
-// Load Product model
+// Load models
 const Product = require("../models/Product");
-// Load User model
 const User = require("../models/User");
+const Discount = require("../models/Discount");
 
 // Validation
 const validateProductInput = require("../validation/product");
@@ -46,7 +46,6 @@ router.post(
             description: req.body.description,
             productImg: req.body.productImg,
             price: req.body.price,
-            // size: req.body.size,
             category: req.body.category,
             available: req.body.available,
             stock: req.body.stock
@@ -347,6 +346,85 @@ router.delete(
     } else {
       return res.status(401).json("Not Authorized");
     }
+  }
+);
+
+// @Route   GET admin/all/discounts/
+// @Desc    GET all Discounts
+// @Access  Private
+router.get(
+  "/all/discounts",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.role) {
+      Discount.find()
+        .sort({ date: -1 })
+        .then(discounts => res.json(discounts))
+        .catch(err => res.status(404).json({ orders: "No discounts found" }));
+    } else {
+      return res.status(401).json({ error: "Not Authorized" });
+    }
+  }
+);
+
+// @Route   POST admin/create/discount
+// @Desc    Create discount
+// @Access  Private
+router.post(
+  "/create/discount",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ role: req.user.role })
+      .then(user => {
+        if (user.role) {
+          Discount.findOne({ name: req.body.name }).then(name => {
+            if (name) {
+              return res.status(400).json({
+                discount: "Discount name already exist try another name"
+              });
+            } else {
+              const newDiscount = new Discount({
+                name: req.body.name,
+                discountValue: req.body.discountValue
+              });
+              newDiscount
+                .save()
+                .then(discount =>
+                  res.json(discount).catch(err => res.send(err))
+                );
+            }
+          });
+        } else {
+          return res.status(401).json({ NoAthorization: "Not authorized" });
+        }
+      })
+      .catch(err => res.status(404).json({ usererror: "No user found" }));
+  }
+);
+
+// @Route   DELETE admin/delete/discount/:id
+// @Desc    Delete discount
+// @Access  Private
+router.delete(
+  "/delete/discount/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ role: req.user.role }).then(user => {
+      Discount.findById(req.params.id)
+        .then(discount => {
+          // Check if user is Admin
+          if (user.role) {
+            discount
+              .remove()
+              .then(() =>
+                res.json({ message: "Discount is successfully deleted" })
+              );
+          } else {
+            return res.status(401).json("Not Authorized");
+          }
+        })
+        .catch(err => res.status(404).json({ message: "No discount found" }));
+    });
   }
 );
 

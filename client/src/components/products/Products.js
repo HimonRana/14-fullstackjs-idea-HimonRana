@@ -18,8 +18,8 @@ class Products extends Component {
 
   render() {
     const { products } = this.props;
-    let showProducts = products.map((product, index) => (
-      <ProductItem key={index} product={product} />
+    let showProducts = products.map(product => (
+      <ProductItem key={product._id} product={product} />
     ));
 
     return <div className="products-grid-container">{showProducts}</div>;

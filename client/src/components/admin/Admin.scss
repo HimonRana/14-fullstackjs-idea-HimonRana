@@ -1,6 +1,7 @@
 .admin-container {
   max-width: 80%;
   margin: 0 auto;
+  margin-top: 4.6rem;
 }
 
 .show-all-users {
@@ -32,6 +33,10 @@
 .product-admin-container,
 .user-container {
   margin-bottom: 0.7rem;
+}
+
+.ui.blue.header.header-products {
+  margin-top: 2rem;
 }
 
 @media (max-width: 480px) {
