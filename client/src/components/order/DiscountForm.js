@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import {
-  Card,
-  Icon,
-  Image,
   Button,
-  Divider,
-  Header,
   Form,
   Input
 } from "semantic-ui-react";
 
-export default class DiscountForm extends Component {
+class DiscountForm extends Component {
   render() {
     return (
       <div>
@@ -24,3 +19,5 @@ export default class DiscountForm extends Component {
     );
   }
 }
+
+export default DiscountForm;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   addQuantity,
   removeQuantity,
@@ -28,16 +29,23 @@ class CartItem extends Component {
     };
   }
 
-  handleClose = () => {
-    this.setState({
-      cartOpen: false
-    });
-  };
-
   handleOpen = () => {
     this.setState({
       cartOpen: true
     });
+  };
+
+  handleOpenPopupTimeOut = () => {
+    this.timeout = setTimeout(() => {
+      this.setState({ cartOpen: false });
+    }, 2500);
+  };
+
+  handleClose = () => {
+    this.setState({
+      cartOpen: false
+    });
+    clearTimeout(this.timeout);
   };
 
   handleAddQuantity = productData => {
@@ -112,9 +120,11 @@ class CartItem extends Component {
           <Header as="h4">{totalValue} SEK</Header>
         </div>
         <Button
-          disabled={productsInCart.length <= 0 ? true : false}
           color="blue"
           className="cart-checkout-button"
+          as={Link}
+          to="/order"
+          onClick={this.handleClose}
         >
           Checkout
         </Button>
@@ -137,7 +147,7 @@ class CartItem extends Component {
           hideOnScroll={true}
           content={addedItems}
           on="click"
-          open={this.state.isOpen}
+          open={this.state.cartOpen}
           onClose={this.handleClose}
           onOpen={this.handleOpen}
         />

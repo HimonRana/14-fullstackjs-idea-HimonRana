@@ -15,7 +15,7 @@ body {
 }
 
 .app {
-  margin-top: 6rem;
+  margin-top: 4.6rem;
 }
 
 .tool-bar {
@@ -61,5 +61,11 @@ footer {
 
   p {
     transform: translateY(100%);
+  }
+}
+
+@media (max-width: 599px) {
+  .app {
+    margin-top: 4rem;
   }
 }

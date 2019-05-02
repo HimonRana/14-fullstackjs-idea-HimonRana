@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Card,
-  Icon,
-  Image,
-  Button,
-  Divider,
-  Header,
-  Form,
-  Input
-} from "semantic-ui-react";
+import { Card, Icon, Image, Button } from "semantic-ui-react";
 
 export default class ProductsInCart extends Component {
   render() {
