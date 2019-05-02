@@ -5,9 +5,6 @@ const passport = require("passport");
 // Load Product model
 const Product = require("../models/Product");
 
-// Lägg till minst 5 produkter av minst två olika kategorier i databasen.
-// En produkt skall ha en beskrivning, bild, kategori, pris, lagerstatus.
-
 // @Route   GET products/all/products
 // @Desc    GET all Products
 // @Access  Public

@@ -89,7 +89,7 @@ class Login extends Component {
                   textAlign="left"
                 />
                 {/* TODO: put loading in Form later */}
-                <Form error onSubmit={this.onSubmit} size="small"> 
+                <Form error onSubmit={this.onSubmit} size="small">
                   <Form.Input
                     fluid
                     icon="mail"

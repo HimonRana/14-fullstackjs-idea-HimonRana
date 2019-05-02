@@ -12,68 +12,104 @@ class LatestProducts extends Component {
 
   render() {
     const { products } = this.props;
+    console.log(products);
 
-    let latestProducts = products.slice(0, 8).map(product => (
-      <Card key={product._id} className="card-product-latest">
-        <Link to={`/product/${product._id}`}>
-          <div className="products-img-container">
-            <Image alt={product.title} src={product.productImg} />
-          </div>
-        </Link>
-      </Card>
-    ));
+    let latestProducts =
+      products === null ? (
+        <p>No products available, contact the support.</p>
+      ) : products.length > 0 ? (
+        products.slice(0, 8).map(product => (
+          <Card key={product._id} className="card-product-latest">
+            <Link to={`/product/${product._id}`}>
+              <div className="products-img-container">
+                <Image alt={product.title} src={product.productImg} />
+              </div>
+            </Link>
+          </Card>
+        ))
+      ) : (
+        <p>No products available</p>
+      );
 
-    let categoryHead = products
-      .filter(product => product.category === "Head")
-      .slice(0, 4)
-      .map(product => (
-        <Card key={product._id} className="card-product-latest">
-          <Link to={`/product/${product._id}`}>
-            <div className="products-img-container">
-              <Image alt={product.title} src={product.productImg} />
-            </div>
-          </Link>
-        </Card>
-      ));
+    let categoryHead =
+      products === null ? (
+        <p>No products available, contact the support.</p>
+      ) : products.length > 0 ? (
+        products
+          .filter(product => product.category === "Head")
+          .slice(0, 4)
+          .map(product => (
+            <Card key={product._id} className="card-product-latest">
+              <Link to={`/product/${product._id}`}>
+                <div className="products-img-container">
+                  <Image alt={product.title} src={product.productImg} />
+                </div>
+              </Link>
+            </Card>
+          ))
+      ) : (
+        <p>No products available</p>
+      );
 
-    let categoryTop = products
-      .filter(product => product.category === "Top")
-      .slice(0, 4)
-      .map(product => (
-        <Card key={product._id} className="card-product-latest">
-          <Link to={`/product/${product._id}`}>
-            <div className="products-img-container">
-              <Image alt={product.title} src={product.productImg} />
-            </div>
-          </Link>
-        </Card>
-      ));
+    let categoryTop =
+      products === null ? (
+        <p>No products available, contact the support.</p>
+      ) : products.length > 0 ? (
+        products
+          .filter(product => product.category === "Top")
+          .slice(0, 4)
+          .map(product => (
+            <Card key={product._id} className="card-product-latest">
+              <Link to={`/product/${product._id}`}>
+                <div className="products-img-container">
+                  <Image alt={product.title} src={product.productImg} />
+                </div>
+              </Link>
+            </Card>
+          ))
+      ) : (
+        <p>No products available</p>
+      );
 
-    let categoryBottom = products
-      .filter(product => product.category === "Bottom")
-      .slice(0, 4)
-      .map(product => (
-        <Card key={product._id} className="card-product-latest">
-          <Link to={`/product/${product._id}`}>
-            <div className="products-img-container">
-              <Image alt={product.title} src={product.productImg} />
-            </div>
-          </Link>
-        </Card>
-      ));
+    let categoryBottom =
+      products === null ? (
+        <p>No products available, contact the support.</p>
+      ) : products.length > 0 ? (
+        products
+          .filter(product => product.category === "Bottom")
+          .slice(0, 4)
+          .map(product => (
+            <Card key={product._id} className="card-product-latest">
+              <Link to={`/product/${product._id}`}>
+                <div className="products-img-container">
+                  <Image alt={product.title} src={product.productImg} />
+                </div>
+              </Link>
+            </Card>
+          ))
+      ) : (
+        <p>No products available</p>
+      );
 
-    let categoryShoes = products
-      .filter(product => product.category === "Shoes")
-      .slice(0, 4)
-      .map(product => (
-        <Card key={product._id} className="card-product-latest">
-          <Link to={`/product/${product._id}`}>
-            <div className="products-img-container">
-              <Image alt={product.title} src={product.productImg} />
-            </div>
-          </Link>
-        </Card>
-      ));
+    let categoryShoes =
+      products === null ? (
+        <p>No products available, contact the support.</p>
+      ) : products.length > 0 ? (
+        products
+          .filter(product => product.category === "Shoes")
+          .slice(0, 4)
+          .map(product => (
+            <Card key={product._id} className="card-product-latest">
+              <Link to={`/product/${product._id}`}>
+                <div className="products-img-container">
+                  <Image alt={product.title} src={product.productImg} />
+                </div>
+              </Link>
+            </Card>
+          ))
+      ) : (
+        <p>No products available</p>
+      );
 
     return (
       <div className="latest-products-container">

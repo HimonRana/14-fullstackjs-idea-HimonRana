@@ -1,4 +1,5 @@
 import {
+  ADD_DISCOUNT_ORDER,
   ADD_PRODUCT,
   ADD_TO_CART,
   ADD_QUANTITY,
@@ -33,6 +34,7 @@ export default function(state = initialState, action) {
         product: action.payload
       };
 
+    // ADMIN
     case GET_ADMIN_PRODUCTS:
       return {
         ...state,
@@ -59,6 +61,7 @@ export default function(state = initialState, action) {
         )
       };
 
+    // CART
     case ADD_TO_CART:
       let existedItem = state.addedItems.find(product => {
         return (
@@ -105,6 +108,13 @@ export default function(state = initialState, action) {
           return product !== action.payload;
         }),
         total: state.total - action.payload.price * action.payload.quantity
+      };
+
+    // DISCOUNT
+    case ADD_DISCOUNT_ORDER:
+      return {
+        ...state,
+        total: (action.payload.discountValue / 100) * state.total
       };
     default:
       return state;

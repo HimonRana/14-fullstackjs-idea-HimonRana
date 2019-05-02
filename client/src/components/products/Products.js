@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { Header } from "semantic-ui-react";
 import ProductItem from "./ProductItem";
 import { getProducts } from "../../actions/productActions";
 
@@ -18,11 +19,21 @@ class Products extends Component {
 
   render() {
     const { products } = this.props;
-    let showProducts = products.map(product => (
-      <ProductItem key={product._id} product={product} />
-    ));
 
-    return <div className="products-grid-container">{showProducts}</div>;
+    return (
+      <div className="products-grid-container">
+        {/* <Header>Latest Products</Header> */}
+        {products === null ? (
+          <p>Products is not available please contact support.</p>
+        ) : products.length > 0 ? (
+          products.map(product => (
+            <ProductItem key={product._id} product={product} />
+          ))
+        ) : (
+          <p>No products available</p>
+        )}
+      </div>
+    );
   }
 }
 
