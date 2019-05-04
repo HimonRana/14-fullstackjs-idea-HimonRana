@@ -16,11 +16,14 @@ class DiscountForm extends Component {
       name: this.state.discountName
     };
     this.props.addDiscount(newDiscount);
+    this.setState({
+      name: ""
+    });
   };
 
   render() {
-    console.log(this.props);
-
+    const { discount } = this.props;
+    console.log(discount.length);
     return (
       <div>
         <Form error onSubmit={this.onSubmit} size="tiny">
@@ -41,7 +44,8 @@ class DiscountForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  errors: state.errors.error
+  errors: state.errors.error,
+  discount: state.product.discount
 });
 
 export default connect(

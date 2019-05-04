@@ -22,7 +22,7 @@ class ProductsInCart extends Component {
 
   render() {
     const { addedItems } = this.props;
-    console.log(this.props);
+
     return (
       <div>
         {addedItems.length > 0 ? (
@@ -84,7 +84,8 @@ class ProductsInCart extends Component {
 }
 
 const mapStateToProps = state => ({
-  addedItems: state.product.addedItems
+  addedItems: state.product.addedItems,
+  totalValue: state.product.total
 });
 
 export default connect(

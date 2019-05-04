@@ -16,6 +16,7 @@ const initialState = {
   products: [],
   product: {},
   addedItems: [],
+  discount: [],
   total: 0,
   loading: false
 };
@@ -107,15 +108,26 @@ export default function(state = initialState, action) {
         addedItems: state.addedItems.filter(product => {
           return product !== action.payload;
         }),
-        total: state.total - action.payload.price * action.payload.quantity
+        total:
+          state.total - action.payload.price * action.payload.quantity < 0
+            ? 0
+            : state.total - action.payload.price * action.payload.quantity
       };
 
     // DISCOUNT
     case ADD_DISCOUNT_ORDER:
-      return {
-        ...state,
-        total: (action.payload.discountValue / 100) * state.total
-      };
+      if (state.discount.length === 0) {
+        return {
+          ...state,
+          total: (action.payload.discountValue / 100) * state.total,
+          discount: [action.payload]
+        };
+      } else {
+        return {
+          ...state,
+          total: state.total
+        };
+      }
     default:
       return state;
   }
