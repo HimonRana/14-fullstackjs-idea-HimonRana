@@ -8,7 +8,7 @@ import "./Order.scss";
 
 class Order extends Component {
   render() {
-    const { totalValue } = this.props;
+    const { totalValue, addedItems } = this.props;
 
     return (
       <div className="order-container">
@@ -24,7 +24,11 @@ class Order extends Component {
             <Header as="h4">Total value: </Header>
             <Header as="h4">{totalValue} SEK</Header>
           </div>
-          <Button size="small" primary>
+          <Button
+            disabled={addedItems.length === 0 ? true : false}
+            size="small"
+            primary
+          >
             Proceed to checkout
           </Button>
         </div>
@@ -34,6 +38,7 @@ class Order extends Component {
 }
 
 const mapStateToProps = state => ({
+  addedItems: state.product.addedItems,
   totalValue: state.product.total
 });
 

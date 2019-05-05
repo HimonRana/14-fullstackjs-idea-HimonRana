@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addDiscount } from "../../actions/orderActions";
-import { Button, Form, Input } from "semantic-ui-react";
+import { Button, Form, Input, Header } from "semantic-ui-react";
 
 class DiscountForm extends Component {
   state = { discountName: "" };
@@ -17,24 +17,41 @@ class DiscountForm extends Component {
     };
     this.props.addDiscount(newDiscount);
     this.setState({
-      name: ""
+      discountName: ""
     });
   };
 
   render() {
-    const { discount } = this.props;
-    console.log(discount.length);
+    const { addedItems, discount, errors } = this.props;
+
     return (
       <div>
         <Form error onSubmit={this.onSubmit} size="tiny">
-          <Input
-            type="text"
-            name="discountName"
-            value={this.state.discountName}
-            placeholder="Enter discount code"
-            onChange={this.onChange}
-          />
-          <Button type="submit" size="tiny" color="blue">
+          <div>
+            <Input
+              type="text"
+              name="discountName"
+              disabled={addedItems.length === 0 ? true : false}
+              value={this.state.discountName}
+              placeholder="Enter discount code"
+              onChange={this.onChange}
+            />
+            {discount.length > 0 ? (
+              <Header as="h5" color="green">
+                Discount code is used.
+              </Header>
+            ) : (
+              <Header as="h5" color="red">
+                {errors}
+              </Header>
+            )}
+          </div>
+          <Button
+            disabled={addedItems.length === 0 ? true : false}
+            type="submit"
+            size="tiny"
+            color="blue"
+          >
             Add discount
           </Button>
         </Form>
@@ -45,7 +62,8 @@ class DiscountForm extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors.error,
-  discount: state.product.discount
+  discount: state.product.discount,
+  addedItems: state.product.addedItems
 });
 
 export default connect(

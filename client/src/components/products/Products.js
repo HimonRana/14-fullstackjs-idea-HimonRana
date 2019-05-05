@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Header } from "semantic-ui-react";
+import { Header, Card, Image } from "semantic-ui-react";
 import ProductItem from "./ProductItem";
 import { getProducts } from "../../actions/productActions";
 
@@ -22,7 +22,11 @@ class Products extends Component {
 
     return (
       <div className="products-grid-container">
-        {/* <Header>Latest Products</Header> */}
+        <Card className="card-product">
+          <div className="products-img-container title-container">
+            <Header>Latest products</Header>
+          </div>
+        </Card>
         {products === null ? (
           <p>Products is not available please contact support.</p>
         ) : products.length > 0 ? (

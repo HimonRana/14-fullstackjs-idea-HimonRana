@@ -115,6 +115,9 @@ class LatestProducts extends Component {
       <div className="latest-products-container">
         <Header>Latest Products</Header>
         <div className="latest-products-content">{latestProducts}</div>
+        <div className="check-more-button">
+          <Link to="/products">Check more...</Link>
+        </div>
         <Header>Head</Header>
         <div className="latest-products-content">{categoryHead}</div>
         <Header>Top</Header>
