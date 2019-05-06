@@ -103,6 +103,9 @@ export default function(state = initialState, action) {
       };
 
     case DELETE_PRODUCT_FROM_CART:
+      if (state.addedItems.length === 1) {
+        state.discount = [];
+      }
       return {
         ...state,
         addedItems: state.addedItems.filter(product => {

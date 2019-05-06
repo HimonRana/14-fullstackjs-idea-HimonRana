@@ -116,16 +116,28 @@ class LatestProducts extends Component {
         <Header>Latest Products</Header>
         <div className="latest-products-content">{latestProducts}</div>
         <div className="check-more-button">
-          <Link to="/products">Check more...</Link>
+          <Link to="/products">Check more</Link>
         </div>
         <Header>Head</Header>
         <div className="latest-products-content">{categoryHead}</div>
+        <div className="check-more-button">
+          <Link to="/products/category/head">Check more</Link>
+        </div>
         <Header>Top</Header>
         <div className="latest-products-content">{categoryTop}</div>
+        <div className="check-more-button">
+          <Link to="/products/category/top">Check more</Link>
+        </div>
         <Header>Bottom</Header>
         <div className="latest-products-content">{categoryBottom}</div>
+        <div className="check-more-button">
+          <Link to="/products/category/bottom">Check more</Link>
+        </div>
         <Header>Shoes</Header>
         <div className="latest-products-content">{categoryShoes}</div>
+        <div className="check-more-button">
+          <Link to="/products/category/shoes">Check more</Link>
+        </div>
       </div>
     );
   }

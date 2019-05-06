@@ -37,9 +37,15 @@ class DiscountForm extends Component {
               onChange={this.onChange}
             />
             {discount.length > 0 ? (
-              <Header as="h5" color="green">
-                Discount code is used.
-              </Header>
+              addedItems.length === 0 ? (
+                ""
+              ) : (
+                <Header as="h5" color="green">
+                  Discount code is used.
+                </Header>
+              )
+            ) : addedItems.length === 0 ? (
+              ""
             ) : (
               <Header as="h5" color="red">
                 {errors}
