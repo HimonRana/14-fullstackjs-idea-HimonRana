@@ -67,11 +67,59 @@
 }
 
 /* CHECKOUT */
-
 .checkout-container {
   width: 80%;
   margin: 0 auto;
   margin-top: 6.1rem;
+}
+
+/* PAYMENT */
+.payment-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+  .shoppingbag-container {
+    .ui.card {
+      width: 100%;
+      box-shadow: unset;
+      .order-item-card-content-img {
+        img {
+          width: 80px;
+        }
+      }
+    }
+  }
+
+  .discount-container {
+    margin-top: 2rem;
+
+    p span {
+      font-weight: 500;
+    }
+  }
+
+  .shipping-info-container {
+    margin-top: 2rem;
+
+    p {
+      margin: 0;
+      line-height: 1.5285em;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .total-payment-container {
+    margin-top: 2rem;
+
+    p {
+      span {
+        font-weight: 500;
+      }
+    }
+  }
 }
 
 @media (max-width: 599px) {

@@ -1,5 +1,8 @@
 import Axios from "axios";
+import Toastr from "toastr";
+
 import {
+  ADD_ORDER,
   ADD_DISCOUNT_ORDER,
   CHECK_AUTH_AND_CHECKOUT,
   ADD_SHIPPING_DATA,
@@ -35,9 +38,34 @@ export const loginAndCheckout = (isAuthenticated, history) => dispatch => {
   }
 };
 
-export const addShippingData = shippingData => dispatch => {
-  return dispatch({
+// ADD SHIPPING DATA IN ORDER
+export const addShippingData = (shippingData, history) => dispatch => {
+  dispatch({
     type: ADD_SHIPPING_DATA,
     payload: shippingData
   });
+  history.push("/order/checkout/payment");
+};
+
+// ADD ORDER WITH PAYMENT
+export const addOrder = orderData => dispatch => {
+  Axios.post("/order/create", orderData)
+    .then(res => {
+      dispatch({
+        type: ADD_ORDER,
+        payload: res.data
+      });
+      Toastr.success(
+        "Order is successfully created!",
+        { timeOut: 5000 },
+        { positionClass: "toast-bottom-right" }
+      );
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      });
+    });
 };

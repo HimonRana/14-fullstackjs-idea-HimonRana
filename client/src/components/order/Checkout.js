@@ -33,7 +33,7 @@ class Checkout extends Component {
       telephone: this.state.telephone
     };
 
-    this.props.addShippingData(shippingData);
+    this.props.addShippingData(shippingData, this.props.history);
     this.setState({
       name: "",
       email: "",
@@ -45,6 +45,7 @@ class Checkout extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <div className="checkout-container">
         <Header>Shipping information</Header>

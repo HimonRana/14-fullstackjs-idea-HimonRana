@@ -21,34 +21,12 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-  
-    // get cookie (OrderRows)
-    // Get product_id and quantity from cookie
-    myCart = [
-      {
-        productTitle: "Nike",
-        quantity: 1,
-        size: 42,
-        price: 300
-      },
-      {
-        productTitle: "Adidas",
-        quantity: 2,
-        size: 42,
-        price: 200
-      }
-    ];
-
-    let totalSum = 0;
-
-    for (let i = 0; i < myCart.length; i++) {
-      totalSum += myCart[i].quantity * myCart[i].price;
-    }
 
     const newOrder = new Order({
       user: req.user.id,
-      orderProducts: myCart,
-      totalSum: totalSum,
+      orderProducts: req.body.orderProducts,
+      discount: req.body.discount,
+      totalSum: req.body.totalSum,
       name: req.body.name,
       email: req.body.email,
       street: req.body.street,

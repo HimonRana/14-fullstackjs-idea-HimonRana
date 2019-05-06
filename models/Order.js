@@ -10,7 +10,12 @@ const OrderSchema = new Schema({
 
   orderProducts: [
     {
-      productTitle: {
+      title: {
+        type: String,
+        required: true
+      },
+
+      productImg: {
         type: String,
         required: true
       },
@@ -28,6 +33,18 @@ const OrderSchema = new Schema({
       price: {
         type: Number,
         required: true
+      }
+    }
+  ],
+
+  discount: [
+    {
+      discountName: {
+        type: String
+      },
+
+      discountValue: {
+        type: Number
       }
     }
   ],
@@ -63,12 +80,12 @@ const OrderSchema = new Schema({
   },
 
   telephone: {
-    type: String,
+    type: String
   },
 
   status: {
     type: String,
-    required: true
+    default: "ordered"
   },
 
   date: {

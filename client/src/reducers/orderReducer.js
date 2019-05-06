@@ -4,7 +4,8 @@ import {
   DELETE_PRODUCT_FROM_CART,
   ADD_TO_CART,
   ADD_QUANTITY,
-  ADD_DISCOUNT_ORDER
+  ADD_DISCOUNT_ORDER,
+  ADD_ORDER
 } from "../actions/types";
 
 const initialState = {
@@ -19,6 +20,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case ADD_ORDER:
+      return {
+        ...state,
+        orders: [action.payload, ...state.orders]
+      };
     case ADD_SHIPPING_DATA:
       return {
         ...state,

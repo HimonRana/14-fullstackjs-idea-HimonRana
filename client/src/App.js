@@ -18,6 +18,7 @@ import AdminProducts from "./components/admin/products/Products";
 import AdminOrders from "./components/admin/orders/Orders";
 import CategoryProducts from "./components/products/CategoryProducts";
 import Checkout from "./components/order/Checkout";
+import Payment from "./components/order/Payment";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
@@ -71,6 +72,7 @@ const App = () => {
             <Route exact path="/product/:id" component={Product} />
             <Route exact path="/order" component={Order} />
             <Route exact path="/order/checkout" component={Checkout} />
+            <Route exact path="/order/checkout/payment" component={Payment} />
             <Route
               exact
               path="/products/category/:category"
