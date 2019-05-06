@@ -152,19 +152,14 @@ class Navbar extends Component {
                     Logout
                   </Menu.Item>
                 ) : (
-                  <List>
-                    <List.Item
-                      className=""
-                      as="a"
-                      onClick={this.handleSidebarHide}
-                    >
+                  <List
+                    Style="text-align: center;
+                  margin-top: 2rem;"
+                  >
+                    <List.Item as="a" onClick={this.handleSidebarHide}>
                       <Register />
                     </List.Item>
-                    <List.Item
-                      className=""
-                      as="a"
-                      onClick={this.handleSidebarHide}
-                    >
+                    <List.Item as="a" onClick={this.handleSidebarHide}>
                       <Login />
                     </List.Item>
                   </List>

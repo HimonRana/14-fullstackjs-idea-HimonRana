@@ -1,10 +1,11 @@
 import isEmpty from "../validation/is-empty";
 
-import { SET_CURRENT_USER } from "../actions/types";
+import { SET_CURRENT_USER, CHECK_AUTH_AND_CHECKOUT } from "../actions/types";
 
 const initialState = {
   isAuthenticated: false,
-  user: {}
+  user: {},
+  isOpen: false
 };
 
 export default function(state = initialState, action) {
@@ -15,6 +16,15 @@ export default function(state = initialState, action) {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
+    case CHECK_AUTH_AND_CHECKOUT:
+      if (!state.isAuthenticated) {
+        console.log("reducer");
+        return {
+          ...state,
+          isOpen: true
+        };
+      }
+      break;
     default:
       return state;
   }

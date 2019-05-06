@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
+import Register from "../register/Register";
 
 import {
   Button,
@@ -16,8 +17,8 @@ import {
 import "./Login.scss";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       modalOpen: false,
       email: "",
@@ -30,15 +31,18 @@ class Login extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
+    this.setState({
+      modalOpen: nextProps.auth.isOpen
+    });
   }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleModalOpen = () => {
+  handleModalOpen = isOpen => {
     this.setState({
-      modalOpen: true
+      modalOpen: isOpen
     });
   };
 
@@ -120,6 +124,8 @@ class Login extends Component {
                     Log in
                   </Button>
                 </Form>
+                <br />
+                <Register />
               </Modal.Content>
             </Grid.Column>
           </Grid>

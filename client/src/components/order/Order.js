@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductsInCart from "./ProductsInCart";
 import DiscountForm from "./DiscountForm";
-import { Button, Divider, Header } from "semantic-ui-react";
+import { Divider, Header } from "semantic-ui-react";
 
 import "./Order.scss";
+import ProceedToCheckoutButton from "./ProceedToCheckoutButton";
 
 class Order extends Component {
   render() {
-    const { totalValue, addedItems } = this.props;
+    const { totalValue } = this.props;
 
     return (
       <div className="order-container">
@@ -24,13 +25,7 @@ class Order extends Component {
             <Header as="h4">Total value: </Header>
             <Header as="h4">{totalValue} SEK</Header>
           </div>
-          <Button
-            disabled={addedItems.length === 0 ? true : false}
-            size="small"
-            primary
-          >
-            Proceed to checkout
-          </Button>
+          <ProceedToCheckoutButton history={this.props.history} />
         </div>
       </div>
     );
@@ -38,7 +33,6 @@ class Order extends Component {
 }
 
 const mapStateToProps = state => ({
-  addedItems: state.product.addedItems,
   totalValue: state.product.total
 });
 
