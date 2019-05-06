@@ -84,8 +84,8 @@ class ProductsInCart extends Component {
 }
 
 const mapStateToProps = state => ({
-  addedItems: state.product.addedItems,
-  totalValue: state.product.total
+  addedItems: state.order.addedItems,
+  totalValue: state.order.total
 });
 
 export default connect(

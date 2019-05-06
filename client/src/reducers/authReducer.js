@@ -18,7 +18,6 @@ export default function(state = initialState, action) {
       };
     case CHECK_AUTH_AND_CHECKOUT:
       if (!state.isAuthenticated) {
-        console.log("reducer");
         return {
           ...state,
           isOpen: true

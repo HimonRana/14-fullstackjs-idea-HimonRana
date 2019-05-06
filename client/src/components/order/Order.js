@@ -33,7 +33,7 @@ class Order extends Component {
 }
 
 const mapStateToProps = state => ({
-  totalValue: state.product.total
+  totalValue: state.order.total
 });
 
 export default connect(mapStateToProps)(Order);

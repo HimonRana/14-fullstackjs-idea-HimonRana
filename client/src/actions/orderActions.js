@@ -2,6 +2,7 @@ import Axios from "axios";
 import {
   ADD_DISCOUNT_ORDER,
   CHECK_AUTH_AND_CHECKOUT,
+  ADD_SHIPPING_DATA,
   GET_ERRORS
 } from "./types";
 
@@ -32,4 +33,11 @@ export const loginAndCheckout = (isAuthenticated, history) => dispatch => {
       payload: isAuthenticated
     });
   }
+};
+
+export const addShippingData = shippingData => dispatch => {
+  return dispatch({
+    type: ADD_SHIPPING_DATA,
+    payload: shippingData
+  });
 };

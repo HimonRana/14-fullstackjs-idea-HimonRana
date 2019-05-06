@@ -27,7 +27,7 @@ class ProceedToCheckoutButton extends Component {
 }
 
 const mapStateToProps = state => ({
-  addedItems: state.product.addedItems,
+  addedItems: state.order.addedItems,
   isAuthenticated: state.auth.isAuthenticated
 });
 

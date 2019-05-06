@@ -68,8 +68,8 @@ class DiscountForm extends Component {
 
 const mapStateToProps = state => ({
   errors: state.errors.error,
-  discount: state.product.discount,
-  addedItems: state.product.addedItems
+  discount: state.order.discount,
+  addedItems: state.order.addedItems
 });
 
 export default connect(
