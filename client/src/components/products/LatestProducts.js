@@ -12,7 +12,6 @@ class LatestProducts extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(products);
 
     let latestProducts =
       products === null ? (

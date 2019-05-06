@@ -16,6 +16,7 @@ import AdminDiscount from "./components/admin/discounts/AdminDiscount";
 import AdminUsers from "./components/admin/users/Users";
 import AdminProducts from "./components/admin/products/Products";
 import AdminOrders from "./components/admin/orders/Orders";
+import CategoryProducts from "./components/products/CategoryProducts";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
@@ -68,6 +69,11 @@ const App = () => {
             <Route exact path="/products" component={Products} />
             <Route exact path="/product/:id" component={Product} />
             <Route exact path="/order" component={Order} />
+            <Route
+              exact
+              path="/products/category/:category"
+              component={CategoryProducts}
+            />
           </Switch>
           <Footer />
         </div>

@@ -107,7 +107,7 @@ class Navbar extends Component {
                     <Header inverted>Dashboard</Header>
                   </Menu.Item>
                 ) : null}
-                <Menu.Item as="a">
+                <Menu.Item as="a" Style="cursor: auto;">
                   <Header inverted>Category</Header>
                 </Menu.Item>
                 <Menu.Item

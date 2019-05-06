@@ -18,6 +18,11 @@
       margin-bottom: 2rem;
     }
   }
+  .ui.card.card-product {
+    .content {
+      padding: 1rem 0;
+    }
+  }
 }
 
 .ui.card.card-product-latest {
