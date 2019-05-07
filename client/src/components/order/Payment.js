@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Divider, Header, Button } from "semantic-ui-react";
 import ProductsInCart from "./ProductsInCart";
-import { addOrder } from "../../actions/orderActions";
+import StripeButton from "./StripeButton";
 
 class Payment extends Component {
-  onSubmit = () => {
+  render() {
+    const { total, discount, shippingData } = this.props;
+    console.log(this.props);
+
     const order = {
       orderProducts: this.props.addedItems,
       discount: this.props.discount,
@@ -17,13 +20,6 @@ class Payment extends Component {
       city: this.props.shippingData.city,
       telephone: this.props.shippingData.telephone
     };
-
-    this.props.addOrder(order);
-  };
-
-  render() {
-    const { total, discount, shippingData } = this.props;
-    console.log(this.props);
 
     return (
       <div className="payment-container">
@@ -80,9 +76,10 @@ class Payment extends Component {
           <p>
             <span>Total:</span> {total} SEK
           </p>
-          <Button onClick={this.onSubmit} color="olive">
+          {/* <Button onClick={this.onSubmit} color="olive">
             COMPLETE PURCHASE
-          </Button>
+          </Button> */}
+          <StripeButton order={order} history={this.props.history} />
         </div>
       </div>
     );
@@ -96,7 +93,4 @@ const mapStateToProps = state => ({
   addedItems: state.order.addedItems
 });
 
-export default connect(
-  mapStateToProps,
-  { addOrder }
-)(Payment);
+export default connect(mapStateToProps)(Payment);

@@ -2,7 +2,7 @@ import Axios from "axios";
 import Toastr from "toastr";
 
 import {
-  ADD_ORDER,
+  CLEAR_ORDER,
   ADD_DISCOUNT_ORDER,
   CHECK_AUTH_AND_CHECKOUT,
   ADD_SHIPPING_DATA,
@@ -48,18 +48,17 @@ export const addShippingData = (shippingData, history) => dispatch => {
 };
 
 // ADD ORDER WITH PAYMENT
-export const addOrder = orderData => dispatch => {
-  Axios.post("/order/create", orderData)
-    .then(res => {
+export const addOrder = (orderData, stripeToken, history) => dispatch => {
+  Axios.post("/order/create", {
+    order: orderData,
+    stripeToken: stripeToken
+  })
+    .then(() => {
       dispatch({
-        type: ADD_ORDER,
-        payload: res.data
+        type: CLEAR_ORDER,
+        payload: []
       });
-      Toastr.success(
-        "Order is successfully created!",
-        { timeOut: 5000 },
-        { positionClass: "toast-bottom-right" }
-      );
+      history.push("/profile");
     })
     .catch(err => {
       console.log(err);

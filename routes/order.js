@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+require("dotenv").config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Load User/Order/Product model
 const Order = require("../models/Order");
@@ -15,7 +17,7 @@ router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateOrderInput(req.body);
+    const { errors, isValid } = validateOrderInput(req.body.order);
 
     // To check Validation
     if (!isValid) {
@@ -24,22 +26,39 @@ router.post(
 
     const newOrder = new Order({
       user: req.user.id,
-      orderProducts: req.body.orderProducts,
-      discount: req.body.discount,
-      totalSum: req.body.totalSum,
-      name: req.body.name,
-      email: req.body.email,
-      street: req.body.street,
-      zip: req.body.zip,
-      city: req.body.city,
-      telephone: req.body.telephone,
-      status: req.body.status
+      orderProducts: req.body.order.orderProducts,
+      discount: req.body.order.discount,
+      totalSum: req.body.order.totalSum,
+      name: req.body.order.name,
+      email: req.body.order.email,
+      street: req.body.order.street,
+      zip: req.body.order.zip,
+      city: req.body.order.city,
+      telephone: req.body.order.telephone,
+      status: req.body.order.status
     });
 
     newOrder
       .save()
       .then(order => res.json(order))
       .catch(err => res.status(404).json({ order: "No order to save" }));
+
+    const amount = newOrder.totalSum * 100;
+
+    stripe.customers
+      .create({
+        email: req.body.stripeToken.email,
+        source: req.body.stripeToken.id
+      })
+      .then(customer => {
+        stripe.charges.create({
+          amount,
+          description: "BuntShop",
+          currency: "sek",
+          customer: customer.id
+        });
+      })
+      .catch(err => console.log(err));
   }
 );
 

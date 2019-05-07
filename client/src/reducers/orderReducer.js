@@ -5,7 +5,7 @@ import {
   ADD_TO_CART,
   ADD_QUANTITY,
   ADD_DISCOUNT_ORDER,
-  ADD_ORDER
+  CLEAR_ORDER
 } from "../actions/types";
 
 const initialState = {
@@ -20,10 +20,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case ADD_ORDER:
+    case CLEAR_ORDER:
       return {
         ...state,
-        orders: [action.payload, ...state.orders]
+        addedItems: action.payload,
+        discount: action.payload,
+        shippingData: action.payload,
+        total: 0
       };
     case ADD_SHIPPING_DATA:
       return {
