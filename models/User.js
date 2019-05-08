@@ -3,20 +3,6 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const UserSchema = new Schema({
-  order: {
-    type: Schema.Types.ObjectId,
-    ref: "orders"
-  },
-
-  orders: [
-    {
-      order: {
-        type: Schema.Types.ObjectId,
-        ref: "orders"
-      }
-    }
-  ],
-
   name: {
     type: String,
     required: true
@@ -37,7 +23,9 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+
+  orders: []
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

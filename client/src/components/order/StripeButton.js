@@ -31,7 +31,8 @@ class StripeButton extends Component {
     this.loadStripe(() => {
       this.stripeHandler = window.StripeCheckout.configure({
         key: "pk_test_cr3BDV2StJh354Wmrnr0eGfs00ZnwDyGEo",
-        image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+        image:
+          "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX26567497.jpg",
         locale: "auto",
         token: token => {
           this.setState({ loading: true });

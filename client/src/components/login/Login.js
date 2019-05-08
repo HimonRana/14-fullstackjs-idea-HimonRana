@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { loginUser } from "../../actions/authActions";
 import Register from "../register/Register";
 
@@ -31,9 +32,11 @@ class Login extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
-    this.setState({
-      modalOpen: nextProps.auth.isOpen
-    });
+    if (window.location.pathname === "/order") {
+      this.setState({
+        modalOpen: nextProps.auth.isOpen
+      });
+    }
   }
 
   onChange = e => {
@@ -64,7 +67,7 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-
+    
     return (
       <div className="content">
         <Button onClick={this.handleModalOpen} compact basic inverted>
@@ -149,4 +152,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)(withRouter(Login));

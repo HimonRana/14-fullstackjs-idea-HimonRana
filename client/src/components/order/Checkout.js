@@ -45,7 +45,6 @@ class Checkout extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className="checkout-container">
         <Header>Shipping information</Header>

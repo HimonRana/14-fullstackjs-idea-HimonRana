@@ -6,6 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // Load User/Order/Product model
 const Order = require("../models/Order");
+const User = require("../models/User");
 
 // Load Input Validation
 const validateOrderInput = require("../validation/order");
@@ -41,7 +42,19 @@ router.post(
     newOrder
       .save()
       .then(order => res.json(order))
-      .catch(err => res.status(404).json({ order: "No order to save" }));
+      .catch(err =>
+        res.status(404).json({ order: "No order to save", err: err })
+      );
+
+    User.findById(req.user.id)
+      .then(user => {
+        if (!user) {
+          return res.status(404).json({ user: "user not found" });
+        }
+        user.orders.push(newOrder);
+        user.save();
+      })
+      .catch(err => res.status(404).json({ user: "No user found", err: err }));
 
     const amount = newOrder.totalSum * 100;
 

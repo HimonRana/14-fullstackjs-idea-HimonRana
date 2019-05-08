@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Divider, Header, Button } from "semantic-ui-react";
+import { Divider, Header } from "semantic-ui-react";
 import ProductsInCart from "./ProductsInCart";
 import StripeButton from "./StripeButton";
 
 class Payment extends Component {
   render() {
     const { total, discount, shippingData } = this.props;
-    console.log(this.props);
 
     const order = {
       orderProducts: this.props.addedItems,
