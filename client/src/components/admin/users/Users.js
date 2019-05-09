@@ -32,9 +32,16 @@ class Users extends Component {
     const { active } = this.state;
     const { users } = this.props;
 
-    let showUsers = users.map(user => {
-      return <User key={user._id} id={user._id} user={user} />;
-    });
+    let showUsers =
+      users === null ? (
+        <p>No users available.</p>
+      ) : users.length > 0 ? (
+        users.map(user => {
+          return <User key={user._id} id={user._id} user={user} />;
+        })
+      ) : (
+        <p>No users created.</p>
+      );
 
     return (
       <div className="admin-container">

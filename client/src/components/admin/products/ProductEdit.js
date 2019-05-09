@@ -70,8 +70,6 @@ class ProductEdit extends Component {
   };
 
   render() {
-    // const { product } = this.props;
-
     const categoryOptions = [
       { key: "Head", text: "Head", value: "Head" },
       { key: "Top", text: "Top", value: "Top" },

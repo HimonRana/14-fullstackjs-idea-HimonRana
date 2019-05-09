@@ -37,11 +37,13 @@ class Products extends Component {
     const { active } = this.state;
     const { products } = this.props;
 
-    let getAllProducts = products.map(product => {
+    let getAllProducts = products === null ? (
+      <p>No products available.</p>
+    ) : products.length > 0 ? products.map(product => {
       return (
         <ProductEdit key={product._id} id={product._id} product={product} />
       );
-    });
+    }) : <p>No products created.</p>;
 
     return (
       <div className="admin-container">

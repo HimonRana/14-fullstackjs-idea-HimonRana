@@ -10,6 +10,12 @@
   .ui.card {
     box-shadow: unset;
   }
+
+  .profile-content {
+    box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .ui.card.profile-item-card {
@@ -37,5 +43,18 @@
 
   .profile-item-card-content {
     padding-right: 0;
+  }
+}
+
+.ui.card.profile-item-shipping-card {
+  width: 100%;
+
+  .content {
+    padding: 0 !important;
+  }
+
+  .profile-item-status {
+    float: right;
+    margin-right: 1rem;
   }
 }

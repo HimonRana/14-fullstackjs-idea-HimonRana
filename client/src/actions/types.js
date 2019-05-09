@@ -7,6 +7,7 @@ export const GET_PRODUCT = "GET_PRODUCT";
 export const GET_ADMIN_PRODUCTS = "GET_ADMIN_PRODUCTS";
 export const GET_USERS = "GET_USERS";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
+export const GET_ADMIN_ORDERS = "GET_ADMIN_ORDERS";
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const ADD_DISCOUNT = "ADD_DISCOUNT";

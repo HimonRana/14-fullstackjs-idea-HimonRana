@@ -5,6 +5,7 @@ import {
   ADD_TO_CART,
   ADD_QUANTITY,
   ADD_DISCOUNT_ORDER,
+  GET_ADMIN_ORDERS,
   CLEAR_ORDER
 } from "../actions/types";
 
@@ -102,6 +103,13 @@ export default function(state = initialState, action) {
           total: state.total
         };
       }
+
+    // Profile Order
+    case GET_ADMIN_ORDERS:
+      return {
+        ...state,
+        orders: action.payload
+      };
     default:
       return state;
   }

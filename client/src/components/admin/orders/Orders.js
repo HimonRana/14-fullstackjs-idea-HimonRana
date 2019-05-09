@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
 import AdminNavbar from "../AdminNavbar";
+import { Header } from "semantic-ui-react";
 
 import "../Admin.scss";
+import Order from "./Order";
 
 class Orders extends Component {
   constructor() {
@@ -19,21 +23,19 @@ class Orders extends Component {
     }
   };
 
-  componentWillUnmount = () => {
-    this.setState({
-      active: false
-    });
-  };
-
   render() {
     const { active } = this.state;
+    // fetch orders here
+    let showOrders = <Order />;
 
     return (
       <div className="admin-container">
         <AdminNavbar activeOrders={active} />
+        <Header color="blue" content="Orders" textAlign="left" />
+        <div className="show-all-orders">{showOrders}</div>
       </div>
     );
   }
 }
 
-export default Orders;
+export default connect()(Orders);

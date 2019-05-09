@@ -99,26 +99,32 @@ class AdminDashboard extends Component {
               </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-          {discounts.map(discount => {
-            return (
-              <Table.Body key={discount._id}>
-                <Table.Row>
-                  <Table.Cell>{discount.name}</Table.Cell>
-                  <Table.Cell>{discount.discountValue}%</Table.Cell>
-                  <Table.Cell>
-                    {new Date(discount.date).getFullYear() +
-                      "-" +
-                      (new Date(discount.date).getMonth() + 1) +
-                      "-" +
-                      new Date(discount.date).getDate()}
-                  </Table.Cell>
-                  <Table.Cell Style="text-align: right;">
-                    <DeleteDiscount id={discount._id} />
-                  </Table.Cell>
-                </Table.Row>
-              </Table.Body>
-            );
-          })}
+          {discounts === null ? (
+            <p>No discounts available.</p>
+          ) : discounts.length > 0 ? (
+            discounts.map(discount => {
+              return (
+                <Table.Body key={discount._id}>
+                  <Table.Row>
+                    <Table.Cell>{discount.name}</Table.Cell>
+                    <Table.Cell>{discount.discountValue}%</Table.Cell>
+                    <Table.Cell>
+                      {new Date(discount.date).getFullYear() +
+                        "-" +
+                        (new Date(discount.date).getMonth() + 1) +
+                        "-" +
+                        new Date(discount.date).getDate()}
+                    </Table.Cell>
+                    <Table.Cell Style="text-align: right;">
+                      <DeleteDiscount id={discount._id} />
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              );
+            })
+          ) : (
+            <p>No discounts created.</p>
+          )}
         </Table>
       </div>
     );

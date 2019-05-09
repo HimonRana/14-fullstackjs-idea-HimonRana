@@ -6,6 +6,7 @@ import {
   ADD_DISCOUNT_ORDER,
   CHECK_AUTH_AND_CHECKOUT,
   ADD_SHIPPING_DATA,
+  GET_ADMIN_ORDERS,
   GET_ERRORS
 } from "./types";
 
@@ -67,4 +68,21 @@ export const addOrder = (orderData, stripeToken, history) => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+// GET ORDER -ADMIN-
+export const getOrders = () => dispatch => {
+  return Axios.get("/admin/all/orders")
+    .then(res =>
+      dispatch({
+        type: GET_ADMIN_ORDERS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ADMIN_ORDERS,
+        payload: null
+      })
+    );
 };

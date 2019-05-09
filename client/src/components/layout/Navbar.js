@@ -90,13 +90,15 @@ class Navbar extends Component {
               <Menu.Item as={Link} to="/" onClick={this.handleSidebarHide}>
                 <Header inverted>Home</Header>
               </Menu.Item>
-              <Menu.Item
-                as={Link}
-                to="/profile"
-                onClick={this.handleSidebarHide}
-              >
-                <Header inverted>Profile</Header>
-              </Menu.Item>
+              {isAuthenticated ? (
+                <Menu.Item
+                  as={Link}
+                  to="/profile"
+                  onClick={this.handleSidebarHide}
+                >
+                  <Header inverted>Profile</Header>
+                </Menu.Item>
+              ) : null}
               {user.role ? (
                 <Menu.Item
                   as={Link}
@@ -106,7 +108,7 @@ class Navbar extends Component {
                   <Header inverted>Dashboard</Header>
                 </Menu.Item>
               ) : null}
-              <Menu.Item as="a" Style="cursor: auto;">
+              <Menu.Item Style="cursor: auto;">
                 <Header inverted>Category</Header>
               </Menu.Item>
               <Menu.Item
