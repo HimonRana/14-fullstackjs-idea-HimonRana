@@ -19,6 +19,7 @@ import AdminOrders from "./components/admin/orders/Orders";
 import CategoryProducts from "./components/products/CategoryProducts";
 import Checkout from "./components/order/Checkout";
 import Payment from "./components/order/Payment";
+import Profile from "./components/profile/Profile";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
@@ -50,35 +51,42 @@ const App = () => {
       <Router>
         <div className="app">
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route
-              exact
-              path="/admin/dashboard/discount"
-              component={AdminDiscount}
-            />
-            <Route exact path="/admin/dashboard/users" component={AdminUsers} />
-            <Route
-              exact
-              path="/admin/dashboard/products"
-              component={AdminProducts}
-            />
-            <Route
-              exact
-              path="/admin/dashboard/orders"
-              component={AdminOrders}
-            />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/product/:id" component={Product} />
-            <Route exact path="/order" component={Order} />
-            <Route exact path="/order/checkout" component={Checkout} />
-            <Route exact path="/order/checkout/payment" component={Payment} />
-            <Route
-              exact
-              path="/products/category/:category"
-              component={CategoryProducts}
-            />
-          </Switch>
+          <div className="main-content">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route
+                exact
+                path="/admin/dashboard/discount"
+                component={AdminDiscount}
+              />
+              <Route
+                exact
+                path="/admin/dashboard/users"
+                component={AdminUsers}
+              />
+              <Route
+                exact
+                path="/admin/dashboard/products"
+                component={AdminProducts}
+              />
+              <Route
+                exact
+                path="/admin/dashboard/orders"
+                component={AdminOrders}
+              />
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/product/:id" component={Product} />
+              <Route exact path="/order" component={Order} />
+              <Route exact path="/order/checkout" component={Checkout} />
+              <Route exact path="/order/checkout/payment" component={Payment} />
+              <Route
+                exact
+                path="/products/category/:category"
+                component={CategoryProducts}
+              />
+            </Switch>
+          </div>
           <Footer />
         </div>
       </Router>

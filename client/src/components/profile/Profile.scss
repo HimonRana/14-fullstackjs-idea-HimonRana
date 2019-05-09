@@ -1,0 +1,41 @@
+.profile-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+  border-radius: 0.28571429rem;
+
+  .ui.divider.profile-divider {
+    margin: 0;
+  }
+  .ui.card {
+    box-shadow: unset;
+  }
+}
+
+.ui.card.profile-item-card {
+  width: 100%;
+  margin-bottom: 0;
+  .profile-item {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    .profile-item-card-content-img,
+    .profile-item-card-content {
+      padding-right: 1rem;
+    }
+  }
+  .profile-item-total {
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+
+  .profile-item-card-content-img {
+    .ui.tiny.image {
+      width: 60px;
+    }
+  }
+
+  .profile-item-card-content {
+    padding-right: 0;
+  }
+}
