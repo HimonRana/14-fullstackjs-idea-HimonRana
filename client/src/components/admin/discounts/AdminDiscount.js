@@ -18,11 +18,15 @@ class AdminDashboard extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getDiscounts();
-    if (window.location.pathname === "/admin/dashboard/discount") {
-      this.setState({
-        active: true
-      });
+    if (this.props.user.role) {
+      this.props.getDiscounts();
+      if (window.location.pathname === "/admin/dashboard/discount") {
+        this.setState({
+          active: true
+        });
+      }
+    } else {
+      this.props.history.push("/");
     }
   };
 
@@ -132,7 +136,8 @@ class AdminDashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  discounts: state.discount.discounts
+  discounts: state.discount.discounts,
+  user: state.auth.user
 });
 
 export default connect(

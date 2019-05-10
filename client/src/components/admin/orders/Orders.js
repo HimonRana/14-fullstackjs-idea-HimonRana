@@ -9,19 +9,23 @@ import Order from "./Order";
 import "../Admin.scss";
 
 class Orders extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       active: false
     };
   }
 
   componentDidMount = () => {
-    this.props.getOrders();
-    if (window.location.pathname === "/admin/dashboard/orders") {
-      this.setState({
-        active: true
-      });
+    if (this.props.user.role) {
+      this.props.getOrders();
+      if (window.location.pathname === "/admin/dashboard/orders") {
+        this.setState({
+          active: true
+        });
+      }
+    } else {
+      this.props.history.push("/");
     }
   };
 
@@ -51,7 +55,8 @@ class Orders extends Component {
 }
 
 const mapStateToProps = state => ({
-  orders: state.order.orders
+  orders: state.order.orders,
+  user: state.auth.user
 });
 
 export default connect(

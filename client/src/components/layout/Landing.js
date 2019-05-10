@@ -7,10 +7,10 @@ import "./Layout.scss";
 class Landing extends Component {
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Banner />
         <LatestProducts />
-      </div>
+      </React.Fragment>
     );
   }
 }

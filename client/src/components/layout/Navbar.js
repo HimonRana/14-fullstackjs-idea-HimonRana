@@ -59,11 +59,11 @@ class Navbar extends Component {
               Buntshop
             </Link>
           </Typography>
-          <Cart />
 
           <Link to="/profile">
             <Typography className="profile-name">{user.name}</Typography>
           </Link>
+          <Cart />
           <Button
             disabled={this.state.visible ? true : false}
             className="menu-bar-button"

@@ -17,11 +17,15 @@ class Users extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getUsers();
-    if (window.location.pathname === "/admin/dashboard/users") {
-      this.setState({
-        active: true
-      });
+    if (this.props.user.role) {
+      this.props.getUsers();
+      if (window.location.pathname === "/admin/dashboard/users") {
+        this.setState({
+          active: true
+        });
+      }
+    } else {
+      this.props.history.push("/");
     }
   };
 
@@ -51,7 +55,8 @@ class Users extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.user.users
+  users: state.user.users,
+  user: state.auth.user
 });
 
 export default connect(
