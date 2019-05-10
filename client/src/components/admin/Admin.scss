@@ -7,6 +7,10 @@
 .show-all-users {
   display: flex;
   flex-direction: column-reverse;
+
+  .MuiExpansionPanelDetails-root-123 {
+    padding: 0;
+  }
 }
 
 .ui.form.user-edit-form {

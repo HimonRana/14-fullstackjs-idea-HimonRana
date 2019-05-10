@@ -7,6 +7,7 @@ import {
   CHECK_AUTH_AND_CHECKOUT,
   ADD_SHIPPING_DATA,
   GET_ADMIN_ORDERS,
+  EDIT_ADMIN_ORDER,
   GET_ERRORS
 } from "./types";
 
@@ -83,6 +84,29 @@ export const getOrders = () => dispatch => {
       dispatch({
         type: GET_ADMIN_ORDERS,
         payload: null
+      })
+    );
+};
+
+// EDIT PRODUCT -ADMIN-
+export const editOrder = (orderId, orderData) => dispatch => {
+  console.log(orderId, orderData);
+  Axios.put(`/admin/edit/order/${orderId}`, orderData)
+    .then(res => {
+      dispatch({
+        type: EDIT_ADMIN_ORDER,
+        payload: res.data
+      });
+      Toastr.success(
+        "Order is successfully updated!",
+        { timeOut: 5000 },
+        { positionClass: "toast-bottom-right" }
+      );
+    })
+    .catch(err =>
+      dispatch({
+        type: EDIT_ADMIN_ORDER,
+        payload: err.response.data
       })
     );
 };

@@ -51,7 +51,6 @@ class Product extends Component {
         error: true
       });
     } else {
-      //TODO: set productData to localstorage
       const addProductToCart = {
         id: this.state.id,
         title: this.state.title,
@@ -100,7 +99,7 @@ class Product extends Component {
       {
         key: `${product.category}`,
         content: `${product.category}`,
-        link: true
+        href: `/products/category/${product.category}`
       }
     ];
 

@@ -17,7 +17,6 @@ class CategoryProducts extends Component {
 
   render() {
     const { products } = this.props;
-    console.log(this.props);
 
     return (
       <div className="products-grid-container">

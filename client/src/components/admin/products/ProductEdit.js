@@ -62,7 +62,6 @@ class ProductEdit extends Component {
       available: this.state.available
     };
 
-    console.log(updateProduct);
     this.props.editProduct(updateProduct.id, updateProduct);
     this.setState({
       expanded: false

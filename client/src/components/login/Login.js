@@ -67,7 +67,7 @@ class Login extends Component {
 
   render() {
     const { errors } = this.state;
-    
+
     return (
       <div className="content">
         <Button onClick={this.handleModalOpen} compact basic inverted>

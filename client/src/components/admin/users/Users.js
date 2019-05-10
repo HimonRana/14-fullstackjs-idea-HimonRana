@@ -12,10 +12,7 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
-      name: "",
-      email: "",
-      role: false
+      active: false
     };
   }
 

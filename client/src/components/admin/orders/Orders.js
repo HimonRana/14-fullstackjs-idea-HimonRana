@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { getOrders } from "../../../actions/orderActions";
 import AdminNavbar from "../AdminNavbar";
 import { Header } from "semantic-ui-react";
+import Order from "./Order";
 
 import "../Admin.scss";
-import Order from "./Order";
 
 class Orders extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class Orders extends Component {
   }
 
   componentDidMount = () => {
+    this.props.getOrders();
     if (window.location.pathname === "/admin/dashboard/orders") {
       this.setState({
         active: true
@@ -25,8 +27,18 @@ class Orders extends Component {
 
   render() {
     const { active } = this.state;
-    // fetch orders here
-    let showOrders = <Order />;
+    const { orders } = this.props;
+
+    let showOrders =
+      orders === null ? (
+        <p>No orders available.</p>
+      ) : orders.length > 0 ? (
+        orders.map(order => {
+          return <Order key={order._id} id={order._id} order={order} />;
+        })
+      ) : (
+        <p>No orders created.</p>
+      );
 
     return (
       <div className="admin-container">
@@ -38,4 +50,11 @@ class Orders extends Component {
   }
 }
 
-export default connect()(Orders);
+const mapStateToProps = state => ({
+  orders: state.order.orders
+});
+
+export default connect(
+  mapStateToProps,
+  { getOrders }
+)(Orders);

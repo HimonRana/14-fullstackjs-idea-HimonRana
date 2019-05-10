@@ -34,7 +34,7 @@ export const registerUser = userData => dispatch => {
 
 // Login - Get user Token
 export const loginUser = userData => dispatch => {
-  Axios.post("users/login", userData)
+  Axios.post("/users/login", userData)
     .then(res => {
       Toastr.success(
         "You are logged in now!",

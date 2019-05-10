@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Header } from "semantic-ui-react";
-import { getUser } from "../../actions/userActions";
 import "./Profile.scss";
 import ShowOrders from "./ShowOrders";
 

@@ -24,9 +24,10 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-
+    console.log(req.user.name);
     const newOrder = new Order({
       user: req.user.id,
+      userName: req.user.name,
       orderProducts: req.body.order.orderProducts,
       discount: req.body.order.discount,
       totalSum: req.body.order.totalSum,
@@ -39,13 +40,6 @@ router.post(
       status: req.body.order.status
     });
 
-    newOrder
-      .save()
-      .then(order => res.json(order))
-      .catch(err =>
-        res.status(404).json({ order: "No order to save", err: err })
-      );
-
     User.findById(req.user.id)
       .then(user => {
         if (!user) {
@@ -55,6 +49,13 @@ router.post(
         user.save();
       })
       .catch(err => res.status(404).json({ user: "No user found", err: err }));
+
+    newOrder
+      .save()
+      .then(order => res.json(order))
+      .catch(err =>
+        res.status(404).json({ order: "No order to save", err: err })
+      );
 
     const amount = newOrder.totalSum * 100;
 

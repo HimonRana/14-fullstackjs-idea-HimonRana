@@ -8,6 +8,10 @@ const OrderSchema = new Schema({
     ref: "users"
   },
 
+  userName: {
+    type: String
+  },
+
   orderProducts: [
     {
       title: {
@@ -85,7 +89,7 @@ const OrderSchema = new Schema({
 
   status: {
     type: String,
-    default: "ordered"
+    default: "Processing"
   },
 
   date: {

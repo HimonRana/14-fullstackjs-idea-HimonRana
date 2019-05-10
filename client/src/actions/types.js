@@ -14,6 +14,7 @@ export const ADD_DISCOUNT = "ADD_DISCOUNT";
 
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_PRODUCT = "EDIT_PRODUCT";
+export const EDIT_ADMIN_ORDER = "EDIT_ADMIN_ORDER";
 
 export const DELETE_USER = "DELETE_USER";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";

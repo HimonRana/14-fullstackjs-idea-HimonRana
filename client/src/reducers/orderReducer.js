@@ -6,6 +6,7 @@ import {
   ADD_QUANTITY,
   ADD_DISCOUNT_ORDER,
   GET_ADMIN_ORDERS,
+  EDIT_ADMIN_ORDER,
   CLEAR_ORDER
 } from "../actions/types";
 
@@ -104,12 +105,19 @@ export default function(state = initialState, action) {
         };
       }
 
-    // Profile Order
+    // ADMIN ORDER
     case GET_ADMIN_ORDERS:
       return {
         ...state,
         orders: action.payload
       };
+
+    case EDIT_ADMIN_ORDER:
+      return {
+        ...state,
+        order: action.payload
+      };
+
     default:
       return state;
   }

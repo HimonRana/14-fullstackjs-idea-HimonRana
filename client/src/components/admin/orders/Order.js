@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import { Header, Card, Image, Button, Dropdown } from "semantic-ui-react";
+import { editOrder } from "../../../actions/orderActions";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -18,9 +18,13 @@ class Order extends Component {
     this.state = {
       active: false,
       expanded: false,
-      status: ""
+      status: this.props.order.status
     };
   }
+
+  // deleteOrder = () => {
+  //   this.props.deleteOrder(this.props.order._id);
+  // };
 
   handleExpanded = () => {
     this.setState({
@@ -34,7 +38,21 @@ class Order extends Component {
     });
   };
 
+  onSubmit = e => {
+    e.preventDefault();
+    const updateOrderStatus = {
+      id: this.props.order._id,
+      status: this.state.status
+    };
+    this.props.editOrder(updateOrderStatus.id, updateOrderStatus);
+    this.setState({
+      expanded: false
+    });
+  };
+
   render() {
+    const { order } = this.props;
+
     const statusOptions = [
       { key: "Processing", text: "Processing", value: "Processing" },
       { key: "On its way", text: "On its way", value: "On its way" },
@@ -49,58 +67,49 @@ class Order extends Component {
           onChange={this.handleExpanded}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Header as="h5">Ordered: 25 Jun 2015 | User</Header>
+            <Header as="h5">
+              Ordered: {order.date} | {order.userName}
+            </Header>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className="order-content">
-              <Card className="order-item-card">
-                <div className="order-item">
-                  <Card.Content className="order-item-card-content-img">
-                    <Image
-                      size="tiny"
-                      src="https://www.topstreetwear.com/media/catalog/product/cache/1/image/460x597/9df78eab33525d08d6e5fb8d27136e95/4/9/490255_0.jpg"
-                    />
-                  </Card.Content>
-                  <Card.Content className="order-item-card-content">
-                    <Card.Description>
-                      <strong>Title:</strong>
-                    </Card.Description>
-                    <Card.Description>SEK</Card.Description>
-                    <Card.Description>Size: </Card.Description>
-                    <Card.Description>Quantity: </Card.Description>
-                  </Card.Content>
-                </div>
-                <div className="order-item">
-                  <Card.Content className="order-item-card-content-img">
-                    <Image
-                      size="tiny"
-                      src="https://www.topstreetwear.com/media/catalog/product/cache/1/image/460x597/9df78eab33525d08d6e5fb8d27136e95/4/9/490255_0.jpg"
-                    />
-                  </Card.Content>
-                  <Card.Content className="order-item-card-content">
-                    <Card.Description>
-                      <strong>Title:</strong>
-                    </Card.Description>
-                    <Card.Description>SEK</Card.Description>
-                    <Card.Description>Size: </Card.Description>
-                    <Card.Description>Quantity: </Card.Description>
-                  </Card.Content>
-                </div>
-                <Divider />
-                <Card.Description className="order-item-total">
-                  Total: 8999 SEK
-                </Card.Description>
-              </Card>
+              {order.orderProducts.map(product => (
+                <Card key={product._id} className="order-item-card">
+                  <div className="order-item">
+                    <Card.Content className="order-item-card-content-img">
+                      <Image size="tiny" src={product.productImg} />
+                    </Card.Content>
+                    <Card.Content className="order-item-card-content">
+                      <Card.Description>
+                        <strong>{product.title}</strong>
+                      </Card.Description>
+                      <Card.Description>{product.price} SEK</Card.Description>
+                      <Card.Description>Size: {product.size}</Card.Description>
+                      <Card.Description>
+                        Quantity: {product.quantity}
+                      </Card.Description>
+                    </Card.Content>
+                  </div>
+                  <Divider />
+                  <Card.Description className="order-item-total">
+                    Discount: {order.discount.length > 0 ? "Yes" : "No"}
+                  </Card.Description>
+                  <Card.Description className="order-item-total">
+                    Total: {order.totalSum} SEK
+                  </Card.Description>
+                </Card>
+              ))}
               <Card className="order-item-shipping-card">
                 <Card.Content>
                   <Header as="h4">Shipping address</Header>
-                  <Card.Description>Name: </Card.Description>
-                  <Card.Description>Email: </Card.Description>
-                  <Card.Description>Street: </Card.Description>
-                  <Card.Description>Zip: </Card.Description>
-                  <Card.Description>City: </Card.Description>
-                  <Card.Description>Telephone: </Card.Description>
-                  <Card.Description>Telephone: </Card.Description>
+                  <Card.Description>Name: {order.name}</Card.Description>
+                  <Card.Description>Email: {order.email}</Card.Description>
+                  <Card.Description>Street: {order.street}</Card.Description>
+                  <Card.Description>Zip: {order.zip}</Card.Description>
+                  <Card.Description>City: {order.city}</Card.Description>
+                  <Card.Description>
+                    Telephone: {order.telephone}
+                  </Card.Description>
                   <Header as="h5">Status </Header>
                   <Dropdown
                     className=""
@@ -145,4 +154,9 @@ class Order extends Component {
   }
 }
 
-export default connect()(Order);
+export default connect(
+  null,
+  {
+    editOrder
+  }
+)(Order);
