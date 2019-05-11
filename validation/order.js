@@ -9,15 +9,13 @@ module.exports = function validateOrderInput(data) {
   data.street = !isEmpty(data.street) ? data.street : "";
   data.zip = !isEmpty(data.zip) ? data.zip : "";
   data.city = !isEmpty(data.city) ? data.city : "";
-  data.status = !isEmpty(data.status) ? data.status : "";
-  data.totalSum = !isEmpty(data.totalSum) ? data.totalSum : "";
 
   // Name empty
   if (Validator.isEmpty(data.name)) {
     errors.name = "Name is required";
   }
 
-  // Email validate
+  // // Email validate
   if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
@@ -40,16 +38,6 @@ module.exports = function validateOrderInput(data) {
   // City empty
   if (Validator.isEmpty(data.city)) {
     errors.city = "City is required";
-  }
-
-  // City status
-  if (Validator.isEmpty(data.status)) {
-    errors.status = "Status is required";
-  }
-
-  // City totalSum
-  if (Validator.isEmpty(data.totalSum)) {
-    errors.totalSum = "TotalSum is required";
   }
 
   return {

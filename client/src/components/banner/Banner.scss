@@ -1,11 +1,15 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
+.container {
+  margin-top: 4.6rem;
+}
+
 .img-container {
   width: 100%;
   img {
     width: 100%;
-    min-height: 10%;
+    height: 46vw;
     background-repeat: no-repeat;
     background-position: center;
     object-fit: cover;
@@ -18,4 +22,10 @@ ul.slick-dots {
 
 ul.slick-dots li button:before {
   font-size: 0.7rem;
+}
+
+@media (max-width: 599px) {
+  .container {
+    margin-top: 4rem;
+  }
 }

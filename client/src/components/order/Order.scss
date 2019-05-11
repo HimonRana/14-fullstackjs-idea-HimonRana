@@ -1,0 +1,149 @@
+.order-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+  display: flex;
+  justify-content: space-between;
+
+  .ui.card {
+    width: 100%;
+    box-shadow: unset;
+  }
+}
+
+.products-in-order {
+  width: 100%;
+  padding-right: 1rem;
+
+  .order-item-quantity-buttons {
+    margin-top: 1rem;
+  }
+}
+
+.discount-content {
+  width: 50%;
+  padding-left: 1rem;
+  border-left: 1px solid rgb(187, 187, 187);
+
+  h5.ui.header {
+    margin-top: 1rem;
+  }
+
+  .ui.blue.button {
+    background: #00518e;
+    margin-top: 1rem;
+  }
+
+  .total-value-content {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .ui.header:last-child {
+      margin: 0;
+    }
+  }
+}
+
+.ui.card.order-item-card {
+  flex-direction: row;
+  .order-item-card-content-img,
+  .order-item-card-content {
+    padding-left: 0;
+    border-top: unset;
+    flex-grow: unset;
+  }
+
+  .order-item-card-content {
+    padding-right: 0;
+  }
+}
+
+/* CHECKOUT */
+.checkout-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+}
+
+/* PAYMENT */
+.payment-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+  .shoppingbag-container {
+    .ui.card {
+      width: 100%;
+      box-shadow: unset;
+      .order-item-card-content-img {
+        img {
+          width: 80px;
+        }
+      }
+    }
+  }
+
+  .discount-container {
+    margin-top: 2rem;
+
+    p span {
+      font-weight: 500;
+    }
+  }
+
+  .shipping-info-container {
+    margin-top: 2rem;
+
+    p {
+      margin: 0;
+      line-height: 1.5285em;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .total-payment-container {
+    margin-top: 2rem;
+
+    p {
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+/* ORDER SUCCESS*/
+.order-success-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+}
+
+@media (max-width: 599px) {
+  .order-container {
+    flex-direction: column;
+
+    .ui.card {
+      box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+    }
+  }
+
+  .products-in-order {
+    margin-bottom: 1rem;
+  }
+
+  .discount-content {
+    border-left: unset;
+    width: 100%;
+    margin-top: 1rem;
+    padding-left: 0;
+
+    .ui.input {
+      width: 132px;
+    }
+  }
+}

@@ -51,8 +51,6 @@ class CreateProducts extends Component {
       stock: "",
       category: ""
     });
-    console.log(newProduct);
-    console.log(this.state);
     this.props.createProduct(newProduct);
   };
 

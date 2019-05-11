@@ -1,22 +1,32 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-import { Form, Header, Button, Table } from "semantic-ui-react";
+import { createDiscount, getDiscounts } from "../../../actions/discountActions";
+import { Table, Form, Header, Button } from "semantic-ui-react";
 import "../Admin.scss";
 import AdminNavbar from "../AdminNavbar";
+import DeleteDiscount from "./DeleteDiscount";
 
 class AdminDashboard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      active: false
+      active: false,
+      name: "",
+      discountValue: ""
     };
   }
 
   componentDidMount = () => {
-    if (window.location.pathname === "/admin/dashboard/discount") {
-      this.setState({
-        active: true
-      });
+    if (this.props.user.role) {
+      this.props.getDiscounts();
+      if (window.location.pathname === "/admin/dashboard/discount") {
+        this.setState({
+          active: true
+        });
+      }
+    } else {
+      this.props.history.push("/");
     }
   };
 
@@ -26,23 +36,43 @@ class AdminDashboard extends Component {
     });
   };
 
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+
+    const newDiscount = {
+      name: this.state.name,
+      discountValue: this.state.discountValue
+    };
+
+    this.props.createDiscount(newDiscount);
+    this.setState({
+      name: "",
+      discountValue: ""
+    });
+  };
+
   render() {
     const { active } = this.state;
+    const { discounts } = this.props;
 
     return (
       <div className="admin-container">
         <AdminNavbar activeDiscount={active} />
         <Header color="blue" content="Create discount here" textAlign="left" />
         {/* put loading in Form later */}
-        <Form>
+        <Form error onSubmit={this.onSubmit} size="small">
           <Form.Input
             fluid
             icon="tag"
             iconPosition="left"
             placeholder="Discount Name"
             type="text"
-            name="discount"
-            value=""
+            name="name"
+            value={this.state.name}
             onChange={this.onChange}
           />
 
@@ -52,56 +82,65 @@ class AdminDashboard extends Component {
             iconPosition="left"
             placeholder="How much percentage"
             type="number"
-            name="percentage"
-            value=""
+            name="discountValue"
+            value={this.state.discountValue}
             onChange={this.onChange}
           />
-          <Button position="right" type="submit">
+          <Button size="small" position="right" type="submit">
             Create discount
           </Button>
         </Form>
 
-        <Header color="blue" content="Pevious discounts" textAlign="left" />
+        <Header color="blue" content="Previous discounts" textAlign="left" />
         <Table columns={12} unstackable color="red">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Percent</Table.HeaderCell>
               <Table.HeaderCell>Created</Table.HeaderCell>
-              <Table.HeaderCell>Remove</Table.HeaderCell>
+              <Table.HeaderCell Style="text-align: right;">
+                Remove
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>HIM30</Table.Cell>
-              <Table.Cell>30%</Table.Cell>
-              <Table.Cell>2018-04-02</Table.Cell>
-              <Table.Cell>
-                <Button color="red">X</Button>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>JUN15</Table.Cell>
-              <Table.Cell>15%</Table.Cell>
-              <Table.Cell>2018-04-02</Table.Cell>
-              <Table.Cell>
-                <Button color="red">X</Button>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>KV70</Table.Cell>
-              <Table.Cell>70%</Table.Cell>
-              <Table.Cell>2018-04-02</Table.Cell>
-              <Table.Cell>
-                <Button color="red">X</Button>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
+          {discounts === null ? (
+            <p>No discounts available.</p>
+          ) : discounts.length > 0 ? (
+            discounts.map(discount => {
+              return (
+                <Table.Body key={discount._id}>
+                  <Table.Row>
+                    <Table.Cell>{discount.name}</Table.Cell>
+                    <Table.Cell>{discount.discountValue}%</Table.Cell>
+                    <Table.Cell>
+                      {new Date(discount.date).getFullYear() +
+                        "-" +
+                        (new Date(discount.date).getMonth() + 1) +
+                        "-" +
+                        new Date(discount.date).getDate()}
+                    </Table.Cell>
+                    <Table.Cell Style="text-align: right;">
+                      <DeleteDiscount id={discount._id} />
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              );
+            })
+          ) : (
+            <p>No discounts created.</p>
+          )}
         </Table>
       </div>
     );
   }
 }
 
-export default AdminDashboard;
+const mapStateToProps = state => ({
+  discounts: state.discount.discounts,
+  user: state.auth.user
+});
+
+export default connect(
+  mapStateToProps,
+  { createDiscount, getDiscounts }
+)(AdminDashboard);

@@ -10,6 +10,7 @@ import {
 const initialState = {
   products: [],
   product: {},
+
   loading: false
 };
 
@@ -20,26 +21,32 @@ export default function(state = initialState, action) {
         ...state,
         products: action.payload
       };
+
     case GET_PRODUCT:
       return {
         ...state,
         product: action.payload
       };
+
+    // ADMIN
     case GET_ADMIN_PRODUCTS:
       return {
         ...state,
         products: action.payload
       };
+
     case ADD_PRODUCT:
       return {
         ...state,
         products: [action.payload, ...state.products]
       };
+
     case EDIT_PRODUCT:
       return {
         ...state,
         product: action.payload
       };
+
     case DELETE_PRODUCT:
       return {
         ...state,

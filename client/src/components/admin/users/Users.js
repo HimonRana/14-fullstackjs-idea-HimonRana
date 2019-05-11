@@ -12,19 +12,20 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: false,
-      name: "",
-      email: "",
-      role: false
+      active: false
     };
   }
 
   componentDidMount = () => {
-    this.props.getUsers();
-    if (window.location.pathname === "/admin/dashboard/users") {
-      this.setState({
-        active: true
-      });
+    if (this.props.user.role) {
+      this.props.getUsers();
+      if (window.location.pathname === "/admin/dashboard/users") {
+        this.setState({
+          active: true
+        });
+      }
+    } else {
+      this.props.history.push("/");
     }
   };
 
@@ -32,9 +33,16 @@ class Users extends Component {
     const { active } = this.state;
     const { users } = this.props;
 
-    let showUsers = users.map(user => {
-      return <User key={user._id} id={user._id} user={user} />;
-    });
+    let showUsers =
+      users === null ? (
+        <p>No users available.</p>
+      ) : users.length > 0 ? (
+        users.map(user => {
+          return <User key={user._id} id={user._id} user={user} />;
+        })
+      ) : (
+        <p>No users created.</p>
+      );
 
     return (
       <div className="admin-container">
@@ -47,7 +55,8 @@ class Users extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.user.users
+  users: state.user.users,
+  user: state.auth.user
 });
 
 export default connect(

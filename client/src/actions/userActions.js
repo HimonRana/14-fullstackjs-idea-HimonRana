@@ -52,7 +52,12 @@ export const deleteUser = id => dispatch => {
           type: DELETE_USER,
           payload: id
         });
-        window.location.reload();
+        Toastr.success(
+          "User is successfully deleted!",
+          { timeOut: 5000 },
+          { positionClass: "toast-bottom-right" }
+        );
+        // window.location.reload();
       })
       .catch(err =>
         dispatch({

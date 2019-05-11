@@ -39,6 +39,12 @@ class ProductEdit extends Component {
     });
   };
 
+  handleDropdownChange = (e, { value }) => {
+    this.setState({
+      category: value
+    });
+  };
+
   deleteProduct = () => {
     this.props.deleteProduct(this.props.product._id);
   };
@@ -56,7 +62,6 @@ class ProductEdit extends Component {
       available: this.state.available
     };
 
-    console.log(updateProduct);
     this.props.editProduct(updateProduct.id, updateProduct);
     this.setState({
       expanded: false
@@ -64,13 +69,11 @@ class ProductEdit extends Component {
   };
 
   render() {
-    // const { product } = this.props;
-
     const categoryOptions = [
-      { key: 1, text: "Head", value: "Head" },
-      { key: 2, text: "Top", value: "Top" },
-      { key: 3, text: "Bottom", value: "Bottom" },
-      { key: 4, text: "Shoes", value: "Shoes" }
+      { key: "Head", text: "Head", value: "Head" },
+      { key: "Top", text: "Top", value: "Top" },
+      { key: "Bottom", text: "Bottom", value: "Bottom" },
+      { key: "Shoes", text: "Shoes", value: "Shoes" }
     ];
 
     return (
@@ -148,6 +151,7 @@ class ProductEdit extends Component {
                 placeholder="Select Category"
                 scrolling
                 selection
+                name="category"
                 options={categoryOptions}
                 value={this.state.category}
                 onChange={this.handleDropdownChange}
