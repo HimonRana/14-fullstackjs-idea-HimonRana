@@ -116,6 +116,13 @@
   }
 }
 
+/* ORDER SUCCESS*/
+.order-success-container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 6.1rem;
+}
+
 @media (max-width: 599px) {
   .order-container {
     flex-direction: column;

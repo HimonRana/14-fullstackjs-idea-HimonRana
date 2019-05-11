@@ -60,7 +60,7 @@ export const addOrder = (orderData, stripeToken, history) => dispatch => {
         type: CLEAR_ORDER,
         payload: []
       });
-      history.push("/profile");
+      history.push("/order/success");
     })
     .catch(err => {
       console.log(err);

@@ -21,6 +21,7 @@ import CategoryProducts from "./components/products/CategoryProducts";
 import Checkout from "./components/order/Checkout";
 import Payment from "./components/order/Payment";
 import Profile from "./components/profile/Profile";
+import SuccessfulOrderPage from "./components/order/SuccessfulOrderPage";
 import NotFoundPage from "./components/notfoundpage/NotFoundPage";
 
 import "semantic-ui-css/semantic.min.css";
@@ -59,6 +60,11 @@ const App = () => {
               <Route exact path="/order" component={Order} />
               <Route
                 exact
+                path="/order/success"
+                component={SuccessfulOrderPage}
+              />
+              <Route
+                exact
                 path="/products/category/:category"
                 component={CategoryProducts}
               />
@@ -84,6 +90,11 @@ const App = () => {
               />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/order/checkout" component={Checkout} />
+              <PrivateRoute
+                exact
+                path="/order/success"
+                component={SuccessfulOrderPage}
+              />
               <PrivateRoute
                 exact
                 path="/order/checkout/payment"
