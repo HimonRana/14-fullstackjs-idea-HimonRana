@@ -64,7 +64,6 @@ export const getAdminProducts = () => dispatch => {
 
 // POST PRODUCT -ADMIN-
 export const createProduct = productData => dispatch => {
-  console.log(productData);
   Axios.post("/admin/create/product", productData)
     .then(res => {
       dispatch({

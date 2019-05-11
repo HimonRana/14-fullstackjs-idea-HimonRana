@@ -279,31 +279,18 @@ router.get(
 );
 
 // @Route   PUT admin/edit/order/:id
-// @Desc    Edit all Order
+// @Desc    Edit Order
 // @Access  Private
 router.put(
   "/edit/order/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateOrderInput(req.body);
-
-    // To check Validation
-    if (!isValid) {
-      return res.status(400).json(errors);
-    }
-
     User.findOne({ role: req.user.role })
       .then(user => {
         if (user.role) {
-          const newOrder = {};
-          newOrder.totalSum = req.body.totalSum;
-          newOrder.name = req.body.name;
-          newOrder.email = req.body.email;
-          newOrder.street = req.body.street;
-          newOrder.zip = req.body.zip;
-          newOrder.city = req.body.city;
-          newOrder.telephone = req.body.telephone;
-          newOrder.status = req.body.status;
+          const newOrder = {
+            status: req.body.status
+          };
 
           // Update
           Order.findByIdAndUpdate(

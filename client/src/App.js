@@ -6,6 +6,7 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
+import PrivateRoute from "./components/common/PrivateRoute";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
@@ -16,6 +17,12 @@ import AdminDiscount from "./components/admin/discounts/AdminDiscount";
 import AdminUsers from "./components/admin/users/Users";
 import AdminProducts from "./components/admin/products/Products";
 import AdminOrders from "./components/admin/orders/Orders";
+import CategoryProducts from "./components/products/CategoryProducts";
+import Checkout from "./components/order/Checkout";
+import Payment from "./components/order/Payment";
+import Profile from "./components/profile/Profile";
+import SuccessfulOrderPage from "./components/order/SuccessfulOrderPage";
+import NotFoundPage from "./components/notfoundpage/NotFoundPage";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
@@ -34,8 +41,6 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     // Logout user
     store.dispatch(logoutUser());
-    // Clear current Profile
-    // store.dispatch(clearCurrentProfile());
     // Redirect to login
     window.location.href = "/";
   }
@@ -47,28 +52,57 @@ const App = () => {
       <Router>
         <div className="app">
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route
-              exact
-              path="/admin/dashboard/discount"
-              component={AdminDiscount}
-            />
-            <Route exact path="/admin/dashboard/users" component={AdminUsers} />
-            <Route
-              exact
-              path="/admin/dashboard/products"
-              component={AdminProducts}
-            />
-            <Route
-              exact
-              path="/admin/dashboard/orders"
-              component={AdminOrders}
-            />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/product/:id" component={Product} />
-            <Route exact path="/order" component={Order} />
-          </Switch>
+          <div className="main-content">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/product/:id" component={Product} />
+              <Route exact path="/order" component={Order} />
+              <Route
+                exact
+                path="/order/success"
+                component={SuccessfulOrderPage}
+              />
+              <Route
+                exact
+                path="/products/category/:category"
+                component={CategoryProducts}
+              />
+              <PrivateRoute
+                exact
+                path="/admin/dashboard/discount"
+                component={AdminDiscount}
+              />
+              <PrivateRoute
+                exact
+                path="/admin/dashboard/users"
+                component={AdminUsers}
+              />
+              <PrivateRoute
+                exact
+                path="/admin/dashboard/products"
+                component={AdminProducts}
+              />
+              <PrivateRoute
+                exact
+                path="/admin/dashboard/orders"
+                component={AdminOrders}
+              />
+              <PrivateRoute exact path="/profile" component={Profile} />
+              <PrivateRoute exact path="/order/checkout" component={Checkout} />
+              <PrivateRoute
+                exact
+                path="/order/success"
+                component={SuccessfulOrderPage}
+              />
+              <PrivateRoute
+                exact
+                path="/order/checkout/payment"
+                component={Payment}
+              />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </div>
           <Footer />
         </div>
       </Router>

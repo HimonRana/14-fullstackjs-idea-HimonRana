@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import ProductsInCart from "./ProductsInCart";
 import DiscountForm from "./DiscountForm";
-import { Button, Divider, Header } from "semantic-ui-react";
+import { Divider, Header } from "semantic-ui-react";
 
 import "./Order.scss";
-import OrderStep from "./OrderStep";
+import ProceedToCheckoutButton from "./ProceedToCheckoutButton";
 
 class Order extends Component {
   render() {
+    const { totalValue } = this.props;
+
     return (
       <div className="order-container">
         <div className="products-in-order">
@@ -20,15 +23,17 @@ class Order extends Component {
           <Divider />
           <div className="total-value-content">
             <Header as="h4">Total value: </Header>
-            <Header as="h4">7998 SEK</Header>
+            <Header as="h4">{totalValue} SEK</Header>
           </div>
-          <Button size="small" primary>
-            Proceed to checkout
-          </Button>
+          <ProceedToCheckoutButton history={this.props.history} />
         </div>
       </div>
     );
   }
 }
 
-export default Order;
+const mapStateToProps = state => ({
+  totalValue: state.order.total
+});
+
+export default connect(mapStateToProps)(Order);

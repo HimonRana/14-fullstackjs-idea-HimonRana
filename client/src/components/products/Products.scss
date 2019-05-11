@@ -10,11 +10,33 @@
   .ui.card {
     width: unset;
     box-shadow: unset;
+
+    h5 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
+    }
+  }
+  .ui.card.card-product {
+    .content {
+      padding: 1rem 0;
+    }
   }
 }
 
 .ui.card.card-product-latest {
   margin: 0;
+}
+
+.title-container {
+  background-color: rgba(0, 0, 0, 0.8);
+
+  .ui.header {
+    color: white;
+    margin: 0 auto;
+    align-self: center;
+  }
 }
 
 .products-img-container {
@@ -37,6 +59,12 @@
 .latest-products-container {
   width: 90%;
   margin: 0 auto;
+  margin-top: 2rem;
+
+  .check-more-button {
+    text-align: right;
+    margin-top: 1rem;
+  }
 
   .latest-products-content {
     display: grid;

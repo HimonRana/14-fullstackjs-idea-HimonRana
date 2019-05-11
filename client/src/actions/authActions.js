@@ -34,7 +34,7 @@ export const registerUser = userData => dispatch => {
 
 // Login - Get user Token
 export const loginUser = userData => dispatch => {
-  Axios.post("users/login", userData)
+  Axios.post("/users/login", userData)
     .then(res => {
       Toastr.success(
         "You are logged in now!",
@@ -80,10 +80,10 @@ export const logoutUser = () => dispatch => {
   // Set thhe current use to {} which will set IsAuthenticated to false
   dispatch(setCurrentUser({}));
 
-  // Toastr.success(
-  //   "You are logged out now!",
-  //   { timeOut: 5000 },
-  //   { positionClass: "toast-bottom-right" }
-  // );
-  window.location.href = "/";
+  Toastr.success(
+    "You are logged out now!",
+    { timeOut: 3000 },
+    { positionClass: "toast-bottom-right" }
+  );
+  // window.location.href = window.location.pathname;
 };

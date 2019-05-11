@@ -65,54 +65,58 @@ class CartItem extends Component {
 
     let addedItems = (
       <div>
-        {productsInCart.map(productInCart => (
-          <Card key={productInCart.id} className="cart-item-card">
-            <Card.Content className="cart-item-card-content-img">
-              <Image size="tiny" src={productInCart.productImg} />
-            </Card.Content>
-            <Card.Content className="cart-item-card-content">
-              <Card.Description>
-                <strong>{productInCart.title}</strong>
-              </Card.Description>
-              <Card.Description>{productInCart.price} SEK</Card.Description>
-              <Card.Description>Size: {productInCart.size}</Card.Description>
-              <Card.Description>
-                Quantity: {productInCart.quantity}
-              </Card.Description>
-              <div className="cart-item-quantity-buttons">
-                <Button
-                  onClick={() => {
-                    this.handleAddQuantity(productInCart);
-                  }}
-                  size="mini"
-                  icon
-                >
-                  <Icon name="plus" />
-                </Button>
-                <Button
-                  disabled={productInCart.quantity <= 1 ? true : false}
-                  onClick={() => {
-                    this.handleRemoveQuantity(productInCart);
-                  }}
-                  size="mini"
-                  icon
-                >
-                  <Icon name="minus" />
-                </Button>
-                <Button
-                  onClick={() => {
-                    this.handleRemoveFromCart(productInCart);
-                  }}
-                  size="mini"
-                  color="red"
-                  icon
-                >
-                  <Icon name="close" />
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
-        ))}
+        {productsInCart.length > 0 ? (
+          productsInCart.map(productInCart => (
+            <Card key={productInCart.id} className="cart-item-card">
+              <Card.Content className="cart-item-card-content-img">
+                <Image size="tiny" src={productInCart.productImg} />
+              </Card.Content>
+              <Card.Content className="cart-item-card-content">
+                <Card.Description>
+                  <strong>{productInCart.title}</strong>
+                </Card.Description>
+                <Card.Description>{productInCart.price} SEK</Card.Description>
+                <Card.Description>Size: {productInCart.size}</Card.Description>
+                <Card.Description>
+                  Quantity: {productInCart.quantity}
+                </Card.Description>
+                <div className="cart-item-quantity-buttons">
+                  <Button
+                    onClick={() => {
+                      this.handleAddQuantity(productInCart);
+                    }}
+                    size="mini"
+                    icon
+                  >
+                    <Icon name="plus" />
+                  </Button>
+                  <Button
+                    disabled={productInCart.quantity <= 1 ? true : false}
+                    onClick={() => {
+                      this.handleRemoveQuantity(productInCart);
+                    }}
+                    size="mini"
+                    icon
+                  >
+                    <Icon name="minus" />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      this.handleRemoveFromCart(productInCart);
+                    }}
+                    size="mini"
+                    color="red"
+                    icon
+                  >
+                    <Icon name="close" />
+                  </Button>
+                </div>
+              </Card.Content>
+            </Card>
+          ))
+        ) : (
+          <p>No products</p>
+        )}
 
         <Divider />
         <div className="cart-total-value-container">

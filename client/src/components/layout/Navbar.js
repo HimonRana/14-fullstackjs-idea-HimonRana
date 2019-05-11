@@ -52,45 +52,45 @@ class Navbar extends Component {
     };
 
     return (
-      <div>
-        <AppBar style={navbarStyle} position="static">
-          <Toolbar className="tool-bar">
-            <Typography className="logo-name" variant="h4">
-              <Link className="logo" to="/">
-                Buntshop
-              </Link>
-            </Typography>
-            <Cart />
-
-            <Link to="/profile">
-              <Typography className="profile-name">{user.name}</Typography>
+      <AppBar style={navbarStyle} position="static">
+        <Toolbar className="tool-bar">
+          <Typography className="logo-name" variant="h4">
+            <Link className="logo" to="/">
+              Buntshop
             </Link>
-            <Button
-              disabled={this.state.visible ? true : false}
-              className="menu-bar-button"
-              onClick={this.handleSidebarOpen}
-            >
-              {visible ? (
-                <Icon name="close" size="big" />
-              ) : (
-                <Icon name="bars" size="big" />
-              )}
-            </Button>
+          </Typography>
 
-            {/* SIDEBAR */}
-            <Sidebar
-              className="navbar-sidebar"
-              animation="overlay"
-              icon="labeled"
-              onHide={this.handleSidebarHide}
-              vertical="true"
-              visible={this.state.visible}
-              direction="right"
-            >
-              <Menu className="navbar-menu" vertical>
-                <Menu.Item as={Link} to="/" onClick={this.handleSidebarHide}>
-                  <Header inverted>Home</Header>
-                </Menu.Item>
+          <Link to="/profile">
+            <Typography className="profile-name">{user.name}</Typography>
+          </Link>
+          <Cart />
+          <Button
+            disabled={this.state.visible ? true : false}
+            className="menu-bar-button"
+            onClick={this.handleSidebarOpen}
+          >
+            {visible ? (
+              <Icon name="close" size="big" />
+            ) : (
+              <Icon name="bars" size="big" />
+            )}
+          </Button>
+
+          {/* SIDEBAR */}
+          <Sidebar
+            className="navbar-sidebar"
+            animation="overlay"
+            icon="labeled"
+            onHide={this.handleSidebarHide}
+            vertical="true"
+            visible={this.state.visible}
+            direction="right"
+          >
+            <Menu className="navbar-menu" vertical>
+              <Menu.Item as={Link} to="/" onClick={this.handleSidebarHide}>
+                <Header inverted>Home</Header>
+              </Menu.Item>
+              {isAuthenticated ? (
                 <Menu.Item
                   as={Link}
                   to="/profile"
@@ -98,83 +98,78 @@ class Navbar extends Component {
                 >
                   <Header inverted>Profile</Header>
                 </Menu.Item>
-                {user.role ? (
-                  <Menu.Item
-                    as={Link}
-                    to="/admin/dashboard/discount"
-                    onClick={this.handleSidebarHide}
-                  >
-                    <Header inverted>Dashboard</Header>
-                  </Menu.Item>
-                ) : null}
-                <Menu.Item as="a">
-                  <Header inverted>Category</Header>
-                </Menu.Item>
+              ) : null}
+              {user.role ? (
                 <Menu.Item
-                  className="category"
                   as={Link}
-                  to="/products/category/head"
+                  to="/admin/dashboard/discount"
                   onClick={this.handleSidebarHide}
                 >
-                  Head
+                  <Header inverted>Dashboard</Header>
                 </Menu.Item>
+              ) : null}
+              <Menu.Item Style="cursor: auto;">
+                <Header inverted>Category</Header>
+              </Menu.Item>
+              <Menu.Item
+                className="category"
+                as={Link}
+                to="/products/category/head"
+                onClick={this.handleSidebarHide}
+              >
+                Head
+              </Menu.Item>
+              <Menu.Item
+                className="category"
+                as={Link}
+                to="/products/category/top"
+                onClick={this.handleSidebarHide}
+              >
+                Top
+              </Menu.Item>
+              <Menu.Item
+                className="category"
+                as={Link}
+                to="/products/category/bottom"
+                onClick={this.handleSidebarHide}
+              >
+                Bottom
+              </Menu.Item>
+              <Menu.Item
+                className="category"
+                as={Link}
+                to="/products/category/shoes"
+                onClick={this.handleSidebarHide}
+              >
+                Shoes
+              </Menu.Item>
+              {isAuthenticated ? (
                 <Menu.Item
-                  className="category"
-                  as={Link}
-                  to="/products/category/top"
-                  onClick={this.handleSidebarHide}
+                  className="logout-button"
+                  as="a"
+                  onClick={this.onLogoutClick}
                 >
-                  Top
+                  <Icon name="log out" size="large" />
+                  Logout
                 </Menu.Item>
-                <Menu.Item
-                  className="category"
-                  as={Link}
-                  to="/products/category/bottom"
-                  onClick={this.handleSidebarHide}
+              ) : (
+                <List
+                  Style="text-align: center;
+                  margin-top: 2rem;"
                 >
-                  Bottom
-                </Menu.Item>
-                <Menu.Item
-                  className="category"
-                  as={Link}
-                  to="/products/category/shoes"
-                  onClick={this.handleSidebarHide}
-                >
-                  Shoes
-                </Menu.Item>
-                {isAuthenticated ? (
-                  <Menu.Item
-                    className="logout-button"
-                    as="a"
-                    onClick={this.onLogoutClick}
-                  >
-                    <Icon name="log out" size="large" />
-                    Logout
-                  </Menu.Item>
-                ) : (
-                  <List>
-                    <List.Item
-                      className=""
-                      as="a"
-                      onClick={this.handleSidebarHide}
-                    >
-                      <Register />
-                    </List.Item>
-                    <List.Item
-                      className=""
-                      as="a"
-                      onClick={this.handleSidebarHide}
-                    >
-                      <Login />
-                    </List.Item>
-                  </List>
-                )}
-              </Menu>
-            </Sidebar>
-            {/* SIDEBAR */}
-          </Toolbar>
-        </AppBar>
-      </div>
+                  <List.Item as="a" onClick={this.handleSidebarHide}>
+                    <Register />
+                  </List.Item>
+                  <List.Item as="a" onClick={this.handleSidebarHide}>
+                    <Login />
+                  </List.Item>
+                </List>
+              )}
+            </Menu>
+          </Sidebar>
+          {/* SIDEBAR */}
+        </Toolbar>
+      </AppBar>
     );
   }
 }

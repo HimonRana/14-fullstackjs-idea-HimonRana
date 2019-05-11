@@ -62,7 +62,6 @@ class ProductEdit extends Component {
       available: this.state.available
     };
 
-    console.log(updateProduct);
     this.props.editProduct(updateProduct.id, updateProduct);
     this.setState({
       expanded: false
@@ -70,8 +69,6 @@ class ProductEdit extends Component {
   };
 
   render() {
-    // const { product } = this.props;
-
     const categoryOptions = [
       { key: "Head", text: "Head", value: "Head" },
       { key: "Top", text: "Top", value: "Top" },
