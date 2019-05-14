@@ -15,8 +15,6 @@ const admin = require("./routes/admin");
 const order = require("./routes/order");
 const discount = require("./routes/discount");
 
-require("dotenv").config();
-
 app.io = io;
 
 // Body parser middleware

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const keys = require("../config/keys");
+const keys = require("../config/keys_dev");
 const stripe = require("stripe")(keys.STRIPE_SECRET_KEY);
 
 // Load User/Order/Product model
