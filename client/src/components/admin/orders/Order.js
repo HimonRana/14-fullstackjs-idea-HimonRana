@@ -38,6 +38,36 @@ class Order extends Component {
     });
   };
 
+  formatDate = date => {
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
+    var weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    const day = new Date(date).getDate().toLocaleString("sv-SE");
+    const monthIndex = new Date(date).getMonth().toLocaleString("sv-SE");
+    const year = new Date(date).getFullYear();
+    const weekDay = new Date(date).getDay();
+    const hours = new Date(date).getHours();
+    const minutes = new Date(date).getMinutes();
+
+    return `${day} ${monthNames[monthIndex]} ${year} - ${
+      weekdayNames[weekDay]
+    } - ${hours}:${minutes}`;
+  };
+
   onSubmit = e => {
     e.preventDefault();
     const updateOrderStatus = {
@@ -52,7 +82,7 @@ class Order extends Component {
 
   render() {
     const { order } = this.props;
-
+    console.log(new Date(order.date).getMinutes());
     const statusOptions = [
       { key: "Processing", text: "Processing", value: "Processing" },
       { key: "On its way", text: "On its way", value: "On its way" },
@@ -61,15 +91,17 @@ class Order extends Component {
     ];
 
     return (
-      <div>
+      <div className="admin-order-container">
         <ExpansionPanel
           expanded={this.state.expanded}
           onChange={this.handleExpanded}
+          className="order-expansion"
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Header as="h5">
-              Ordered: {order.date} | {order.userName}
-            </Header>
+            <p>
+              <strong>Ordered:</strong> {this.formatDate(order.date)} |{" "}
+              {order.userName}
+            </p>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <div className="order-content">

@@ -4,14 +4,31 @@ import { addDiscount } from "../../actions/orderActions";
 import { Button, Form, Input, Header } from "semantic-ui-react";
 
 class DiscountForm extends Component {
-  state = { discountName: "" };
+  constructor(props) {
+    super(props);
+    this.state = {
+      discountName: "",
+      error: false
+    };
+  }
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  handleBlur = () => {
+    this.setState({
+      error: false
+    });
+  };
+
   onSubmit = e => {
     e.preventDefault();
+    if (this.state.discountName === "") {
+      this.setState({
+        error: true
+      });
+    }
     const newDiscount = {
       name: this.state.discountName
     };
@@ -23,6 +40,7 @@ class DiscountForm extends Component {
 
   render() {
     const { addedItems, discount, errors } = this.props;
+    console.log(this.state.errors);
 
     return (
       <div>
@@ -31,8 +49,12 @@ class DiscountForm extends Component {
             <Input
               type="text"
               name="discountName"
-              disabled={addedItems.length === 0 ? true : false}
+              disabled={
+                addedItems.length === 0 || discount.length > 0 ? true : false
+              }
               value={this.state.discountName}
+              error={this.state.error}
+              onFocus={this.handleBlur}
               placeholder="Enter discount code"
               onChange={this.onChange}
             />
@@ -48,12 +70,14 @@ class DiscountForm extends Component {
               ""
             ) : (
               <Header as="h5" color="red">
-                {errors}
+                {errors != null ? errors : this.state.error}
               </Header>
             )}
           </div>
           <Button
-            disabled={addedItems.length === 0 ? true : false}
+            disabled={
+              addedItems.length === 0 || discount.length > 0 ? true : false
+            }
             type="submit"
             size="tiny"
             color="blue"

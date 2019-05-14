@@ -169,7 +169,7 @@ class ProductEdit extends Component {
           <ExpansionPanelActions>
             <Button.Group className="product-button-group" size="tiny">
               <Button size="small" onClick={this.onSubmit} primary>
-                Edit user
+                Edit product
               </Button>
               <Button.Or />
               <Button size="small" onClick={this.deleteProduct} negative>

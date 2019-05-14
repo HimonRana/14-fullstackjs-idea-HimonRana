@@ -5,17 +5,17 @@ import { Header, Button } from "semantic-ui-react";
 import socketIOClient from "socket.io-client";
 import "./Notification.scss";
 import $ from "jquery";
+const socket = socketIOClient("http://localhost:5000");
 
 class Notification extends Component {
   state = { productId: "" };
-  
+
   componentDidMount() {
     $(".notification-container").hide();
     this.handleHide();
   }
 
   handleHide = () => {
-    const socket = socketIOClient("http://localhost:5000");
     socket.on("notification", data => {
       this.setState({
         productId: data
@@ -34,12 +34,25 @@ class Notification extends Component {
     this.props.history.push(`/product/${productId}`);
   };
 
+  handleCloseNotification = () => {
+    $(".notification-container").hide();
+  };
+
   render() {
     return (
       <div className="notification-container">
         <div className="notification-content">
-          <Header>New product released!</Header>
-          <Button onClick={this.handleProduct}>Check out</Button>
+          <Button
+            onClick={this.handleCloseNotification}
+            size="mini"
+            inverted
+            as="a"
+            className="close-notification"
+          >
+            X
+          </Button>
+          <Header as="h3">New product released</Header>
+          <Header as="h4">Check it out on latest products!</Header>
         </div>
       </div>
     );

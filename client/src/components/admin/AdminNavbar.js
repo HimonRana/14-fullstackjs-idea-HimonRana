@@ -21,7 +21,7 @@ class AdminNavbar extends Component {
             color="olive"
             active={activeUsers}
           >
-            User
+            Users
           </Menu.Item>
           <Menu.Item
             as={Link}

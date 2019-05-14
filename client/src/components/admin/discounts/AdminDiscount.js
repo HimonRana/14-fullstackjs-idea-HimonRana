@@ -40,6 +40,29 @@ class AdminDashboard extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  formatDate = date => {
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
+    const day = new Date(date).getDate().toLocaleString("sv-SE");
+    const monthIndex = new Date(date).getMonth().toLocaleString("sv-SE");
+    const year = new Date(date).getFullYear();
+
+    return `${day} ${monthNames[monthIndex]} ${year}`;
+  };
+
   onSubmit = e => {
     e.preventDefault();
 
@@ -112,13 +135,7 @@ class AdminDashboard extends Component {
                   <Table.Row>
                     <Table.Cell>{discount.name}</Table.Cell>
                     <Table.Cell>{discount.discountValue}%</Table.Cell>
-                    <Table.Cell>
-                      {new Date(discount.date).getFullYear() +
-                        "-" +
-                        (new Date(discount.date).getMonth() + 1) +
-                        "-" +
-                        new Date(discount.date).getDate()}
-                    </Table.Cell>
+                    <Table.Cell>{this.formatDate(discount.date)}</Table.Cell>
                     <Table.Cell Style="text-align: right;">
                       <DeleteDiscount id={discount._id} />
                     </Table.Cell>
