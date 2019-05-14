@@ -51,7 +51,10 @@ router.post(
             stock: req.body.stock
           });
 
-          newProduct.save().then(product => res.json(product));
+          newProduct.save().then(product => {
+            req.app.io.emit("notification", product._id);
+            res.json(product);
+          });
         } else {
           return res.status(401).json({ NoAthorization: "Not Authorized" });
         }

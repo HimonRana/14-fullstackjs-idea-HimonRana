@@ -2,6 +2,36 @@ import React, { Component } from "react";
 import { Header, Card, Image, Divider } from "semantic-ui-react";
 
 class ShowOrders extends Component {
+  formatDate = date => {
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
+
+    var weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+    const day = new Date(date).getDate().toLocaleString("sv-SE");
+    const monthIndex = new Date(date).getMonth().toLocaleString("sv-SE");
+    const year = new Date(date).getFullYear();
+    const weekDay = new Date(date).getDay();
+    const hours = new Date(date).getHours();
+    const minutes = new Date(date).getMinutes();
+
+    return `${day} ${monthNames[monthIndex]} ${year} - ${hours}:${minutes} - ${
+      weekdayNames[weekDay]
+    }`;
+  };
+
   render() {
     const { orders } = this.props.user;
 
@@ -12,7 +42,7 @@ class ShowOrders extends Component {
         ) : orders.length > 0 ? (
           orders.map(order => (
             <div key={order._id} className="profile-content">
-              <Header as="h5">Ordered: {order.date}</Header>
+              <Header as="h5">Ordered: {this.formatDate(order.date)}</Header>
               {order.orderProducts.map(product => (
                 <Card key={product._id} className="profile-item-card">
                   <div className="profile-item">

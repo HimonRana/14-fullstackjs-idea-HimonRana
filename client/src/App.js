@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
 
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 import PrivateRoute from "./components/common/PrivateRoute";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
@@ -26,6 +26,7 @@ import NotFoundPage from "./components/notfoundpage/NotFoundPage";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.scss";
+import Notification from "./components/notification/Notification";
 
 // Check for Token
 if (localStorage.jwtToken) {
@@ -46,68 +47,75 @@ if (localStorage.jwtToken) {
   }
 }
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Router>
-        <div className="app">
-          <Navbar />
-          <div className="main-content">
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/products" component={Products} />
-              <Route exact path="/product/:id" component={Product} />
-              <Route exact path="/order" component={Order} />
-              <Route
-                exact
-                path="/order/success"
-                component={SuccessfulOrderPage}
-              />
-              <Route
-                exact
-                path="/products/category/:category"
-                component={CategoryProducts}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/dashboard/discount"
-                component={AdminDiscount}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/dashboard/users"
-                component={AdminUsers}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/dashboard/products"
-                component={AdminProducts}
-              />
-              <PrivateRoute
-                exact
-                path="/admin/dashboard/orders"
-                component={AdminOrders}
-              />
-              <PrivateRoute exact path="/profile" component={Profile} />
-              <PrivateRoute exact path="/order/checkout" component={Checkout} />
-              <PrivateRoute
-                exact
-                path="/order/success"
-                component={SuccessfulOrderPage}
-              />
-              <PrivateRoute
-                exact
-                path="/order/checkout/payment"
-                component={Payment}
-              />
-              <Route component={NotFoundPage} />
-            </Switch>
+class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <div className="app">
+            <Navbar />
+            <div className="main-content">
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/products" component={Products} />
+                <Route exact path="/product/:id" component={Product} />
+                <Route exact path="/order" component={Order} />
+                <Route
+                  exact
+                  path="/order/success"
+                  component={SuccessfulOrderPage}
+                />
+                <Route
+                  exact
+                  path="/products/category/:category"
+                  component={CategoryProducts}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/dashboard/discount"
+                  component={AdminDiscount}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/dashboard/users"
+                  component={AdminUsers}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/dashboard/products"
+                  component={AdminProducts}
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/dashboard/orders"
+                  component={AdminOrders}
+                />
+                <PrivateRoute exact path="/profile" component={Profile} />
+                <PrivateRoute
+                  exact
+                  path="/order/checkout"
+                  component={Checkout}
+                />
+                <PrivateRoute
+                  exact
+                  path="/order/success"
+                  component={SuccessfulOrderPage}
+                />
+                <PrivateRoute
+                  exact
+                  path="/order/checkout/payment"
+                  component={Payment}
+                />
+                <Route component={NotFoundPage} />
+              </Switch>
+            </div>
+            <Notification />
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
-    </Provider>
-  );
-};
+        </Router>
+      </Provider>
+    );
+  }
+}
 
 export default App;

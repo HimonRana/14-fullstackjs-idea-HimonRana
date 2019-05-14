@@ -70,11 +70,6 @@ export const createProduct = productData => dispatch => {
         type: ADD_PRODUCT,
         payload: res.data
       });
-      Toastr.success(
-        "Product is successfully created!",
-        { timeOut: 5000 },
-        { positionClass: "toast-bottom-right" }
-      );
     })
     .catch(err => {
       dispatch({
