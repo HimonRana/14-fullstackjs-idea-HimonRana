@@ -1,16 +1,29 @@
 const express = require("express");
+const app = express();
+var server = require("http").Server(app);
+var io = require("socket.io")(server);
+
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 
+const port = process.env.PORT || 5000;
 const users = require("./routes/users");
 const products = require("./routes/products");
 const admin = require("./routes/admin");
 const order = require("./routes/order");
 const discount = require("./routes/discount");
+
 require("dotenv").config();
 
-const app = express();
+app.io = io;
+
+// io.on("connection", socket => {
+
+//   socket.on("disconnect", () => {
+//     console.log("Someone disconnected!");
+//   });
+// });
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,5 +51,4 @@ app.use("/admin", admin);
 app.use("/order", order);
 app.use("/discount", discount);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(port, () => console.log(`Server running on port ${port}`));
