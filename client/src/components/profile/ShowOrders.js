@@ -18,7 +18,7 @@ class ShowOrders extends Component {
       "Dec"
     ];
 
-    var weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const day = new Date(date).getDate().toLocaleString("sv-SE");
     const monthIndex = new Date(date).getMonth().toLocaleString("sv-SE");

@@ -40,7 +40,6 @@ class DiscountForm extends Component {
 
   render() {
     const { addedItems, discount, errors } = this.props;
-    console.log(this.state.errors);
 
     return (
       <div>

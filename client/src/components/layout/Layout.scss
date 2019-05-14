@@ -28,12 +28,12 @@
   font-family: "Lobster", cursive;
 }
 
-.MuiTypography-body1-50.profile-name {
-  cursor: pointer;
+.profile-name {
+  cursor: pointer !important;
   font-size: 1rem !important;
   color: white !important;
-  transition: 0.1s ease-in-out;
-  margin-right: 1rem;
+  transition: 0.1s ease-in-out !important;
+  margin-right: 1rem !important;
 }
 
 .profile-name:hover {

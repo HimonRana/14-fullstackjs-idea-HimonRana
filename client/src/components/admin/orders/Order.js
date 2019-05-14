@@ -54,7 +54,7 @@ class Order extends Component {
       "Dec"
     ];
 
-    var weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    var weekdayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const day = new Date(date).getDate().toLocaleString("sv-SE");
     const monthIndex = new Date(date).getMonth().toLocaleString("sv-SE");
@@ -82,7 +82,7 @@ class Order extends Component {
 
   render() {
     const { order } = this.props;
-    console.log(new Date(order.date).getMinutes());
+
     const statusOptions = [
       { key: "Processing", text: "Processing", value: "Processing" },
       { key: "On its way", text: "On its way", value: "On its way" },
