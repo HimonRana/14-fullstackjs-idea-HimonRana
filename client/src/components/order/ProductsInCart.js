@@ -42,15 +42,6 @@ class ProductsInCart extends Component {
                 </Card.Description>
                 <div className="order-item-quantity-buttons">
                   <Button
-                    onClick={() => {
-                      this.handleAddQuantity(product);
-                    }}
-                    size="mini"
-                    icon
-                  >
-                    <Icon name="plus" />
-                  </Button>
-                  <Button
                     disabled={product.quantity <= 1 ? true : false}
                     onClick={() => {
                       this.handleRemoveQuantity(product);
@@ -59,6 +50,15 @@ class ProductsInCart extends Component {
                     icon
                   >
                     <Icon name="minus" />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      this.handleAddQuantity(product);
+                    }}
+                    size="mini"
+                    icon
+                  >
+                    <Icon name="plus" />
                   </Button>
                   <Button
                     onClick={() => {
