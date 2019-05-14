@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
-var server = require("http").Server(app);
-var io = require("socket.io")(server);
+const server = require("http").Server(app);
+const io = require("socket.io")(server);
 
-const mongoose = require("mongoose");
+const connectDB = require("./config/db");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const path = require("path");
 
 const port = process.env.PORT || 5000;
 const users = require("./routes/users");
@@ -18,25 +19,12 @@ require("dotenv").config();
 
 app.io = io;
 
-// io.on("connection", socket => {
-
-//   socket.on("disconnect", () => {
-//     console.log("Someone disconnected!");
-//   });
-// });
-
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// DB Config
-const db = require("./config/keys").mongoURI;
-
 // Connect to MongoDB
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log(err));
+connectDB();
 
 // Passport middleware
 app.use(passport.initialize());
@@ -50,5 +38,16 @@ app.use("/products", products);
 app.use("/admin", admin);
 app.use("/order", order);
 app.use("/discount", discount);
+
+// Deploy config
+// Serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 
 server.listen(port, () => console.log(`Server running on port ${port}`));

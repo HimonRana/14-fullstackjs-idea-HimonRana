@@ -5,7 +5,7 @@ import { Header, Button } from "semantic-ui-react";
 import socketIOClient from "socket.io-client";
 import "./Notification.scss";
 import $ from "jquery";
-const socket = socketIOClient("http://localhost:5000");
+const socket = socketIOClient("/");
 
 class Notification extends Component {
   state = { productId: "" };

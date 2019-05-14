@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-require("dotenv").config();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const keys = require("../config/keys");
+const stripe = require("stripe")(keys.STRIPE_SECRET_KEY);
 
 // Load User/Order/Product model
 const Order = require("../models/Order");
@@ -24,7 +24,6 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-    console.log(req.user.name);
     const newOrder = new Order({
       user: req.user.id,
       userName: req.user.name,
