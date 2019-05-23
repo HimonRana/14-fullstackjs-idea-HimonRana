@@ -30,7 +30,7 @@ class AdminDashboard extends Component {
     }
   };
 
-  componentWillUnmount = () => {
+  UNSAFE_componentWillUnmount = () => {
     this.setState({
       active: false
     });

@@ -26,7 +26,7 @@ class Product extends Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       id: nextProps.product._id,
       title: nextProps.product.title,

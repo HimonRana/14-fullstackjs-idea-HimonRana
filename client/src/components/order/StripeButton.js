@@ -48,7 +48,7 @@ class StripeButton extends Component {
     });
   }
 
-  componentWillUnmount() {
+  UNSAFE_componentWillUnmount() {
     if (this.stripeHandler) {
       this.stripeHandler.close();
     }
