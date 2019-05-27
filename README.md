@@ -1,4 +1,4 @@
-## Buntstapress
+## BuntShop
 
 https://buntshop.herokuapp.com/
 
